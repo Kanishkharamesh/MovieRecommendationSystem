@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import './Homepage.css';
 
 const movies = [
-    {
+        {
         id: 1,
         title: "The Lion King",
         rating: "8.0",
