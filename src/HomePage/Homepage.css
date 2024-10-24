@@ -1,0 +1,135 @@
+/* Import Poppins font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* General styles */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif; /* Updated font to Poppins */
+    background-color: #121212; /* Dark background for contrast */
+    color: white; /* White text for readability */
+}
+
+/* Make the container full width */
+.homepage-container {
+    width: 100%; /* Full width for the page */
+}
+
+/* Navigation Bar styles */
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1f1f1f; /* Darker background for the navbar */
+    padding: 20px;
+}
+
+.navbar-logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: red; /* Logo color */
+}
+
+.navbar-links {
+    display: flex; /* Make sure the links are displayed in a row */
+}
+
+.navbar-link {
+    color: white; /* White links */
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+.navbar-search {
+    display: flex;
+}
+
+.search-input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px 0 0 5px;
+}
+
+.search-button {
+    padding: 10px;
+    background-color: red; /* Button color */
+    color: white;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+/* Hero Section styles */
+.hero-container {
+    background-color: #282828; /* Hero section background */
+    padding: 50px;
+    text-align: center;
+}
+
+.hero-title {
+    font-size: 36px;
+    color: red; /* Hero text color */
+}
+
+.hero-subtitle {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+/* Featured Movies Section styles */
+.featured-movies-container {
+    padding: 20px;
+}
+
+.featured-title {
+    text-align: center;
+    font-size: 28px;
+    color: red; /* Section title color */
+}
+
+/* Carousel styles */
+.movies-carousel {
+    display: flex;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    scroll-snap-type: x mandatory; /* Smooth scrolling effect */
+}
+
+.movie-card {
+    background-color: #1f1f1f; /* Dark background for movie cards */
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    min-width: 200px; /* Minimum width for cards */
+    margin-right: 20px; /* Space between cards */
+    scroll-snap-align: start; /* Snap cards into place */
+    transition: transform 0.2s;
+}
+
+.movie-card:hover {
+    transform: scale(1.05); /* Scale effect on hover */
+}
+
+.movie-image {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* Footer styles */
+.footer-container {
+    background-color: #1f1f1f;
+    padding: 20px;
+    text-align: center;
+}
+
+.footer-text {
+    color: white; /* White footer text */
+}
+
+.footer-links-container {
+    margin-top: 10px;
+}
+
+.footer-link {
+    color: white; /* White footer links */
+    margin: 0 15px;
+    text-decoration: none;
+}
