@@ -40,7 +40,10 @@ body {
 }
 
 .navbar-search {
+    flex: 1; /* Allow the search bar to grow */
     display: flex;
+    justify-content: center; /* Center the search bar */
+    margin: 0 20px; /* Spacing around the search bar */
 }
 
 .search-input {
@@ -56,6 +59,20 @@ body {
     border: none;
     border-radius: 0 5px 5px 0;
     cursor: pointer;
+}
+
+.navbar-button {
+    margin: 0 10px; /* Spacing between buttons */
+    padding: 10px 15px;
+    background-color: red; /* Button color */
+    color: white; /* Text color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.navbar-button:hover {
+    background-color: #ff4d4d; /* Darker red on hover */
 }
 
 /* Hero Section styles */
@@ -90,18 +107,22 @@ body {
 .movies-carousel {
     display: flex;
     overflow-x: auto; /* Enable horizontal scrolling */
-    scroll-snap-type: x mandatory; /* Smooth scrolling effect */
+    scroll-behavior: smooth; /* Smooth scrolling effect */
+    padding: 20px 0; /* Top and bottom padding */
 }
 
 .movie-card {
+    flex: 0 0 200px; /* Fixed width for movie cards */
+    height: 350px; /* Increased height for better text accommodation */
+    margin-right: 15px; /* Spacing between cards */
     background-color: #1f1f1f; /* Dark background for movie cards */
-    padding: 10px;
-    border-radius: 10px;
-    text-align: center;
-    min-width: 200px; /* Minimum width for cards */
-    margin-right: 20px; /* Space between cards */
-    scroll-snap-align: start; /* Snap cards into place */
-    transition: transform 0.2s;
+    border-radius: 10px; /* Rounded corners */
+    display: flex; /* Use flexbox for content alignment */
+    flex-direction: column; /* Stack items vertically */
+    justify-content: space-between; /* Space out items */
+    text-align: center; /* Center text */
+    transition: transform 0.2s; /* Smooth scaling effect */
+    padding: 10px; /* Padding for internal spacing */
 }
 
 .movie-card:hover {
@@ -110,7 +131,29 @@ body {
 
 .movie-image {
     width: 100%;
-    border-radius: 10px;
+    height: 70%; /* Fixed height for images to maintain aspect ratio */
+    object-fit: cover; /* Cover ensures the image fills the space */
+    border-radius: 10px 10px 0 0; /* Rounded top corners */
+}
+
+/* Text styles within movie card */
+.movie-title {
+    font-size: 16px; /* Adjust font size */
+    font-weight: bold; /* Bold text for title */
+    margin: 5px 0; /* Margin for spacing */
+}
+
+.movie-rating {
+    font-size: 14px; /* Adjust font size for rating */
+    color: #FFD700; /* Gold color for star rating */
+    margin: 5px 0; /* Margin for spacing */
+}
+
+.movie-watch-link {
+    font-size: 12px; /* Smaller font size for watch link */
+    color: #00BFFF; /* Link color */
+    text-decoration: underline; /* Underline for link */
+    margin-top: 5px; /* Margin for spacing */
 }
 
 /* Footer styles */
