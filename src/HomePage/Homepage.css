@@ -1,90 +1,107 @@
-/* Import Poppins font from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-/* General styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
-    font-family: 'Poppins', sans-serif; /* Updated font to Poppins */
-    background-color: #121212; /* Dark background for contrast */
-    color: white; /* White text for readability */
+    font-family: 'Poppins', sans-serif;
+    background-color: #121212;
+    color: white;
+    overflow-x: hidden;
 }
 
-/* Make the container full width */
 .homepage-container {
-    width: 100%; /* Full width for the page */
+    width: 100vw;
 }
 
-/* Navigation Bar styles */
 .navbar-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #1f1f1f; /* Darker background for the navbar */
-    padding: 20px;
+    background-color: #1f1f1f;
+    padding: 10px 20px;
+    width: 100vw;
 }
 
 .navbar-logo {
     font-size: 24px;
     font-weight: bold;
-    color: red; /* Logo color */
+    color: red;
 }
 
 .navbar-links {
-    display: flex; /* Make sure the links are displayed in a row */
+    display: flex;
+    align-items: center;
 }
 
 .navbar-link {
-    color: white; /* White links */
+    color: white;
     margin: 0 15px;
     text-decoration: none;
 }
 
 .navbar-search {
-    flex: 1; /* Allow the search bar to grow */
+    flex: 1;
     display: flex;
-    justify-content: center; /* Center the search bar */
-    margin: 0 20px; /* Spacing around the search bar */
+    justify-content: center;
+    margin: 0 20px;
+    padding-top: 10px;
 }
 
 .search-input {
     padding: 10px;
     border: none;
     border-radius: 5px 0 0 5px;
+    height: 45px;
 }
 
 .search-button {
-    padding: 10px;
-    background-color: red; /* Button color */
+    padding: 10px 15px;
+    background-color: red;
     color: white;
     border: none;
     border-radius: 0 5px 5px 0;
     cursor: pointer;
+    height: 45px;
+}
+
+.search-button .search-link {
+    color: white;
+    text-decoration: none;
+}
+
+.search-button:hover .search-link{
+    color: black;
 }
 
 .navbar-button {
-    margin: 0 10px; /* Spacing between buttons */
+    margin: 0 10px;
     padding: 10px 15px;
-    background-color: red; /* Button color */
-    color: white; /* Text color */
+    background-color: red;
+    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
-.navbar-button:hover {
-    background-color: #ff4d4d; /* Darker red on hover */
+.navbar-button:hover{
+    color: black;
 }
 
-/* Hero Section styles */
 .hero-container {
-    background-color: #282828; /* Hero section background */
+    background-color: #282828;
     padding: 50px;
     text-align: center;
+    width: 100vw;
 }
 
 .hero-title {
     font-size: 36px;
-    color: red; /* Hero text color */
+    color: red;
 }
 
 .hero-subtitle {
@@ -92,7 +109,6 @@ body {
     margin-top: 10px;
 }
 
-/* Featured Movies Section styles */
 .featured-movies-container {
     padding: 20px;
 }
@@ -100,10 +116,9 @@ body {
 .featured-title {
     text-align: center;
     font-size: 28px;
-    color: red; /* Section title color */
+    color: red;
 }
 
-/* Carousel styles */
 .movies-carousel {
     display: flex;
     overflow-x: auto; /* Enable horizontal scrolling */
@@ -122,49 +137,48 @@ body {
     justify-content: space-between; /* Space out items */
     text-align: center; /* Center text */
     transition: transform 0.2s; /* Smooth scaling effect */
-    padding: 10px; /* Padding for internal spacing */
+    padding: 10px;
 }
 
 .movie-card:hover {
-    transform: scale(1.05); /* Scale effect on hover */
+    transform: scale(1.05);
 }
 
 .movie-image {
     width: 100%;
-    height: 70%; /* Fixed height for images to maintain aspect ratio */
-    object-fit: cover; /* Cover ensures the image fills the space */
-    border-radius: 10px 10px 0 0; /* Rounded top corners */
+    height: 70%;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
 }
 
-/* Text styles within movie card */
 .movie-title {
-    font-size: 16px; /* Adjust font size */
-    font-weight: bold; /* Bold text for title */
-    margin: 5px 0; /* Margin for spacing */
+    font-size: 16px;
+    font-weight: bold;
+    margin: 5px 0;
 }
 
 .movie-rating {
-    font-size: 14px; /* Adjust font size for rating */
-    color: #FFD700; /* Gold color for star rating */
-    margin: 5px 0; /* Margin for spacing */
+    font-size: 14px;
+    color: #FFD700;
+    margin: 5px 0;
 }
 
 .movie-watch-link {
-    font-size: 12px; /* Smaller font size for watch link */
-    color: #00BFFF; /* Link color */
-    text-decoration: underline; /* Underline for link */
-    margin-top: 5px; /* Margin for spacing */
+    font-size: 12px;
+    color: #00BFFF;
+    text-decoration: underline;
+    margin-top: 5px;
 }
 
-/* Footer styles */
 .footer-container {
     background-color: #1f1f1f;
     padding: 20px;
     text-align: center;
+    width: 100vw;
 }
 
 .footer-text {
-    color: white; /* White footer text */
+    color: white;
 }
 
 .footer-links-container {
@@ -172,7 +186,7 @@ body {
 }
 
 .footer-link {
-    color: white; /* White footer links */
+    color: white;
     margin: 0 15px;
     text-decoration: none;
 }

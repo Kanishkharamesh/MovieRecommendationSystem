@@ -1,5 +1,4 @@
-// src/HomePage/Homepage.jsx
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Homepage.css';
 
@@ -77,6 +76,7 @@ const movies = [
 ];
 
 const Homepage = () => {
+    const [searchQuery, setSearchQuery] = useState("");
     const carouselRef = useRef(null);
 
     useEffect(() => {
@@ -99,8 +99,18 @@ const Homepage = () => {
             <nav className="navbar-container">
                 <div className="navbar-logo">MovieFinder</div>
                 <div className="navbar-search">
-                    <input type="text" className="search-input" placeholder="Search for movies..." />
-                    <button type="button" className="search-button">Search</button>
+                    <input
+                        type="text"
+                        className="search-input"
+                        placeholder="Search for movies..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                    <button type="button" className="search-button">
+                        <Link to={`/search?query=${encodeURIComponent(searchQuery)}`} className="search-link">
+                            Search
+                        </Link>
+                    </button>
                 </div>
                 <div className="navbar-links">
                     <Link to="/login" className="navbar-button">Login</Link>
@@ -120,14 +130,9 @@ const Homepage = () => {
                 <div className="movies-carousel" ref={carouselRef}>
                     {movies.map((movie) => (
                         <a href={movie.watchLink} className="movie-card" key={movie.id}>
-                            <img
-                                src={movie.image}
-                                alt={movie.title}
-                                className="movie-image"
-                            />
+                            <img src={movie.image} alt={movie.title} className="movie-image" />
                             <h3 className="movie-title">{movie.title}</h3>
                             <p className="movie-rating">Rating: {movie.rating}</p>
-                            <p className="movie-watch-link">Where to Watch: {movie.watchLink}</p>
                         </a>
                     ))}
                 </div>
