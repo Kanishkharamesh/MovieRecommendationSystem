@@ -91,21 +91,14 @@ const SearchResults = () => {
 
     return (
         <div className="search-results-container">
-            <h1>Search Results for "{searchQuery}"</h1>
-            <input
-                type="text"
-                className="search-input"
-                placeholder="Refine your search..."
-                value={searchQuery}
-                readOnly
-            />
+            <h1 className="results-title">Search Results for <span className="search-results-keyword">"{searchQuery}"</span></h1>
             <div className="results-list">
                 {filteredMovies.length > 0 ? (
                     filteredMovies.map(movie => (
-                        <div key={movie.id} className="movie-card">
-                            <img src={movie.image} alt={movie.title} className="movie-image" />
-                            <h3 className="movie-title">{movie.title}</h3>
-                            <p className="movie-rating">Rating: {movie.rating}</p>
+                        <div key={movie.id} className="search-results-movie-card">
+                            <img src={movie.image} alt={movie.title} className="search-results-movie-image" />
+                            <h3 className="search-results-movie-title">{movie.title}</h3>
+                            <p className="search-results-movie-rating">Rating: {movie.rating}</p>
                         </div>
                     ))
                 ) : (
