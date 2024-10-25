@@ -1,17 +1,19 @@
+// src/HomePage/Homepage.jsx
 import React, { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import './Homepage.css';
 
 const movies = [
-        {
+    {
         id: 1,
         title: "The Lion King",
         rating: "8.0",
         image: "https://th.bing.com/th/id/OIP.vJxcpf437GmnbjY-aONxkwHaKS?rs=1&pid=ImgDetMain",
-        watchLink: "#movie1", // Link to the movie page
+        watchLink: "#movie1",
     },
     {
         id: 2,
-        title: "Spitited Away",
+        title: "Spirited Away",
         rating: "7.5",
         image: "https://m.media-amazon.com/images/M/MV5BMjlmZmI5MDctNDE2YS00YWE0LWE5ZWItZDBhYWQ0NTcxNWRhXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg",
         watchLink: "#movie2",
@@ -86,9 +88,9 @@ const Homepage = () => {
                     carouselRef.current.scrollTo({ left: 0, behavior: 'smooth' });
                 }
             }
-        }, 3000); // Delay in milliseconds (3000 ms = 3 seconds)
+        }, 3000);
 
-        return () => clearInterval(scrollInterval); // Cleanup the interval on component unmount
+        return () => clearInterval(scrollInterval);
     }, []);
 
     return (
@@ -101,8 +103,8 @@ const Homepage = () => {
                     <button type="button" className="search-button">Search</button>
                 </div>
                 <div className="navbar-links">
-                    <button className="navbar-button">Login</button>
-                    <button className="navbar-button">Sign Up</button>
+                    <Link to="/login" className="navbar-button">Login</Link>
+                    <Link to="/signup" className="navbar-button">Sign Up</Link>
                 </div>
             </nav>
 
