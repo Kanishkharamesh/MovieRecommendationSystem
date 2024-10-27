@@ -49,6 +49,7 @@
     transition: background-color 0.3s;
 }
 
+/* Highlight the active button */
 .search-results-filter-button:hover,
 .search-results-filter-button.active {
     background-color: #007bff;
@@ -56,6 +57,19 @@
 }
 
 .search-results-language-dropdown select {
+    padding: 5px;
+    margin-left: 10px; /* Space between genre buttons and dropdown */
+}
+
+/* Additional Filters: Year and Language */
+.search-results-additional-filters {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Year Filter Dropdown */
+.search-results-year-dropdown select {
     padding: 5px;
     margin-left: 10px; /* Space between genre buttons and dropdown */
 }
@@ -71,7 +85,9 @@
     padding: 8px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    width: 200px; /* Adjusted width as necessary */
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 915px; /* Adjusted width as necessary */
 }
 
 .search-results-search-bar button {
@@ -86,29 +102,6 @@
 
 .search-results-search-bar button:hover {
     background-color: #0056b3;
-}
-
-/* Additional Filters: Year and Language */
-.search-results-additional-filters {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.search-results-year-filter,
-.search-results-language-filter {
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: white;
-    color: #555555;
-    cursor: pointer;
-}
-
-.search-results-year-filter:focus,
-.search-results-language-filter:focus {
-    outline: none;
-    border-color: #007bff;
 }
 
 /* Movie Results */

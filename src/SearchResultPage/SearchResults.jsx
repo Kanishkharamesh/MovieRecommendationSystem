@@ -14,7 +14,7 @@ const genreMap = {
     Romance: 10749,
 };
 
-// You can expand this map with more languages if needed
+// Expanded languageMap with various languages
 const languageMap = {
     English: 'en',
     Hindi: 'hi',
@@ -41,21 +41,27 @@ const languageMap = {
     Italian: 'it',
 };
 
+const yearMap = Array.from({ length: 51 }, (_, i) => 1970 + i); // Years from 1970 to 2020
+
 const SearchResults = () => {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const searchQueryParam = queryParams.get('query') || "";
+    
     const [movies, setMovies] = useState([]);
     const [genre, setGenre] = useState(null);
-    const [language, setLanguage] = useState(null); // Language state
+    const [language, setLanguage] = useState(null);
+    const [year, setYear] = useState(null); // Year state
     const [searchQuery, setSearchQuery] = useState(searchQueryParam);
 
     // Fetch movies from API
     const fetchMovies = async () => {
         const genreQuery = genre ? `&with_genres=${genre}` : "";
         const languageQuery = language ? `&language=${language}` : "";
+        const yearQuery = year ? `&primary_release_year=${year}` : ""; // Year filter query
+        
         const response = await fetch(
-            `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${searchQuery}${genreQuery}${languageQuery}`
+            `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${searchQuery}${genreQuery}${languageQuery}${yearQuery}`
         );
         const data = await response.json();
         setMovies(data.results || []);
@@ -63,12 +69,18 @@ const SearchResults = () => {
 
     useEffect(() => {
         if (searchQuery) fetchMovies();
-    }, [searchQuery, genre, language]); // Added language to the dependency array
+    }, [searchQuery, genre, language, year]); // Added year to dependency array
 
     const handleGenreClick = (selectedGenre) => {
-        setGenre(genreMap[selectedGenre]);
-        // Reset search results when genre is changed
-        setSearchQuery(searchQueryParam);
+        // Toggle genre selection
+        if (genre === genreMap[selectedGenre]) {
+            setGenre(null); // Deselect if already selected
+        } else {
+            setGenre(genreMap[selectedGenre]);
+        }
+        // Do NOT reset the search query here
+        // This allows the search query to remain the same
+        fetchMovies(); // Re-fetch movies with the updated genre
     };
 
     const handleSearch = () => {
@@ -99,6 +111,17 @@ const SearchResults = () => {
                         {Object.keys(languageMap).map((langName) => (
                             <option key={langName} value={languageMap[langName]}>
                                 {langName}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
+                <div className="search-results-year-dropdown">
+                    <select onChange={(e) => setYear(e.target.value)} value={year}>
+                        <option value="">Select Year</option>
+                        {yearMap.map((year) => (
+                            <option key={year} value={year}>
+                                {year}
                             </option>
                         ))}
                     </select>
