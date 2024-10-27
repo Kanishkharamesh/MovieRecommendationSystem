@@ -17,6 +17,7 @@ body {
 .homepage-container {
     width: 100vw;
     background-color: #1f1f1f; /* Ensure the homepage container has the same background */
+    margin-top: 20px;
 }
 
 .navbar-container {
@@ -79,6 +80,8 @@ body {
 
 .navbar-button {
     margin: 0 10px;
+    width: 100px;
+    text-align: center;
     padding: 10px 15px;
     background-color: red;
     color: white;
@@ -86,6 +89,7 @@ body {
     border-radius: 5px;
     cursor: pointer;
     text-decoration: none;
+    margin-right: 20px;
 }
 
 .navbar-button:hover {
@@ -112,6 +116,7 @@ body {
     padding: 50px;
     text-align: center;
     width: 100vw;
+    margin-top: 20px;
 }
 
 .hero-title {
@@ -232,35 +237,39 @@ body {
     text-align: center;
     background: #1f1f1f; /* Black background for cells */
     color: white; /* Set text color to white */
-    text-decoration: none; /* Ensure text is not underlined */
-    transition: background 0.3s ease; /* Smooth transition for hover effect */
+    transition: background 0.3s ease, color 0.3s ease; /* Smooth transition for color changes */
 }
 
 .tab-movies-table th {
-    color: rgb(255, 255, 255); /* White text for header */
-    font-weight: bold; /* Bold for header */
+    color: rgb(255, 255, 255);
+    font-weight: bold;
 }
 
 .tab-movies-table tr:hover th,
 .tab-movies-table tr:hover td {
-    background: white; /* White on hover */
-    color: black; /* Text color changes to black on hover */
+    color: black;
 }
 
-.tab-movie-title {
-    font-size: 14px; /* Font size for movie titles */
-    color: white; /* White text color */
-    padding: 8px; /* Reduced padding */
+.tab-movie-title a {
+    text-decoration: none;
+    color: white;
+}
+
+.tab-movie-title a:hover {
+    text-decoration: none;
+    color: blue; 
 }
 
 /* Responsive design */
 @media (max-width: 768px) {
     .tab-top-title {
         font-size: 20px; /* Adjust title size for smaller screens */
+        text-decoration: none;
     }
     
     .tab-movie-title {
         font-size: 12px; /* Adjust movie title size for smaller screens */
+        text-decoration: none;
     }
 }
 
