@@ -1,5 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import Tabs from 'react-bootstrap/Tabs';
+import Tab from 'react-bootstrap/Tab';
 import './Homepage.css';
 
 const movies = [
@@ -78,6 +81,9 @@ const movies = [
 const Homepage = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const carouselRef = useRef(null);
+    const [featuredMovies, setFeaturedMovies] = useState([]);
+    const [topMovies, setTopMovies] = useState([]);
+    const [activeTab, setActiveTab] = useState("day");
 
     useEffect(() => {
         const scrollInterval = setInterval(() => {
@@ -106,11 +112,11 @@ const Homepage = () => {
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                     />
-                    <button type="button" className="search-button">
-                        <Link to={`/search?query=${encodeURIComponent(searchQuery)}`} className="search-link">
-                            Search
-                        </Link>
-                    </button>
+                    <Link to={`/search?query=${encodeURIComponent(searchQuery)}`} className="search-button">
+                        Search
+                    </Link>
+
+
                 </div>
                 <div className="navbar-links">
                     <Link to="/login" className="navbar-button">Login</Link>
@@ -138,6 +144,46 @@ const Homepage = () => {
                         </a>
                     ))}
                 </div>
+            </div>
+
+            {/* Top Movies Tabs */}
+            <div className="top-movies-container">
+                <h2 className="top-title">Top Movies</h2>
+                <Tabs
+                    defaultActiveKey="day"
+                    activeKey={activeTab}
+                    onSelect={(k) => setActiveTab(k)}
+                    className="mb-3"
+                    fill
+                >
+                    <Tab eventKey="day" title="Top Day">
+                        <div className="movies-list">
+                            {topMovies.map((hashtag, index) => (
+                                <div className="movie-card" key={index}>
+                                    <h3 className="movie-title">{hashtag}</h3>
+                                </div>
+                            ))}
+                        </div>
+                    </Tab>
+                    <Tab eventKey="month" title="Top Month">
+                        <div className="movies-list">
+                            {topMovies.map((hashtag, index) => (
+                                <div className="movie-card" key={index}>
+                                    <h3 className="movie-title">{hashtag}</h3>
+                                </div>
+                            ))}
+                        </div>
+                    </Tab>
+                    <Tab eventKey="year" title="Top Year">
+                        <div className="movies-list">
+                            {topMovies.map((hashtag, index) => (
+                                <div className="movie-card" key={index}>
+                                    <h3 className="movie-title">{hashtag}</h3>
+                                </div>
+                            ))}
+                        </div>
+                    </Tab>
+                </Tabs>
             </div>
 
             {/* Footer */}

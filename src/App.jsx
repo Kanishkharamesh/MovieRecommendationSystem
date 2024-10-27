@@ -1,6 +1,7 @@
 // src/App.jsx
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Homepage from './HomePage/Homepage';
 import Login from './LoginPage/Login';
 import SignUp from './SignUpPage/SignUp';

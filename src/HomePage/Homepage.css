@@ -68,14 +68,15 @@ body {
     border-radius: 0 5px 5px 0;
     cursor: pointer;
     height: 45px;
+    text-decoration: none;
 }
 
-.search-button .search-link {
+.search-button{
     color: white;
     text-decoration: none;
 }
 
-.search-button:hover .search-link{
+.search-button:hover{
     color: black;
 }
 
@@ -87,6 +88,7 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .navbar-button:hover{
@@ -101,11 +103,11 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .homepage-button:hover{
-    background-color: red;
-    color: white;
+    color: red;
 }
 
 .hero-container {
@@ -157,6 +159,7 @@ body {
     text-align: center;
     transition: transform 0.2s;
     padding: 10px;
+    text-decoration: none;
 }
 
 .movie-card:hover {
