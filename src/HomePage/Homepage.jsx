@@ -122,6 +122,8 @@ const Homepage = () => {
             <div className="hero-container">
                 <h1 className="hero-title">Discover Your Next Favorite Movie</h1>
                 <p className="hero-subtitle">Explore a world of movies tailored just for you!</p>
+                <br></br>
+                <Link to="/login" className="homepage-button">Get Recommendation</Link>
             </div>
 
             {/* Featured Movies Section */}
