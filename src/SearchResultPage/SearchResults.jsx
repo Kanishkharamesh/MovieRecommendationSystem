@@ -14,7 +14,7 @@ const genreMap = {
     Romance: 10749,
 };
 
-// Expanded languageMap with various languages
+// Expanded languageMap with various languages including Indian languages
 const languageMap = {
     English: 'en',
     Hindi: 'hi',
@@ -56,12 +56,15 @@ const SearchResults = () => {
 
     // Fetch movies from API
     const fetchMovies = async () => {
+        // Prepare query parameters
         const genreQuery = genre ? `&with_genres=${genre}` : "";
         const languageQuery = language ? `&language=${language}` : "";
         const yearQuery = year ? `&primary_release_year=${year}` : "";
+        const searchQueryParam = searchQuery ? `&query=${searchQuery}` : ""; // Use search query if available
 
+        // Use discover endpoint for filtering
         const response = await fetch(
-            `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${searchQuery}${genreQuery}${languageQuery}${yearQuery}`
+            `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}${searchQueryParam}${genreQuery}${languageQuery}${yearQuery}`
         );
         const data = await response.json();
         setMovies(data.results || []);
@@ -85,9 +88,9 @@ const SearchResults = () => {
     };
 
     const clearFilters = () => {
-        setGenre(null);
-        setLanguage(null);
-        setYear(null);
+        setGenre(null); // Reset genre filter
+        setLanguage(null); // Reset language filter
+        setYear(null); // Reset year filter
         setSearchQuery(""); // Reset search query to empty
     };
 
