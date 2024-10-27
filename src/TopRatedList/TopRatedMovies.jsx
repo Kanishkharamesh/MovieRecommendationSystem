@@ -9,7 +9,7 @@ const TopRatedMovies = () => {
     useEffect(() => {
         // Replace 'YOUR_API_KEY' with your actual API key
         axios
-            .get('https://api.themoviedb.org/3/movie/top_rated?api_key=YOUR_API_KEY')
+            .get('https://api.themoviedb.org/3/movie/top_rated?api_key=22741e403faf9947cd315c65fbb0e763')
             .then((response) => setTopMovies(response.data.results))
             .catch((error) => console.error('Error fetching top rated movies:', error));
     }, []);
