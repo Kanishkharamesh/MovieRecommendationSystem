@@ -186,7 +186,6 @@ body {
     font-size: 12px;
     color: #00BFFF;
     text-decoration: underline;
-    margin-top: 5px;
 }
 
 /* Container for the top movies section */
@@ -219,6 +218,7 @@ body {
     overflow-x: auto; /* Allow horizontal scrolling if necessary */
 }
 
+/* Movies list styling */
 .tab-movies-table {
     width: 800px; /* Set width for alignment with tabs */
     border-collapse: collapse; /* Merge borders */
@@ -232,6 +232,7 @@ body {
     text-align: center;
     background: #1f1f1f; /* Black background for cells */
     color: white; /* Set text color to white */
+    text-decoration: none; /* Ensure text is not underlined */
     transition: background 0.3s ease; /* Smooth transition for hover effect */
 }
 
@@ -245,7 +246,6 @@ body {
     background: white; /* White on hover */
     color: black; /* Text color changes to black on hover */
 }
-
 
 .tab-movie-title {
     font-size: 14px; /* Font size for movie titles */
