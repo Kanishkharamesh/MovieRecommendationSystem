@@ -52,7 +52,7 @@
 /* Highlight the active button */
 .search-results-filter-button:hover,
 .search-results-filter-button.active {
-    background-color: #007bff;
+    background-color: blue;
     color: white;
 }
 
@@ -87,12 +87,13 @@
     border-radius: 5px;
     margin-top: 20px;
     margin-bottom: 20px;
-    width: 915px; /* Adjusted width as necessary */
+    width: 750px; /* Adjusted width as necessary */
 }
 
 .search-results-search-bar button {
     padding: 8px 16px;
-    background-color: #007bff;
+    height: 45px;
+    background-color: red;
     color: white;
     border: none;
     border-radius: 5px;
@@ -101,7 +102,7 @@
 }
 
 .search-results-search-bar button:hover {
-    background-color: #0056b3;
+    background-color: blue;
 }
 
 /* Movie Results */
@@ -157,6 +158,11 @@
     color: #777;
     padding-left: 180px;
     margin-top: 20px;
+}
+
+.clear-filters-button{
+    background-color: blue;
+    border-radius: 5px;
 }
 
 /* Pagination */

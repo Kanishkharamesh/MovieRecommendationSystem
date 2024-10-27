@@ -47,19 +47,19 @@ const SearchResults = () => {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const searchQueryParam = queryParams.get('query') || "";
-    
+
     const [movies, setMovies] = useState([]);
     const [genre, setGenre] = useState(null);
     const [language, setLanguage] = useState(null);
-    const [year, setYear] = useState(null); // Year state
+    const [year, setYear] = useState(null);
     const [searchQuery, setSearchQuery] = useState(searchQueryParam);
 
     // Fetch movies from API
     const fetchMovies = async () => {
         const genreQuery = genre ? `&with_genres=${genre}` : "";
         const languageQuery = language ? `&language=${language}` : "";
-        const yearQuery = year ? `&primary_release_year=${year}` : ""; // Year filter query
-        
+        const yearQuery = year ? `&primary_release_year=${year}` : "";
+
         const response = await fetch(
             `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${searchQuery}${genreQuery}${languageQuery}${yearQuery}`
         );
@@ -68,8 +68,8 @@ const SearchResults = () => {
     };
 
     useEffect(() => {
-        if (searchQuery) fetchMovies();
-    }, [searchQuery, genre, language, year]); // Added year to dependency array
+        fetchMovies(); // Fetch movies whenever search query, genre, language, or year changes
+    }, [searchQuery, genre, language, year]);
 
     const handleGenreClick = (selectedGenre) => {
         // Toggle genre selection
@@ -78,19 +78,23 @@ const SearchResults = () => {
         } else {
             setGenre(genreMap[selectedGenre]);
         }
-        // Do NOT reset the search query here
-        // This allows the search query to remain the same
-        fetchMovies(); // Re-fetch movies with the updated genre
     };
 
     const handleSearch = () => {
         fetchMovies(); // Fetch movies based on the current search query and filters
     };
 
+    const clearFilters = () => {
+        setGenre(null);
+        setLanguage(null);
+        setYear(null);
+        setSearchQuery(""); // Reset search query to empty
+    };
+
     return (
         <div className="search-results-container">
             <h1 className="search-results-title">
-                Search Results for <span className="search-results-keyword">"{searchQuery}"</span>
+                Search Results for <span className="search-results-keyword">"{searchQuery || 'All Movies'}"</span>
             </h1>
             
             {/* Filter Buttons and Search Bar */}
@@ -136,6 +140,11 @@ const SearchResults = () => {
                     />
                     <button onClick={handleSearch}>Search</button>
                 </div>
+
+                {/* Clear All Filters Button */}
+                <button onClick={clearFilters} className="clear-filters-button">
+                    Clear All Filters
+                </button>
             </div>
             
             {/* Movie Results */}
