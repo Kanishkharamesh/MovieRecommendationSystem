@@ -111,7 +111,9 @@ const Homepage = () => {
 
             {/* Top Movies Tabs */}
             <div className="top-movies-container">
+                <br></br>
                 <h2 className="tab-top-title">Top Movies</h2>
+                <br></br>
                 <div className="tabs-container">
                     <Tabs
                         defaultActiveKey="day"
