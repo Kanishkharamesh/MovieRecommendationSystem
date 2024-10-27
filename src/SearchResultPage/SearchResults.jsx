@@ -1,9 +1,9 @@
-// src/SearchResultsPage/SearchResults.jsx
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import './SearchResults.css';
 
 const API_KEY = "22741e403faf9947cd315c65fbb0e763";
+
 const genreMap = {
     Action: 28,
     Comedy: 35,
@@ -14,7 +14,6 @@ const genreMap = {
     Romance: 10749,
 };
 
-// Expanded languageMap with various languages including Indian languages
 const languageMap = {
     English: 'en',
     Hindi: 'hi',
@@ -41,7 +40,7 @@ const languageMap = {
     Italian: 'it',
 };
 
-const yearMap = Array.from({ length: 51 }, (_, i) => 1970 + i); // Years from 1970 to 2020
+const yearMap = Array.from({ length: 21 }, (_, i) => 2000 + i); // Generates years from 2000 to 2020
 
 const SearchResults = () => {
     const location = useLocation();
@@ -53,53 +52,78 @@ const SearchResults = () => {
     const [language, setLanguage] = useState(null);
     const [year, setYear] = useState(null);
     const [searchQuery, setSearchQuery] = useState(searchQueryParam);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null); // Error state for handling API errors
 
     // Fetch movies from API
     const fetchMovies = async () => {
-        // Prepare query parameters
-        const genreQuery = genre ? `&with_genres=${genre}` : "";
-        const languageQuery = language ? `&language=${language}` : "";
-        const yearQuery = year ? `&primary_release_year=${year}` : "";
-        const searchQueryParam = searchQuery ? `&query=${searchQuery}` : ""; // Use search query if available
+        setLoading(true);
+        setError(null); // Reset error state on new fetch
+        let allMovies = [];
 
-        // Use discover endpoint for filtering
-        const response = await fetch(
-            `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}${searchQueryParam}${genreQuery}${languageQuery}${yearQuery}`
-        );
-        const data = await response.json();
-        setMovies(data.results || []);
-    };
+        try {
+            if (genre) {
+                for (let page = 1; page <= 5; page++) {
+                    const url = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${genre}&page=${page}`;
+                    const response = await fetch(url);
+                    if (!response.ok) throw new Error('Failed to fetch movies for this genre.');
+                    const data = await response.json();
+                    allMovies = [...allMovies, ...data.results];
+                }
+            } else {
+                const url = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(searchQuery)}`;
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Failed to fetch movies for the search query.');
+                const data = await response.json();
+                allMovies = data.results || [];
+            }
 
-    useEffect(() => {
-        fetchMovies(); // Fetch movies whenever search query, genre, language, or year changes
-    }, [searchQuery, genre, language, year]);
-
-    const handleGenreClick = (selectedGenre) => {
-        // Toggle genre selection
-        if (genre === genreMap[selectedGenre]) {
-            setGenre(null); // Deselect if already selected
-        } else {
-            setGenre(genreMap[selectedGenre]);
+            setMovies(allMovies);
+        } catch (error) {
+            setError(error.message); // Set error message
+            console.error('Error fetching movies:', error);
+        } finally {
+            setLoading(false);
         }
     };
 
-    const handleSearch = () => {
-        fetchMovies(); // Fetch movies based on the current search query and filters
+    useEffect(() => {
+        fetchMovies();
+    }, [searchQuery, genre]);
+
+    const handleGenreClick = (selectedGenre) => {
+        setGenre(genre === genreMap[selectedGenre] ? null : genreMap[selectedGenre]);
     };
 
     const clearFilters = () => {
-        setGenre(null); // Reset genre filter
-        setLanguage(null); // Reset language filter
-        setYear(null); // Reset year filter
-        setSearchQuery(""); // Reset search query to empty
+        setGenre(null);
+        setLanguage(null);
+        setYear(null);
+        setSearchQuery(searchQueryParam);
     };
+
+    const applyFilters = () => {
+        let filteredMovies = movies;
+
+        if (language) {
+            filteredMovies = filteredMovies.filter(movie => movie.original_language === language);
+        }
+
+        if (year) {
+            filteredMovies = filteredMovies.filter(movie => new Date(movie.release_date).getFullYear() === Number(year));
+        }
+
+        return filteredMovies;
+    };
+
+    const filteredMovies = applyFilters();
 
     return (
         <div className="search-results-container">
             <h1 className="search-results-title">
                 Search Results for <span className="search-results-keyword">"{searchQuery || 'All Movies'}"</span>
             </h1>
-            
+
             {/* Filter Buttons and Search Bar */}
             <div className="search-results-filter-bar">
                 {Object.keys(genreMap).map((genreName) => (
@@ -141,33 +165,38 @@ const SearchResults = () => {
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                     />
-                    <button onClick={handleSearch}>Search</button>
+                    <button onClick={fetchMovies}>Search</button>
                 </div>
 
-                {/* Clear All Filters Button */}
                 <button onClick={clearFilters} className="clear-filters-button">
                     Clear All Filters
                 </button>
             </div>
-            
+
             {/* Movie Results */}
-            <div className="search-results-list">
-                {movies.length > 0 ? (
-                    movies.map((movie) => (
-                        <div key={movie.id} className="search-results-movie-card">
-                            <img
-                                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                                alt={movie.title}
-                                className="search-results-movie-image"
-                            />
-                            <h3 className="search-results-movie-title">{movie.title}</h3>
-                            <p className="search-results-movie-rating">Rating: {movie.vote_average}</p>
-                        </div>
-                    ))
-                ) : (
-                    <p className="search-results-no-results">No results found.</p>
-                )}
-            </div>
+            {loading ? (
+                <p className="search-results-loading">Loading movies, please wait...</p>
+            ) : error ? (
+                <p className="search-results-error">{error}</p>
+            ) : (
+                <div className="search-results-list">
+                    {filteredMovies.length > 0 ? (
+                        filteredMovies.map((movie) => (
+                            <div key={movie.id} className="search-results-movie-card">
+                                <img
+                                    src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : 'placeholder-image-url.png'}
+                                    alt={movie.title}
+                                    className="search-results-movie-image"
+                                />
+                                <h3 className="search-results-movie-title">{movie.title}</h3>
+                                <p className="search-results-movie-rating">Rating: {movie.vote_average}</p>
+                            </div>
+                        ))
+                    ) : (
+                        <p className="search-results-no-results">No results found.</p>
+                    )}
+                </div>
+            )}
         </div>
     );
 };
