@@ -5,79 +5,6 @@ import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import './Homepage.css';
 
-const movies = [
-    {
-        id: 1,
-        title: "The Lion King",
-        rating: "8.0",
-        image: "https://th.bing.com/th/id/OIP.vJxcpf437GmnbjY-aONxkwHaKS?rs=1&pid=ImgDetMain",
-        watchLink: "#movie1",
-    },
-    {
-        id: 2,
-        title: "Spirited Away",
-        rating: "7.5",
-        image: "https://m.media-amazon.com/images/M/MV5BMjlmZmI5MDctNDE2YS00YWE0LWE5ZWItZDBhYWQ0NTcxNWRhXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg",
-        watchLink: "#movie2",
-    },
-    {
-        id: 3,
-        title: "The Invisible Man",
-        rating: "9.0",
-        image: "https://images.moviesrankings.com/image/thumb/Video113/v4/2e/b4/3f/2eb43f1c-0b37-ad5d-8cd1-9f63a1f9a232/pr_source.lsr/900x900bb.jpg",
-        watchLink: "#movie3",
-    },
-    {
-        id: 4,
-        title: "Parasite",
-        rating: "8.5",
-        image: "https://image.tmdb.org/t/p/original/xJgHg0pHphLsqTTEdzaJe0M25kT.jpg",
-        watchLink: "#movie4",
-    },
-    {
-        id: 5,
-        title: "A Man Called Ove",
-        rating: "7.8",
-        image: "https://th.bing.com/th/id/OIP.ZAa2QqFWyLUtx-Xfv4VAaQHaLH?rs=1&pid=ImgDetMain",
-        watchLink: "#movie5",
-    },
-    {
-        id: 6,
-        title: "Tomb Raider",
-        rating: "8.3",
-        image: "https://image.tmdb.org/t/p/original/iWFeyCxwmVMgZyGFWF2riynKrJ5.jpg",
-        watchLink: "#movie6",
-    },
-    {
-        id: 7,
-        title: "The Secret Garden",
-        rating: "8.1",
-        image: "https://static.metacritic.com/images/products/movies/1/a94c8d1b6aa07973dfcb38fd5b0aa287.jpg",
-        watchLink: "#movie7",
-    },
-    {
-        id: 8,
-        title: "Mowgli: Legend of the Jungle",
-        rating: "7.9",
-        image: "https://th.bing.com/th/id/OIP.vwNpQqAVrFpbPH1C6AxRCQHaK-?rs=1&pid=ImgDetMain",
-        watchLink: "#movie8",
-    },
-    {
-        id: 9,
-        title: "Life Is Beautiful",
-        rating: "8.6",
-        image: "https://www.themoviedb.org/t/p/original/aQkjmmWBcj3NI8MUmT0k28vH49p.jpg",
-        watchLink: "#movie9",
-    },
-    {
-        id: 10,
-        title: "My Neighbor Totoro",
-        rating: "9.1",
-        image: "https://www.themoviedb.org/t/p/original/rtGDOeG9LzoerkDGZF9dnVeLppL.jpg",
-        watchLink: "#movie10",
-    },
-];
-
 const Homepage = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const carouselRef = useRef(null);
@@ -85,29 +12,49 @@ const Homepage = () => {
     const [topMoviesDay, setTopMoviesDay] = useState([]);
     const [topMoviesMonth, setTopMoviesMonth] = useState([]);
     const [topMoviesYear, setTopMoviesYear] = useState([]);
+    const [featuredMovies, setFeaturedMovies] = useState([]);
 
     const apiKey = '22741e403faf9947cd315c65fbb0e763';
 
-    const fetchTopMovies = async (timeFrame, setMovies) => {
+    const fetchTopMovies = async () => {
         try {
-            const response = await axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=1`);
-            setMovies(response.data.results.slice(0, 10)); // Get top 10 movies
+            // Fetch top movies for the day
+            const responseDay = await axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=1`);
+            const moviesDay = responseDay.data.results.slice(0, 10); // Get top 10 movies
+            setTopMoviesDay(moviesDay);
+
+            // Fetch top movies for the month
+            const responseMonth = await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=2`);
+            const moviesMonth = responseMonth.data.results.slice(10, 20); // Get next 10 popular movies
+            setTopMoviesMonth(moviesMonth);
+
+            // Fetch top movies for the year
+            const responseYear = await axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=2`);
+            const moviesYear = responseYear.data.results.slice(0, 10); // Get top 10 movies from the second page
+            setTopMoviesYear(moviesYear);
         } catch (error) {
             console.error("Error fetching data from TMDB:", error);
         }
     };
 
+    const fetchFeaturedMovies = async () => {
+        try {
+            const response = await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`);
+            setFeaturedMovies(response.data.results.slice(0, 10)); // Get top 10 popular movies
+        } catch (error) {
+            console.error("Error fetching featured movies:", error);
+        }
+    };
+
     useEffect(() => {
-        fetchTopMovies('day', setTopMoviesDay);
-        fetchTopMovies('month', setTopMoviesMonth);
-        fetchTopMovies('year', setTopMoviesYear);
+        fetchTopMovies(); // Fetch different top movies for each tab
+        fetchFeaturedMovies(); // Fetch featured movies on component mount
     }, []);
 
     useEffect(() => {
         const scrollInterval = setInterval(() => {
             if (carouselRef.current) {
                 carouselRef.current.scrollBy({ left: 220, behavior: 'smooth' });
-
                 if (carouselRef.current.scrollLeft + carouselRef.current.clientWidth >= carouselRef.current.scrollWidth) {
                     carouselRef.current.scrollTo({ left: 0, behavior: 'smooth' });
                 }
@@ -133,7 +80,6 @@ const Homepage = () => {
                     <Link to={`/search?query=${encodeURIComponent(searchQuery)}`} className="search-button">
                         Search
                     </Link>
-
                 </div>
                 <div className="navbar-links">
                     <Link to="/login" className="navbar-button">Login</Link>
@@ -145,7 +91,7 @@ const Homepage = () => {
             <div className="hero-container">
                 <h1 className="hero-title">Discover Your Next Favorite Movie</h1>
                 <p className="hero-subtitle">Explore a world of movies tailored just for you!</p>
-                <br></br>
+                <br />
                 <Link to="/login" className="homepage-button">Get Recommendation</Link>
             </div>
 
@@ -153,12 +99,12 @@ const Homepage = () => {
             <div className="featured-movies-container">
                 <h2 className="featured-title">Featured Movies</h2>
                 <div className="movies-carousel" ref={carouselRef}>
-                    {movies.map((movie) => (
-                        <a href={movie.watchLink} className="movie-card" key={movie.id}>
-                            <img src={movie.image} alt={movie.title} className="movie-image" />
+                    {featuredMovies.map((movie) => (
+                        <Link to={`/movie/${movie.id}`} className="movie-card" key={movie.id}>
+                            <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} className="movie-image" />
                             <h3 className="movie-title">{movie.title}</h3>
-                            <p className="movie-rating">Rating: {movie.rating}</p>
-                        </a>
+                            <p className="movie-rating">Rating: {movie.vote_average}</p>
+                        </Link>
                     ))}
                 </div>
             </div>
@@ -166,7 +112,7 @@ const Homepage = () => {
             {/* Top Movies Tabs */}
             <div className="top-movies-container">
                 <h2 className="tab-top-title">Top Movies</h2>
-                <div className="tabs-container"> {/* Added container for tabs */}
+                <div className="tabs-container">
                     <Tabs
                         defaultActiveKey="day"
                         activeKey={activeTab}
@@ -180,7 +126,9 @@ const Homepage = () => {
                                     <tbody>
                                         {topMoviesDay.map((movie, index) => (
                                             <tr key={index}>
-                                                <td className="tab-movie-title">{movie.title}</td>
+                                                <td className="tab-movie-title">
+                                                    <Link to={`/movie/${movie.id}`}>{movie.title}</Link>
+                                                </td>
                                             </tr>
                                         ))}
                                     </tbody>
@@ -193,7 +141,9 @@ const Homepage = () => {
                                     <tbody>
                                         {topMoviesMonth.map((movie, index) => (
                                             <tr key={index}>
-                                                <td className="tab-movie-title">{movie.title}</td>
+                                                <td className="tab-movie-title">
+                                                    <Link to={`/movie/${movie.id}`}>{movie.title}</Link>
+                                                </td>
                                             </tr>
                                         ))}
                                     </tbody>
@@ -206,7 +156,9 @@ const Homepage = () => {
                                     <tbody>
                                         {topMoviesYear.map((movie, index) => (
                                             <tr key={index}>
-                                                <td className="tab-movie-title">{movie.title}</td>
+                                                <td className="tab-movie-title">
+                                                    <Link to={`/movie/${movie.id}`}>{movie.title}</Link>
+                                                </td>
                                             </tr>
                                         ))}
                                     </tbody>
@@ -216,7 +168,6 @@ const Homepage = () => {
                     </Tabs>
                 </div>
             </div>
-
 
             {/* Footer */}
             <footer className="footer-container">
