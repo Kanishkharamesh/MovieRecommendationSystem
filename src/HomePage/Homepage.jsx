@@ -81,9 +81,27 @@ const movies = [
 const Homepage = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const carouselRef = useRef(null);
-    const [featuredMovies, setFeaturedMovies] = useState([]);
-    const [topMovies, setTopMovies] = useState([]);
-    const [activeTab, setActiveTab] = useState("day");
+    const [activeTab, setActiveTab] = useState('day');
+    const [topMoviesDay, setTopMoviesDay] = useState([]);
+    const [topMoviesMonth, setTopMoviesMonth] = useState([]);
+    const [topMoviesYear, setTopMoviesYear] = useState([]);
+
+    const apiKey = '22741e403faf9947cd315c65fbb0e763';
+
+    const fetchTopMovies = async (timeFrame, setMovies) => {
+        try {
+            const response = await axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=1`);
+            setMovies(response.data.results.slice(0, 10)); // Get top 10 movies
+        } catch (error) {
+            console.error("Error fetching data from TMDB:", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchTopMovies('day', setTopMoviesDay);
+        fetchTopMovies('month', setTopMoviesMonth);
+        fetchTopMovies('year', setTopMoviesYear);
+    }, []);
 
     useEffect(() => {
         const scrollInterval = setInterval(() => {
@@ -116,7 +134,6 @@ const Homepage = () => {
                         Search
                     </Link>
 
-
                 </div>
                 <div className="navbar-links">
                     <Link to="/login" className="navbar-button">Login</Link>
@@ -148,7 +165,7 @@ const Homepage = () => {
 
             {/* Top Movies Tabs */}
             <div className="top-movies-container">
-                <h2 className="top-title">Top Movies</h2>
+                <h2 className="tab-top-title">Top Movies</h2>
                 <Tabs
                     defaultActiveKey="day"
                     activeKey={activeTab}
@@ -157,30 +174,42 @@ const Homepage = () => {
                     fill
                 >
                     <Tab eventKey="day" title="Top Day">
-                        <div className="movies-list">
-                            {topMovies.map((hashtag, index) => (
-                                <div className="movie-card" key={index}>
-                                    <h3 className="movie-title">{hashtag}</h3>
-                                </div>
-                            ))}
+                        <div className="tab-movies-list">
+                            <table className="tab-movies-table">
+                                <tbody>
+                                    {topMoviesDay.map((movie, index) => (
+                                        <tr key={index}>
+                                            <td className="tab-movie-title">{movie.title}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
                         </div>
                     </Tab>
                     <Tab eventKey="month" title="Top Month">
-                        <div className="movies-list">
-                            {topMovies.map((hashtag, index) => (
-                                <div className="movie-card" key={index}>
-                                    <h3 className="movie-title">{hashtag}</h3>
-                                </div>
-                            ))}
+                        <div className="tab-movies-list">
+                            <table className="tab-movies-table">
+                                <tbody>
+                                    {topMoviesMonth.map((movie, index) => (
+                                        <tr key={index}>
+                                            <td className="tab-movie-title">{movie.title}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
                         </div>
                     </Tab>
                     <Tab eventKey="year" title="Top Year">
-                        <div className="movies-list">
-                            {topMovies.map((hashtag, index) => (
-                                <div className="movie-card" key={index}>
-                                    <h3 className="movie-title">{hashtag}</h3>
-                                </div>
-                            ))}
+                        <div className="tab-movies-list">
+                            <table className="tab-movies-table">
+                                <tbody>
+                                    {topMoviesYear.map((movie, index) => (
+                                        <tr key={index}>
+                                            <td className="tab-movie-title">{movie.title}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
                         </div>
                     </Tab>
                 </Tabs>

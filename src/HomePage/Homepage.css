@@ -71,12 +71,7 @@ body {
     text-decoration: none;
 }
 
-.search-button{
-    color: white;
-    text-decoration: none;
-}
-
-.search-button:hover{
+.search-button:hover {
     color: black;
 }
 
@@ -91,7 +86,7 @@ body {
     text-decoration: none;
 }
 
-.navbar-button:hover{
+.navbar-button:hover {
     color: black;
 }
 
@@ -106,7 +101,7 @@ body {
     text-decoration: none;
 }
 
-.homepage-button:hover{
+.homepage-button:hover {
     color: red;
 }
 
@@ -145,7 +140,6 @@ body {
     padding: 20px 0;
     scrollbar-width: none;
 }
-
 
 .movie-card {
     flex: 0 0 200px;
@@ -190,6 +184,89 @@ body {
     color: #00BFFF;
     text-decoration: underline;
     margin-top: 5px;
+}
+
+/* Container for the top movies section */
+.top-movies-container {
+    padding: 20px;
+    background-color: #f8f9fa; /* Light background color for the section */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Title style */
+.tab-top-title {
+    font-size: 22px; /* Slightly smaller for tabs */
+    font-weight: bold;
+    margin-bottom: 15px; /* Reduced margin */
+    text-align: center;
+    color: black;
+}
+
+/* Tabs styling */
+.nav-tabs {
+    margin-bottom: 15px; /* Reduced margin for tabs */
+    background-color: black;
+    border-radius: 5px; /* Add border radius for aesthetic */
+}
+
+.nav-link {
+    font-size: 16px; /* Smaller font size for tabs */
+    color: white; /* Bootstrap primary color */
+    transition: color 0.3s;
+    padding: 8px 12px; /* Reduced padding */
+}
+
+.nav-link:hover {
+    color: red; /* Darker shade on hover */
+}
+
+.nav-link.active {
+    color: #fff; /* White text for active tab */
+    background-color: #1f1f1f; /* Matching background for active tab */
+    border: none; /* Remove border */
+}
+
+/* Movies list styling */
+.tab-movies-list {
+    overflow-x: auto; /* Allow horizontal scrolling if necessary */
+}
+
+/* Table styling */
+.tab-movies-table {
+    width: 100%;
+    border-collapse: collapse; /* Merge borders */
+    border-radius: 8px; /* Rounded corners */
+    overflow: hidden; /* Hide overflow for rounded corners */
+}
+
+.tab-movies-table th, .tab-movies-table td {
+    padding: 8px; /* Reduced padding for table cells */
+    text-align: center;
+    background-color: #1f1f1f; /* Dark background for table */
+    border: 1px solid #444; /* Lighter border for aesthetic */
+}
+
+.tab-movies-table th {
+    color: #fff; /* White text for header */
+    font-weight: bold; /* Bold for header */
+}
+
+.tab-movie-title {
+    font-size: 14px; /* Font size for movie titles */
+    color: white; /* Darker text color */
+    padding: 8px; /* Reduced padding */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .tab-top-title {
+        font-size: 20px; /* Adjust title size for smaller screens */
+    }
+    
+    .tab-movie-title {
+        font-size: 12px; /* Adjust movie title size for smaller screens */
+    }
 }
 
 .footer-container {
