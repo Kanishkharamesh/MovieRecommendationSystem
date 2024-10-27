@@ -3,106 +3,134 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import './SearchResults.css';
 
-const movies = [
-    {
-        id: 1,
-        title: "The Lion King",
-        rating: "8.0",
-        image: "https://th.bing.com/th/id/OIP.vJxcpf437GmnbjY-aONxkwHaKS?rs=1&pid=ImgDetMain",
-        watchLink: "#movie1",
-    },
-    {
-        id: 2,
-        title: "Spirited Away",
-        rating: "7.5",
-        image: "https://m.media-amazon.com/images/M/MV5BMjlmZmI5MDctNDE2YS00YWE0LWE5ZWItZDBhYWQ0NTcxNWRhXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg",
-        watchLink: "#movie2",
-    },
-    {
-        id: 3,
-        title: "The Invisible Man",
-        rating: "9.0",
-        image: "https://images.moviesrankings.com/image/thumb/Video113/v4/2e/b4/3f/2eb43f1c-0b37-ad5d-8cd1-9f63a1f9a232/pr_source.lsr/900x900bb.jpg",
-        watchLink: "#movie3",
-    },
-    {
-        id: 4,
-        title: "Parasite",
-        rating: "8.5",
-        image: "https://image.tmdb.org/t/p/original/xJgHg0pHphLsqTTEdzaJe0M25kT.jpg",
-        watchLink: "#movie4",
-    },
-    {
-        id: 5,
-        title: "A Man Called Ove",
-        rating: "7.8",
-        image: "https://th.bing.com/th/id/OIP.ZAa2QqFWyLUtx-Xfv4VAaQHaLH?rs=1&pid=ImgDetMain",
-        watchLink: "#movie5",
-    },
-    {
-        id: 6,
-        title: "Tomb Raider",
-        rating: "8.3",
-        image: "https://image.tmdb.org/t/p/original/iWFeyCxwmVMgZyGFWF2riynKrJ5.jpg",
-        watchLink: "#movie6",
-    },
-    {
-        id: 7,
-        title: "The Secret Garden",
-        rating: "8.1",
-        image: "https://static.metacritic.com/images/products/movies/1/a94c8d1b6aa07973dfcb38fd5b0aa287.jpg",
-        watchLink: "#movie7",
-    },
-    {
-        id: 8,
-        title: "Mowgli: Legend of the Jungle",
-        rating: "7.9",
-        image: "https://th.bing.com/th/id/OIP.vwNpQqAVrFpbPH1C6AxRCQHaK-?rs=1&pid=ImgDetMain",
-        watchLink: "#movie8",
-    },
-    {
-        id: 9,
-        title: "Life Is Beautiful",
-        rating: "8.6",
-        image: "https://www.themoviedb.org/t/p/original/aQkjmmWBcj3NI8MUmT0k28vH49p.jpg",
-        watchLink: "#movie9",
-    },
-    {
-        id: 10,
-        title: "My Neighbor Totoro",
-        rating: "9.1",
-        image: "https://www.themoviedb.org/t/p/original/rtGDOeG9LzoerkDGZF9dnVeLppL.jpg",
-        watchLink: "#movie10",
-    },
-];
+const API_KEY = "22741e403faf9947cd315c65fbb0e763";
+const genreMap = {
+    Action: 28,
+    Comedy: 35,
+    Drama: 18,
+    Horror: 27,
+    Thriller: 53,
+    Crime: 80,
+    Romance: 10749,
+};
+
+// You can expand this map with more languages if needed
+const languageMap = {
+    English: 'en',
+    Hindi: 'hi',
+    Bengali: 'bn',
+    Telugu: 'te',
+    Marathi: 'mr',
+    Tamil: 'ta',
+    Urdu: 'ur',
+    Gujarati: 'gu',
+    Malayalam: 'ml',
+    Kannada: 'kn',
+    Punjabi: 'pa',
+    Assamese: 'as',
+    Nepali: 'ne',
+    Thai: 'th',
+    Chinese: 'zh',
+    Japanese: 'ja',
+    Korean: 'ko',
+    Vietnamese: 'vi',
+    French: 'fr',
+    German: 'de',
+    Spanish: 'es',
+    Russian: 'ru',
+    Italian: 'it',
+};
 
 const SearchResults = () => {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
-    const searchQuery = queryParams.get('query') || "";
-    const [filteredMovies, setFilteredMovies] = useState(movies);
+    const searchQueryParam = queryParams.get('query') || "";
+    const [movies, setMovies] = useState([]);
+    const [genre, setGenre] = useState(null);
+    const [language, setLanguage] = useState(null); // Language state
+    const [searchQuery, setSearchQuery] = useState(searchQueryParam);
+
+    // Fetch movies from API
+    const fetchMovies = async () => {
+        const genreQuery = genre ? `&with_genres=${genre}` : "";
+        const languageQuery = language ? `&language=${language}` : "";
+        const response = await fetch(
+            `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${searchQuery}${genreQuery}${languageQuery}`
+        );
+        const data = await response.json();
+        setMovies(data.results || []);
+    };
 
     useEffect(() => {
-        const results = movies.filter(movie =>
-            movie.title.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-        setFilteredMovies(results);
-    }, [searchQuery]);
+        if (searchQuery) fetchMovies();
+    }, [searchQuery, genre, language]); // Added language to the dependency array
+
+    const handleGenreClick = (selectedGenre) => {
+        setGenre(genreMap[selectedGenre]);
+        // Reset search results when genre is changed
+        setSearchQuery(searchQueryParam);
+    };
+
+    const handleSearch = () => {
+        fetchMovies(); // Fetch movies based on the current search query and filters
+    };
 
     return (
         <div className="search-results-container">
-            <h1 className="results-title">Search Results for <span className="search-results-keyword">"{searchQuery}"</span></h1>
-            <div className="results-list">
-                {filteredMovies.length > 0 ? (
-                    filteredMovies.map(movie => (
+            <h1 className="search-results-title">
+                Search Results for <span className="search-results-keyword">"{searchQuery}"</span>
+            </h1>
+            
+            {/* Filter Buttons and Search Bar */}
+            <div className="search-results-filter-bar">
+                {Object.keys(genreMap).map((genreName) => (
+                    <button
+                        key={genreName}
+                        onClick={() => handleGenreClick(genreName)}
+                        className={`search-results-filter-button ${genre === genreMap[genreName] ? 'active' : ''}`}
+                    >
+                        {genreName}
+                    </button>
+                ))}
+
+                <div className="search-results-language-dropdown">
+                    <select onChange={(e) => setLanguage(e.target.value)} value={language}>
+                        <option value="">Select Language</option>
+                        {Object.keys(languageMap).map((langName) => (
+                            <option key={langName} value={languageMap[langName]}>
+                                {langName}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
+                <div className="search-results-search-bar">
+                    <input
+                        type="text"
+                        placeholder="Search..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                    <button onClick={handleSearch}>Search</button>
+                </div>
+            </div>
+            
+            {/* Movie Results */}
+            <div className="search-results-list">
+                {movies.length > 0 ? (
+                    movies.map((movie) => (
                         <div key={movie.id} className="search-results-movie-card">
-                            <img src={movie.image} alt={movie.title} className="search-results-movie-image" />
+                            <img
+                                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                                alt={movie.title}
+                                className="search-results-movie-image"
+                            />
                             <h3 className="search-results-movie-title">{movie.title}</h3>
-                            <p className="search-results-movie-rating">Rating: {movie.rating}</p>
+                            <p className="search-results-movie-rating">Rating: {movie.vote_average}</p>
                         </div>
                     ))
                 ) : (
-                    <p>No results found.</p>
+                    <p className="search-results-no-results">No results found.</p>
                 )}
             </div>
         </div>

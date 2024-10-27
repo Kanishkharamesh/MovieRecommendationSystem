@@ -1,12 +1,14 @@
 /* src/SearchResultsPage/SearchResults.css */
+
 .search-results-container {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Aligns items to the left within the container */
+    align-items: flex-start;
 }
 
-.results-title {
+/* Title and Keyword */
+.search-results-title {
     font-size: 1.5em;
     margin: 20px 0;
     padding-left: 180px;
@@ -20,7 +22,97 @@
     display: inline-block;
 }
 
-.results-list {
+/* Filter Bar */
+.search-results-filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px; /* Space between buttons and input */
+    padding-left: 180px;
+    margin: 20px 0; /* Added margin for spacing */
+}
+
+/* Filter Buttons */
+.search-results-filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.search-results-filter-button {
+    padding: 8px 16px;
+    background-color: #555555;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-results-filter-button:hover,
+.search-results-filter-button.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.search-results-language-dropdown select {
+    padding: 5px;
+    margin-left: 10px; /* Space between genre buttons and dropdown */
+}
+
+/* Search Bar */
+.search-results-search-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-results-search-bar input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 200px; /* Adjusted width as necessary */
+}
+
+.search-results-search-bar button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-results-search-bar button:hover {
+    background-color: #0056b3;
+}
+
+/* Additional Filters: Year and Language */
+.search-results-additional-filters {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.search-results-year-filter,
+.search-results-language-filter {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: white;
+    color: #555555;
+    cursor: pointer;
+}
+
+.search-results-year-filter:focus,
+.search-results-language-filter:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+/* Movie Results */
+.search-results-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
@@ -43,13 +135,13 @@
     text-decoration: none;
 }
 
-.movie-card:hover {
+.search-results-movie-card:hover {
     transform: scale(1.05);
 }
 
 .search-results-movie-image {
     width: 100%;
-    height: 70%;
+    height: 280px;
     object-fit: cover;
     border-radius: 10px 10px 0 0;
 }
@@ -67,16 +159,24 @@
     margin: 5px 0;
 }
 
+.search-results-no-results {
+    font-size: 18px;
+    color: #777;
+    padding-left: 180px;
+    margin-top: 20px;
+}
+
+/* Pagination */
 .pagination {
     margin-top: 20px;
-    padding-left: 40px;
+    padding-left: 180px;
 }
 
 .page-button {
     padding: 5px 10px;
     margin: 0 5px;
     border: none;
-    background-color: #007BFF;
+    background-color: #007bff;
     color: white;
     cursor: pointer;
     border-radius: 5px;
