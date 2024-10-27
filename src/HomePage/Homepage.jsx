@@ -166,54 +166,57 @@ const Homepage = () => {
             {/* Top Movies Tabs */}
             <div className="top-movies-container">
                 <h2 className="tab-top-title">Top Movies</h2>
-                <Tabs
-                    defaultActiveKey="day"
-                    activeKey={activeTab}
-                    onSelect={(k) => setActiveTab(k)}
-                    className="mb-3"
-                    fill
-                >
-                    <Tab eventKey="day" title="Top Day">
-                        <div className="tab-movies-list">
-                            <table className="tab-movies-table">
-                                <tbody>
-                                    {topMoviesDay.map((movie, index) => (
-                                        <tr key={index}>
-                                            <td className="tab-movie-title">{movie.title}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    </Tab>
-                    <Tab eventKey="month" title="Top Month">
-                        <div className="tab-movies-list">
-                            <table className="tab-movies-table">
-                                <tbody>
-                                    {topMoviesMonth.map((movie, index) => (
-                                        <tr key={index}>
-                                            <td className="tab-movie-title">{movie.title}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    </Tab>
-                    <Tab eventKey="year" title="Top Year">
-                        <div className="tab-movies-list">
-                            <table className="tab-movies-table">
-                                <tbody>
-                                    {topMoviesYear.map((movie, index) => (
-                                        <tr key={index}>
-                                            <td className="tab-movie-title">{movie.title}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    </Tab>
-                </Tabs>
+                <div className="tabs-container"> {/* Added container for tabs */}
+                    <Tabs
+                        defaultActiveKey="day"
+                        activeKey={activeTab}
+                        onSelect={(k) => setActiveTab(k)}
+                        className="mb-3"
+                        fill
+                    >
+                        <Tab eventKey="day" title="Top Day">
+                            <div className="tab-movies-list">
+                                <table className="tab-movies-table">
+                                    <tbody>
+                                        {topMoviesDay.map((movie, index) => (
+                                            <tr key={index}>
+                                                <td className="tab-movie-title">{movie.title}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </Tab>
+                        <Tab eventKey="month" title="Top Month">
+                            <div className="tab-movies-list">
+                                <table className="tab-movies-table">
+                                    <tbody>
+                                        {topMoviesMonth.map((movie, index) => (
+                                            <tr key={index}>
+                                                <td className="tab-movie-title">{movie.title}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </Tab>
+                        <Tab eventKey="year" title="Top Year">
+                            <div className="tab-movies-list">
+                                <table className="tab-movies-table">
+                                    <tbody>
+                                        {topMoviesYear.map((movie, index) => (
+                                            <tr key={index}>
+                                                <td className="tab-movie-title">{movie.title}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </Tab>
+                    </Tabs>
+                </div>
             </div>
+
 
             {/* Footer */}
             <footer className="footer-container">
