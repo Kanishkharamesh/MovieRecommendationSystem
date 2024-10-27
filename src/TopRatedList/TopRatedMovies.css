@@ -1,0 +1,19 @@
+/* src/TopRatedList/TopRatedMovies.css */
+
+.top-rated-movies {
+    padding: 20px;
+}
+
+.top-rated-movies h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.top-rated-movies ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.top-rated-movies li {
+    margin-bottom: 10px;
+}
