@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './SearchResults.css';
 
-const API_KEY = "22741e403faf9947cd315c65fbb0e763";
+const API_KEY = "5c49b6e2a36066a5b1491648804ef4c1";
 
 const genreMap = {
     Action: 28,
@@ -44,6 +44,7 @@ const yearMap = Array.from({ length: 21 }, (_, i) => 2000 + i); // Generates yea
 
 const SearchResults = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const queryParams = new URLSearchParams(location.search);
     const searchQueryParam = queryParams.get('query') || "";
 
@@ -53,12 +54,11 @@ const SearchResults = () => {
     const [year, setYear] = useState(null);
     const [searchQuery, setSearchQuery] = useState(searchQueryParam);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null); // Error state for handling API errors
+    const [error, setError] = useState(null);
 
-    // Fetch movies from API
     const fetchMovies = async () => {
         setLoading(true);
-        setError(null); // Reset error state on new fetch
+        setError(null);
         let allMovies = [];
 
         try {
@@ -80,7 +80,7 @@ const SearchResults = () => {
 
             setMovies(allMovies);
         } catch (error) {
-            setError(error.message); // Set error message
+            setError(error.message);
             console.error('Error fetching movies:', error);
         } finally {
             setLoading(false);
@@ -117,6 +117,10 @@ const SearchResults = () => {
     };
 
     const filteredMovies = applyFilters();
+
+    const handleMovieClick = (movie) => {
+        navigate(`/movie-results`, { state: { movieId: movie.id } });
+    };
 
     return (
         <div className="search-results-container">
@@ -182,7 +186,12 @@ const SearchResults = () => {
                 <div className="search-results-list">
                     {filteredMovies.length > 0 ? (
                         filteredMovies.map((movie) => (
-                            <div key={movie.id} className="search-results-movie-card">
+                            <div
+                                key={movie.id}
+                                className="search-results-movie-card"
+                                onClick={() => handleMovieClick(movie)}
+                                style={{ cursor: 'pointer' }}
+                            >
                                 <img
                                     src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : 'placeholder-image-url.png'}
                                     alt={movie.title}
