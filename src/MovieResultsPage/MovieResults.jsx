@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './MovieResults.css';
 
-const API_KEY = "5c49b6e2a36066a5b1491648804ef4c1";
+const API_KEY = "f6ce39aeaf2a9b3dad64b6b768e74462";
 
 const MovieResults = ({ movieId }) => {
     const [movieDetails, setMovieDetails] = useState(null);
@@ -24,11 +24,11 @@ const MovieResults = ({ movieId }) => {
 
                 const castResponse = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${API_KEY}`);
                 const castData = await castResponse.json();
-                setCast(castData.cast.slice(0, 10));
+                setCast(castData.cast.slice(0, 10)); // Limit to top 10 cast members
 
                 const watchProvidersResponse = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/watch/providers?api_key=${API_KEY}`);
                 const watchData = await watchProvidersResponse.json();
-                setWatchProviders(watchData.results?.US?.flatrate || []);
+                setWatchProviders(watchData.results?.US?.flatrate || []); // Use US providers if available
 
             } catch (error) {
                 console.error('Error fetching movie details:', error);
