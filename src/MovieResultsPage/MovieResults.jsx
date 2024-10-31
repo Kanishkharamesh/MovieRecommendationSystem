@@ -64,7 +64,7 @@ const MovieResults = () => {
                     </div>
 
                     {/* Watch Providers Section */}
-                    {movie.watch_providers && movie.watch_providers.results && (
+                    {movie.watch_providers && movie.watch_providers.results.length > 0 ? (
                         <div className="movie-results-classname-watch-providers">
                             <div className="movie-results-classname-watch-providers-title">Available on</div>
                             <div className="movie-results-classname-watch-list">
@@ -80,6 +80,8 @@ const MovieResults = () => {
                                 ))}
                             </div>
                         </div>
+                    ) : (
+                        <p className="movie-results-classname-no-providers">No watch providers available for this movie.</p>
                     )}
 
                     {/* Videos Section */}
