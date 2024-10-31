@@ -35,20 +35,20 @@ const MovieResults = () => {
                 <p className="movie-results-classname-error">{error}</p>
             ) : movie ? (
                 <div className="movie-results-classname-content">
-                    <h1 className="movie-results-classname-title">{movie.title}</h1>
                     <img
                         src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : 'placeholder-image-url.png'}
                         alt={movie.title}
                         className="movie-results-classname-movie-image"
                     />
-                    <p className="movie-results-classname-description">{movie.overview || 'No description available.'}</p>
-                    <p className="movie-results-classname-release-year">Release Year: {new Date(movie.release_date).getFullYear()}</p>
-                    <p className="movie-results-classname-language">Language: {movie.original_language}</p>
-                    <p className="movie-results-classname-rating">Rating: {movie.vote_average}</p>
+                    <div className="movie-results-classname-title">{movie.title}</div>
+                    <div className="movie-results-classname-description">{movie.overview || 'No description available.'}</div>
+                    <div className="movie-results-classname-release-year">Release Year: {new Date(movie.release_date).getFullYear()}</div>
+                    <div className="movie-results-classname-language">Language: {movie.original_language}</div>
+                    <div className="movie-results-classname-rating">Rating: {movie.vote_average}</div>
 
-                    {/* Fetch and display cast */}
+                    {/* Cast Section */}
                     <div className="movie-results-classname-cast">
-                        <h4 className="movie-results-classname-cast-title">Cast:</h4>
+                        <div className="movie-results-classname-cast-title">Cast</div>
                         <div className="movie-results-classname-cast-list">
                             {movie.credits.cast.slice(0, 5).map((actor) => (
                                 <div key={actor.id} className="movie-results-classname-cast-member">
@@ -57,16 +57,16 @@ const MovieResults = () => {
                                         alt={actor.name}
                                         className="movie-results-classname-cast-image"
                                     />
-                                    <p className="movie-results-classname-actor-name">{actor.name}</p>
+                                    <div>{actor.name}</div>
                                 </div>
                             ))}
                         </div>
                     </div>
 
-                    {/* Display watch providers */}
+                    {/* Watch Providers Section */}
                     {movie.watch_providers && movie.watch_providers.results && (
                         <div className="movie-results-classname-watch-providers">
-                            <h4 className="movie-results-classname-watch-providers-title">Available on:</h4>
+                            <div className="movie-results-classname-watch-providers-title">Available on</div>
                             <div className="movie-results-classname-watch-list">
                                 {movie.watch_providers.results.map(provider => (
                                     <div key={provider.provider_id} className="movie-results-classname-provider">
@@ -75,31 +75,29 @@ const MovieResults = () => {
                                             alt={provider.provider_name}
                                             className="movie-results-classname-provider-image"
                                         />
-                                        <span>{provider.provider_name}</span>
+                                        <div>{provider.provider_name}</div>
                                     </div>
                                 ))}
                             </div>
                         </div>
                     )}
 
-                    {/* Display videos */}
+                    {/* Videos Section */}
                     {movie.videos && movie.videos.results.length > 0 && (
                         <div className="movie-results-classname-videos">
-                            <h4 className="movie-results-classname-videos-title">Videos:</h4>
-                            {movie.videos.results.map(video => (
-                                <div key={video.id} className="movie-results-classname-video">
-                                    <h5>{video.name}</h5>
-                                    <iframe
-                                        className="movie-results-classname-video-iframe"
-                                        width="560"
-                                        height="315"
-                                        src={`https://www.youtube.com/embed/${video.key}`}
-                                        title={video.name}
-                                        frameBorder="0"
-                                        allowFullScreen
-                                    ></iframe>
-                                </div>
-                            ))}
+                            <div className="movie-results-classname-videos-title">Watch Trailers</div>
+                            <div className="movie-results-classname-video-list">
+                                {movie.videos.results.map(video => (
+                                    <div key={video.id} className="movie-results-classname-video">
+                                        <iframe
+                                            className="movie-results-classname-video-iframe"
+                                            src={`https://www.youtube.com/embed/${video.key}`}
+                                            title={video.name}
+                                            allowFullScreen
+                                        ></iframe>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     )}
                 </div>
