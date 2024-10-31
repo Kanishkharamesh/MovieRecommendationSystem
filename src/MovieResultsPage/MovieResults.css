@@ -1,44 +1,52 @@
-.movie-results-container {
-    display: flex;
+.movie-results-classname-container {
     padding: 20px;
 }
 
-.movie-results-movie-image {
-    width: 200px;
-    height: auto;
-    margin-right: 20px;
+.movie-results-classname-loading,
+.movie-results-classname-error {
+    font-size: 18px;
 }
 
-.movie-results-content {
-    flex: 1;
+.movie-results-classname-content {
+    display: flex;
+    flex-direction: column;
 }
 
-.movie-results-title {
+.movie-results-classname-title {
     font-size: 24px;
     font-weight: bold;
 }
 
-.movie-results-description {
+.movie-results-classname-movie-image {
+    width: 300px; /* Adjust as needed */
+    height: auto;
+}
+
+.movie-results-classname-description {
     margin: 10px 0;
 }
 
-.movie-results-release-year,
-.movie-results-genre,
-.movie-results-language,
-.movie-results-rating {
+.movie-results-classname-release-year,
+.movie-results-classname-language,
+.movie-results-classname-rating {
     margin: 5px 0;
 }
 
-.movie-results-cast {
+.movie-results-classname-cast {
     margin-top: 20px;
 }
 
-.movie-results-cast-list {
+.movie-results-classname-cast-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.movie-results-classname-cast-list {
     display: flex;
     flex-wrap: wrap;
 }
 
-.movie-results-cast-member {
+.movie-results-classname-cast-member {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -46,29 +54,52 @@
     margin-bottom: 10px;
 }
 
-.movie-results-cast-image {
+.movie-results-classname-cast-image {
     border-radius: 50%;
     width: 50px;
     height: 50px;
 }
 
-.movie-results-watch-providers {
+.movie-results-classname-watch-providers {
     margin-top: 20px;
 }
 
-.movie-results-watch-list {
+.movie-results-classname-watch-providers-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.movie-results-classname-watch-list {
     display: flex;
     flex-wrap: wrap;
 }
 
-.movie-results-provider {
+.movie-results-classname-provider {
     display: flex;
     align-items: center;
     margin-right: 10px;
 }
 
-.movie-results-provider-image {
+.movie-results-classname-provider-image {
     width: 50px;
     height: auto;
     margin-right: 5px;
+}
+
+.movie-results-classname-videos {
+    margin-top: 20px;
+}
+
+.movie-results-classname-videos-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.movie-results-classname-video {
+    margin-bottom: 10px;
+}
+
+.movie-results-classname-video-iframe {
+    width: 100%; /* Responsive width */
+    height: 315px; /* Fixed height */
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import './SearchResults.css';
 
 const API_KEY = "5c49b6e2a36066a5b1491648804ef4c1";
@@ -119,8 +119,8 @@ const SearchResults = () => {
     const filteredMovies = applyFilters();
 
     const handleMovieClick = (movie) => {
-        navigate(`/movie-results`, { state: { movieId: movie.id } });
-    };
+        navigate(`/movie/${movie.id}`); // Navigate to the correct route
+    };    
 
     return (
         <div className="search-results-container">

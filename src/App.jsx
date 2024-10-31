@@ -6,6 +6,7 @@ import Homepage from './HomePage/Homepage';
 import Login from './LoginPage/Login';
 import SignUp from './SignUpPage/SignUp';
 import SearchResults from './SearchResultPage/SearchResults';
+import MovieResults from './MovieResultsPage/MovieResults';
 
 const App = () => {
   return (
@@ -15,6 +16,8 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/search" element={<SearchResults />} />
+        <Route path="/movie/:id" element={<MovieResults />} />
+
       </Routes>
     </Router>
   );

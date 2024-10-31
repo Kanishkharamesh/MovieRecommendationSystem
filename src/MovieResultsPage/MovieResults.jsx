@@ -1,117 +1,111 @@
 import React, { useState, useEffect } from 'react';
-import './MovieResults.css';
+import { useParams } from 'react-router-dom';
+import './MovieResults.css'; // Make sure to include this CSS file for styling
 
-const API_KEY = "f6ce39aeaf2a9b3dad64b6b768e74462";
+const API_KEY = "5c49b6e2a36066a5b1491648804ef4c1";
 
-const MovieResults = ({ movieId }) => {
-    const [movieDetails, setMovieDetails] = useState(null);
-    const [cast, setCast] = useState([]);
-    const [watchProviders, setWatchProviders] = useState([]);
+const MovieResults = () => {
+    const { id } = useParams(); // Get the movie ID from the URL parameters
+    const [movie, setMovie] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchMovieDetails = async () => {
             try {
-                setLoading(true);
-                const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}&language=en-US`);
-                
-                if (!response.ok) {
-                    throw new Error('Failed to fetch movie details');
-                }
-
+                const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&append_to_response=credits,videos,watch/providers`);
+                if (!response.ok) throw new Error('Failed to fetch movie details.');
                 const data = await response.json();
-                setMovieDetails(data);
-
-                const castResponse = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${API_KEY}`);
-                const castData = await castResponse.json();
-                setCast(castData.cast.slice(0, 10)); // Limit to top 10 cast members
-
-                const watchProvidersResponse = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/watch/providers?api_key=${API_KEY}`);
-                const watchData = await watchProvidersResponse.json();
-                setWatchProviders(watchData.results?.US?.flatrate || []); // Use US providers if available
-
+                setMovie(data);
             } catch (error) {
-                console.error('Error fetching movie details:', error);
+                setError(error.message);
             } finally {
                 setLoading(false);
             }
         };
 
         fetchMovieDetails();
-    }, [movieId]);
-
-    if (loading) {
-        return <p className="movie-results-loading">Loading movie details...</p>;
-    }
-
-    if (!movieDetails) {
-        return <p className="movie-results-error">Movie details not found.</p>;
-    }
+    }, [id]);
 
     return (
-        <div className="movie-results-container">
-            <img
-                src={movieDetails.poster_path ? `https://image.tmdb.org/t/p/w500${movieDetails.poster_path}` : 'path-to-your-placeholder-image.png'}
-                alt={movieDetails.title}
-                className="movie-results-movie-image"
-            />
+        <div className="movie-results-classname-container">
+            {loading ? (
+                <p className="movie-results-classname-loading">Loading movie details, please wait...</p>
+            ) : error ? (
+                <p className="movie-results-classname-error">{error}</p>
+            ) : movie ? (
+                <div className="movie-results-classname-content">
+                    <h1 className="movie-results-classname-title">{movie.title}</h1>
+                    <img
+                        src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : 'placeholder-image-url.png'}
+                        alt={movie.title}
+                        className="movie-results-classname-movie-image"
+                    />
+                    <p className="movie-results-classname-description">{movie.overview || 'No description available.'}</p>
+                    <p className="movie-results-classname-release-year">Release Year: {new Date(movie.release_date).getFullYear()}</p>
+                    <p className="movie-results-classname-language">Language: {movie.original_language}</p>
+                    <p className="movie-results-classname-rating">Rating: {movie.vote_average}</p>
 
-            <div className="movie-results-content">
-                <h1 className="movie-results-title">{movieDetails.title}</h1>
-                <p className="movie-results-description">{movieDetails.overview || "No description available."}</p>
-                <p className="movie-results-release-year">Release Year: {new Date(movieDetails.release_date).getFullYear()}</p>
-
-                <div className="movie-results-genre">
-                    <strong>Genre: </strong>
-                    {movieDetails.genres.map((genre) => genre.name).join(', ')}
-                </div>
-
-                <div className="movie-results-language">
-                    <strong>Language: </strong>
-                    {movieDetails.original_language.toUpperCase()}
-                </div>
-
-                <div className="movie-results-rating">
-                    <strong>Rating: </strong>
-                    {movieDetails.vote_average}
-                </div>
-
-                <div className="movie-results-cast">
-                    <h3>Cast</h3>
-                    <div className="movie-results-cast-list">
-                        {cast.map((member) => (
-                            <div key={member.id} className="movie-results-cast-member">
-                                <img
-                                    src={member.profile_path ? `https://image.tmdb.org/t/p/w185${member.profile_path}` : 'path-to-your-placeholder-profile-image.png'}
-                                    alt={member.name}
-                                    className="movie-results-cast-image"
-                                />
-                                <p className="movie-results-cast-name">{member.name}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                <div className="movie-results-watch-providers">
-                    <h3>Available on</h3>
-                    <div className="movie-results-watch-list">
-                        {watchProviders.length > 0 ? (
-                            watchProviders.map((provider) => (
-                                <div key={provider.provider_id} className="movie-results-provider">
+                    {/* Fetch and display cast */}
+                    <div className="movie-results-classname-cast">
+                        <h4 className="movie-results-classname-cast-title">Cast:</h4>
+                        <div className="movie-results-classname-cast-list">
+                            {movie.credits.cast.slice(0, 5).map((actor) => (
+                                <div key={actor.id} className="movie-results-classname-cast-member">
                                     <img
-                                        src={`https://image.tmdb.org/t/p/w92${provider.logo_path}`}
-                                        alt={provider.provider_name}
-                                        className="movie-results-provider-image"
+                                        src={actor.profile_path ? `https://image.tmdb.org/t/p/w500${actor.profile_path}` : 'placeholder-image-url.png'}
+                                        alt={actor.name}
+                                        className="movie-results-classname-cast-image"
                                     />
-                                    <p className="movie-results-provider-name">{provider.provider_name}</p>
+                                    <p className="movie-results-classname-actor-name">{actor.name}</p>
                                 </div>
-                            ))
-                        ) : (
-                            <p>Not available on streaming platforms.</p>
-                        )}
+                            ))}
+                        </div>
                     </div>
+
+                    {/* Display watch providers */}
+                    {movie.watch_providers && movie.watch_providers.results && (
+                        <div className="movie-results-classname-watch-providers">
+                            <h4 className="movie-results-classname-watch-providers-title">Available on:</h4>
+                            <div className="movie-results-classname-watch-list">
+                                {movie.watch_providers.results.map(provider => (
+                                    <div key={provider.provider_id} className="movie-results-classname-provider">
+                                        <img
+                                            src={`https://image.tmdb.org/t/p/w500${provider.logo_path}`}
+                                            alt={provider.provider_name}
+                                            className="movie-results-classname-provider-image"
+                                        />
+                                        <span>{provider.provider_name}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Display videos */}
+                    {movie.videos && movie.videos.results.length > 0 && (
+                        <div className="movie-results-classname-videos">
+                            <h4 className="movie-results-classname-videos-title">Videos:</h4>
+                            {movie.videos.results.map(video => (
+                                <div key={video.id} className="movie-results-classname-video">
+                                    <h5>{video.name}</h5>
+                                    <iframe
+                                        className="movie-results-classname-video-iframe"
+                                        width="560"
+                                        height="315"
+                                        src={`https://www.youtube.com/embed/${video.key}`}
+                                        title={video.name}
+                                        frameBorder="0"
+                                        allowFullScreen
+                                    ></iframe>
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
-            </div>
+            ) : (
+                <p className="movie-results-classname-no-results">No movie found.</p>
+            )}
         </div>
     );
 };
