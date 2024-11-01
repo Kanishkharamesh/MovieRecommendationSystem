@@ -92,7 +92,9 @@ const Userpage = () => {
             {/* Hero Section */}
             <div className="userpage-hero-container">
                 <h1 className="userpage-hero-title">Discover Your Next Favorite Movie</h1>
+                <br></br>
                 <p className="userpage-hero-subtitle">Explore a world of movies tailored just for you!</p>
+                <br></br>
                 <Link to="/login" className="userpage-button">Get Recommendation</Link>
             </div>
 
@@ -118,67 +120,92 @@ const Userpage = () => {
 
             {/* Top Movies Tabs */}
             <div className="userpage-top-movies-container">
+                <br></br>
                 <h2 className="userpage-tab-top-title">Top Movies</h2>
+                <br></br>
                 <div className="userpage-tabs-container">
                     <Tabs
                         activeKey={activeTab}
                         onSelect={(k) => setActiveTab(k)}
-                        className="userpage-tabs"
+                        className="mb-3"
+                        fill
                     >
-                        <Tab eventKey="day" title="Today">
-                            {loading ? (
-                                <p>Loading top movies...</p>
-                            ) : error ? (
-                                <p>{error}</p>
-                            ) : (
-                                <div className="userpage-movie-list">
-                                    {topMoviesDay.map((movie) => (
-                                        <Link to={`/movie/${movie.id}`} className="userpage-movie-card" key={movie.id}>
-                                            <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={`Poster of ${movie.title}`} className="movie-image" />
-                                            <h3 className="userpage-movie-title">{movie.title}</h3>
-                                            <p className="userpage-movie-rating">Rating: {movie.vote_average}</p>
-                                        </Link>
-                                    ))}
-                                </div>
-                            )}
+                        <Tab eventKey="day" title="Top Day">
+                            <div className="userpage-tab-movies-list">
+                                {loading ? (
+                                    <p>Loading top movies...</p>
+                                ) : error ? (
+                                    <p>{error}</p>
+                                ) : (
+                                    <table className="userpage-tab-movies-table">
+                                        <tbody>
+                                            {topMoviesDay.map((movie, index) => (
+                                                <tr key={index}>
+                                                    <td className="userpage-tab-movie-title">
+                                                        <Link to={`/movie/${movie.id}`}>{movie.title}</Link>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                )}
+                            </div>
                         </Tab>
-                        <Tab eventKey="month" title="This Month">
-                            {loading ? (
-                                <p>Loading top movies...</p>
-                            ) : error ? (
-                                <p>{error}</p>
-                            ) : (
-                                <div className="userpage-movie-list">
-                                    {topMoviesMonth.map((movie) => (
-                                        <Link to={`/movie/${movie.id}`} className="userpage-movie-card" key={movie.id}>
-                                            <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={`Poster of ${movie.title}`} className="movie-image" />
-                                            <h3 className="userpage-movie-title">{movie.title}</h3>
-                                            <p className="userpage-movie-rating">Rating: {movie.vote_average}</p>
-                                        </Link>
-                                    ))}
-                                </div>
-                            )}
+                        <Tab eventKey="month" title="Top Month">
+                            <div className="userpage-tab-movies-list">
+                                {loading ? (
+                                    <p>Loading top movies...</p>
+                                ) : error ? (
+                                    <p>{error}</p>
+                                ) : (
+                                    <table className="userpage-tab-movies-table">
+                                        <tbody>
+                                            {topMoviesMonth.map((movie, index) => (
+                                                <tr key={index}>
+                                                    <td className="userpage-tab-movie-title">
+                                                        <Link to={`/movie/${movie.id}`}>{movie.title}</Link>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                )}
+                            </div>
                         </Tab>
-                        <Tab eventKey="year" title="This Year">
-                            {loading ? (
-                                <p>Loading top movies...</p>
-                            ) : error ? (
-                                <p>{error}</p>
-                            ) : (
-                                <div className="userpage-movie-list">
-                                    {topMoviesYear.map((movie) => (
-                                        <Link to={`/movie/${movie.id}`} className="userpage-movie-card" key={movie.id}>
-                                            <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={`Poster of ${movie.title}`} className="movie-image" />
-                                            <h3 className="userpage-movie-title">{movie.title}</h3>
-                                            <p className="userpage-movie-rating">Rating: {movie.vote_average}</p>
-                                        </Link>
-                                    ))}
-                                </div>
-                            )}
+                        <Tab eventKey="year" title="Top Year">
+                            <div className="userpage-tab-movies-list">
+                                {loading ? (
+                                    <p>Loading top movies...</p>
+                                ) : error ? (
+                                    <p>{error}</p>
+                                ) : (
+                                    <table className="userpage-tab-movies-table">
+                                        <tbody>
+                                            {topMoviesYear.map((movie, index) => (
+                                                <tr key={index}>
+                                                    <td className="userpage-tab-movie-title">
+                                                        <Link to={`/movie/${movie.id}`}>{movie.title}</Link>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                )}
+                            </div>
                         </Tab>
                     </Tabs>
                 </div>
             </div>
+
+            {/* Footer */}
+            <footer className="userpage-footer-container">
+                <p className="userpage-footer-text">&copy; 2024 MovieFinder. All rights reserved.</p>
+                <div className="userpage-footer-links-container">
+                    <a href="#contact" className="userpage-footer-link">Contact</a>
+                    <a href="#terms" className="userpage-footer-link">Terms of Use</a>
+                    <a href="#privacy" className="userpage-footer-link">Privacy Policy</a>
+                </div>
+            </footer>
         </div>
     );
 };
