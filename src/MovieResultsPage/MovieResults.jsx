@@ -128,7 +128,7 @@ const MovieResults = () => {
                         <p className="movie-results-classname-no-providers">No watch providers available for this movie.</p>
                     )}
 
-
+                    <br></br>
                     {/* Videos Section */}
                     {movie.videos && movie.videos.results.length > 0 && (
                         <div className="movie-results-classname-videos">
@@ -149,13 +149,15 @@ const MovieResults = () => {
                     )}
 
                     <br></br>
+                    <br></br>
                     {/* Reviews Section */}
                     <div className="movie-results-classname-reviews">
-                        <div className="movie-results-classname-reviews-title">Reviews</div>
+                        <div className="movie-results-classname-reviews-title"><strong style={{ color: 'red', fontSize: '24px' }}>Reviews </strong></div>
+                        <br></br>
                         {reviews.length > 0 ? (
                             reviews.slice(0, 3).map(review => (
                                 <div key={review.id} className="movie-results-classname-review">
-                                    <div className="movie-results-classname-review-author">Author: {review.author}</div>
+                                    <div className="movie-results-classname-review-author"><strong style={{ color: 'red', fontSize: '18px' }}>Author:</strong> {review.author}</div>
                                     <br></br>
                                     <p>{review.content}</p>
                                 </div>
