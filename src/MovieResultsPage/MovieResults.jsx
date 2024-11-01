@@ -157,9 +157,8 @@ const MovieResults = () => {
                         {reviews.length > 0 ? (
                             reviews.slice(0, 3).map(review => (
                                 <div key={review.id} className="movie-results-classname-review">
-                                    <div className="movie-results-classname-review-author"><strong style={{ color: 'red', fontSize: '18px' }}>Author:</strong> {review.author}</div>
-                                    <br></br>
-                                    <p>{review.content}</p>
+                                    <div className="movie-results-classname-review-author"><strong style={{ color: 'red', fontSize: '18px'}}>Author:</strong> {review.author}</div>
+                                    <p className="justified-text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{review.content}</p>
                                 </div>
                             ))
                         ) : (

@@ -169,6 +169,11 @@
     border-radius: 8px; 
 }
 
+.justified-text {
+    text-align: justify;
+    margin-left: 20px; 
+}
+
 @media (max-width: 768px) {
     .movie-results-classname-content {
         align-items: center; 
