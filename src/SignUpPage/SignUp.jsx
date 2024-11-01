@@ -7,14 +7,15 @@ const SignUp = () => {
   return (
     <div className="signup-container">
       <h2>Create an Account</h2>
+      <div className="signup-form-background">
       <form className="signup-form">
         <input type="text" placeholder="Username" className="signup-input" />
         <input type="email" placeholder="Email" className="signup-input" />
         <input type="password" placeholder="Password" className="signup-input" />
         <button type="submit" className="signup-button">Sign Up</button>
       </form>
-      <br></br>
-      <p>Already have an account? <Link to="/login">Login</Link></p>
+      </div>
+      <p>Already have an account? <Link to="/login" style={{ color: 'red' }}>Login</Link></p>
     </div>
   );
 };
