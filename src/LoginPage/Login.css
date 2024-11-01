@@ -39,6 +39,13 @@ h2 {
   border: 1px solid #ccc;
 }
 
+.errorLabel {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+
 .login-button {
   padding: 10px;
   font-size: 16px;

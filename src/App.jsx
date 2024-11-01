@@ -7,6 +7,7 @@ import Login from './LoginPage/Login';
 import SignUp from './SignUpPage/SignUp';
 import SearchResults from './SearchResultPage/SearchResults';
 import MovieResults from './MovieResultsPage/MovieResults';
+import UserPage from './UserPage/Userpage';
 
 const App = () => {
   return (
@@ -17,7 +18,7 @@ const App = () => {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/search" element={<SearchResults />} />
         <Route path="/movie/:id" element={<MovieResults />} />
-
+        <Route path="/userpage" element={<UserPage />} />
       </Routes>
     </Router>
   );
