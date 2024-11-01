@@ -35,20 +35,29 @@ const MovieResults = () => {
                 <p className="movie-results-classname-error">{error}</p>
             ) : movie ? (
                 <div className="movie-results-classname-content">
-                    <img
-                        src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : 'placeholder-image-url.png'}
-                        alt={movie.title}
-                        className="movie-results-classname-movie-image"
-                    />
-                    <div className="movie-results-classname-title">{movie.title}</div>
-                    <div className="movie-results-classname-description">{movie.overview || 'No description available.'}</div>
-                    <div className="movie-results-classname-release-year">Release Year: {new Date(movie.release_date).getFullYear()}</div>
-                    <div className="movie-results-classname-language">Language: {movie.original_language}</div>
-                    <div className="movie-results-classname-rating">Rating: {movie.vote_average}</div>
+                    <table>
+                        <tr>
+                            <td>
+                                <img
+                                    src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : 'placeholder-image-url.png'}
+                                    alt={movie.title}
+                                    className="movie-results-classname-movie-image"
+                                    />
+                            </td>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td>
+                                <div className="movie-results-classname-title">{movie.title}</div>
+                                <div className="movie-results-classname-description">{movie.overview || 'No description available.'}</div>
+                                <div className="movie-results-classname-release-year">Release Year: {new Date(movie.release_date).getFullYear()}</div>
+                                <div className="movie-results-classname-language">Language: {movie.original_language}</div>
+                                <div className="movie-results-classname-rating">Rating: {movie.vote_average}</div>
+                            </td>
+                        </tr>
+                    </table>
 
                     {/* Cast Section */}
                     <div className="movie-results-classname-cast">
-                        <div className="movie-results-classname-cast-title">Cast</div>
+                        <div className="movie-results-classname-cast-title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cast</div>
                         <div className="movie-results-classname-cast-list">
                             {movie.credits.cast.slice(0, 5).map((actor) => (
                                 <div key={actor.id} className="movie-results-classname-cast-member">
