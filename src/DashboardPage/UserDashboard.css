@@ -1,0 +1,40 @@
+.user-dashboard-container {
+    padding: 20px;
+    background-color: #1f1f1f; /* Matches your app's theme */
+    color: white;
+}
+
+.user-profile-section,
+.watchlist-section {
+    margin-bottom: 40px;
+}
+
+.profile-picture {
+    width: 100px; /* Adjust as needed */
+    height: 100px; /* Adjust as needed */
+    border-radius: 50%;
+}
+
+.watchlist-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.watchlist-section li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.watchlist-section button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.watchlist-section button:hover {
+    background-color: darkred;
+}

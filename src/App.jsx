@@ -8,7 +8,7 @@ import SignUp from './SignUpPage/SignUp';
 import SearchResults from './SearchResultPage/SearchResults';
 import MovieResults from './MovieResultsPage/MovieResults';
 import UserPage from './UserPage/Userpage';
-
+import UserDashboard from './DashboardPage/Userdashboard';
 const App = () => {
   return (
     <Router>
@@ -19,6 +19,7 @@ const App = () => {
         <Route path="/search" element={<SearchResults />} />
         <Route path="/movie/:id" element={<MovieResults />} />
         <Route path="/userpage" element={<UserPage />} />
+        <Route path="/userdashboard" element={<UserDashboard />} />
       </Routes>
     </Router>
   );
