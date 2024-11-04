@@ -119,7 +119,12 @@ body {
 .userpage-navbar-user-name {
     font-weight: bold;
     color: white; 
-    margin-right: 50px;
+    margin-right: 15px;
+    text-decoration: none;
+}
+
+.userpage-navbar-user-name:hover {
+    color: red;
 }
 
 .userpage-button {
@@ -228,6 +233,7 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow */
 }
+
 /* Title style */
 .userpage-tab-top-title {
     text-align: center;

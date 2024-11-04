@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import './SignUp.css';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios'; // Import Axios
 
 const SignUp = () => {
   const [username, setUsername] = useState('');
@@ -10,10 +11,11 @@ const SignUp = () => {
   const [usernameError, setUsernameError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const [signUpError, setSignUpError] = useState(''); // To store any signup errors
 
   const navigate = useNavigate();
 
-  const handleSignUp = (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
     let valid = true;
 
@@ -43,9 +45,30 @@ const SignUp = () => {
 
     // Proceed if inputs are valid
     if (valid) {
-      console.log("Signup successful!");
-      // Here you would typically handle user registration logic
-      navigate('/userpage', { state: { username } }); // Pass username to UserPage
+      try {
+        const response = await axios.post("http://localhost:5000/signup", {
+          username,
+          email,
+          password,
+        });
+
+        if (response.status === 201) {
+          // Successful signup, redirect to user page
+          navigate('/userpage', { state: { username } }); // Pass username to UserPage
+        } else if (response.data === "User already exists") {
+          setSignUpError("User already exists. Please log in.");
+        } else {
+          setSignUpError("An error occurred during sign up.");
+        }
+      } catch (error) {
+        console.error("Error during sign up:", error);
+        // Check for error response from server
+        if (error.response && error.response.data) {
+          setSignUpError(error.response.data); // Use error message from server
+        } else {
+          setSignUpError("An error occurred during sign up.");
+        }
+      }
     }
   };
 
@@ -80,6 +103,7 @@ const SignUp = () => {
           {passwordError && <span className="errorLabel">{passwordError}</span>}
           <button type="submit" className="signup-button">Sign Up</button>
         </form>
+        {signUpError && <span className="errorLabel">{signUpError}</span>} {/* Display signup error */}
       </div>
       <p>Already have an account? <Link to="/login" style={{ color: 'red' }}>Login</Link></p>
     </div>

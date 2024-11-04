@@ -2,36 +2,28 @@
 import React, { useState } from 'react';
 import './Login.css';
 import { Link, useNavigate } from 'react-router-dom';
-
-// Simulated existing users (replace with real data from a database)
-const registeredUsers = ['user1', 'user2']; 
+import axios from 'axios';
 
 const Login = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [usernameError, setUsernameError] = useState('');
+  const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [loginError, setLoginError] = useState('');
 
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     let valid = true;
 
-    // Basic username validation
-    if (!username) {
-      setUsernameError('Username is required');
-      valid = false;
-    } else if (!registeredUsers.includes(username)) {
-      setLoginError('Username does not exist. Please sign up first.');
+    if (!email) {
+      setEmailError('Email is required');
       valid = false;
     } else {
-      setUsernameError('');
-      setLoginError(''); // Clear login error if username exists
+      setEmailError('');
     }
 
-    // Basic password validation
     if (!password) {
       setPasswordError('Password is required');
       valid = false;
@@ -39,25 +31,18 @@ const Login = () => {
       setPasswordError('');
     }
 
-    // Proceed if inputs are valid
     if (valid) {
-      console.log("Login successful!");
-      // Clear all error messages on successful login
-      setUsernameError('');
-      setPasswordError('');
-      setLoginError('');
-      // Navigate to the UserPage with username as state
-      navigate('/userpage', { state: { username } });
+      try {
+        const response = await axios.post('http://localhost:5000/login', { email, password });
+        const { token, username } = response.data; // Ensure your backend sends back the username
+        localStorage.setItem('authToken', token); // Store token in localStorage
+        localStorage.setItem('username', username); // Store username in localStorage
+        navigate('/userpage'); // Redirect to the user page
+      } catch (error) {
+        setLoginError(error.response?.data?.message || 'Error logging in');
+      }
     }
   };
-
-  // Optional: Reset errors when navigating back to the login page (if you have this logic)
-  React.useEffect(() => {
-    // Reset errors on component mount (e.g., when navigating to the login page)
-    setUsernameError('');
-    setPasswordError('');
-    setLoginError('');
-  }, []);
 
   return (
     <div className="login-container">
@@ -65,13 +50,13 @@ const Login = () => {
       <div className="login-form-background">
         <form className="login-form" onSubmit={handleLogin}>
           <input
-            type="text"
-            placeholder="Username"
+            type="email"
+            placeholder="Email"
             className="login-input"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
-          {usernameError && <span className="errorLabel">{usernameError}</span>}
+          {emailError && <span className="errorLabel">{emailError}</span>}
           {loginError && <span className="errorLabel">{loginError}</span>}
           <input
             type="password"

@@ -8,7 +8,6 @@ import './Userpage.css';
 
 const Userpage = () => {
     const location = useLocation();
-    const { state } = location; // Get state from location
     const [searchQuery, setSearchQuery] = useState("");
     const carouselRef = useRef(null);
     const [activeTab, setActiveTab] = useState('day');
@@ -18,7 +17,7 @@ const Userpage = () => {
     const [featuredMovies, setFeaturedMovies] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
-    const [userName, setUserName] = useState(() => state?.username || "User"); // Use username from state
+    const [userName, setUserName] = useState(() => localStorage.getItem('username') || "User");
 
     const apiKey = '5c49b6e2a36066a5b1491648804ef4c1';
 
@@ -83,9 +82,13 @@ const Userpage = () => {
                 </div>
                 <div className="userpage-navbar-user">
                     <div className="userpage-navbar-profile-icon">
-                        {userName && userName.charAt(0).toUpperCase()} {/* Ensure userName is defined */}
-                    </div>
-                    <span className="userpage-navbar-user-name">{userName.toUpperCase() || "USER"}</span> {/* Fallback if userName is empty */}
+                        {userName.charAt(0).toUpperCase()} {/* Display the first letter of the username */}
+                    </div>&nbsp;&nbsp;&nbsp;
+                    <Link to="/userdashboard" className="userpage-navbar-user-name">
+                        {userName.toUpperCase()}
+                    </Link>
+
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </div>
             </nav>
 
@@ -120,81 +123,77 @@ const Userpage = () => {
 
             {/* Top Movies Tabs */}
             <div className="userpage-top-movies-container">
-                <br></br>
                 <h2 className="userpage-tab-top-title">Top Movies</h2>
-                <br></br>
-                <div className="userpage-tabs-container">
-                    <Tabs
-                        activeKey={activeTab}
-                        onSelect={(k) => setActiveTab(k)}
-                        className="mb-3"
-                        fill
-                    >
-                        <Tab eventKey="day" title="Top Day">
-                            <div className="userpage-tab-movies-list">
-                                {loading ? (
-                                    <p>Loading top movies...</p>
-                                ) : error ? (
-                                    <p>{error}</p>
-                                ) : (
-                                    <table className="userpage-tab-movies-table">
-                                        <tbody>
-                                            {topMoviesDay.map((movie, index) => (
-                                                <tr key={index}>
-                                                    <td className="userpage-tab-movie-title">
-                                                        <Link to={`/movie/${movie.id}`}>{movie.title}</Link>
-                                                    </td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                )}
-                            </div>
-                        </Tab>
-                        <Tab eventKey="month" title="Top Month">
-                            <div className="userpage-tab-movies-list">
-                                {loading ? (
-                                    <p>Loading top movies...</p>
-                                ) : error ? (
-                                    <p>{error}</p>
-                                ) : (
-                                    <table className="userpage-tab-movies-table">
-                                        <tbody>
-                                            {topMoviesMonth.map((movie, index) => (
-                                                <tr key={index}>
-                                                    <td className="userpage-tab-movie-title">
-                                                        <Link to={`/movie/${movie.id}`}>{movie.title}</Link>
-                                                    </td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                )}
-                            </div>
-                        </Tab>
-                        <Tab eventKey="year" title="Top Year">
-                            <div className="userpage-tab-movies-list">
-                                {loading ? (
-                                    <p>Loading top movies...</p>
-                                ) : error ? (
-                                    <p>{error}</p>
-                                ) : (
-                                    <table className="userpage-tab-movies-table">
-                                        <tbody>
-                                            {topMoviesYear.map((movie, index) => (
-                                                <tr key={index}>
-                                                    <td className="userpage-tab-movie-title">
-                                                        <Link to={`/movie/${movie.id}`}>{movie.title}</Link>
-                                                    </td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                )}
-                            </div>
-                        </Tab>
-                    </Tabs>
-                </div>
+                <Tabs
+                    activeKey={activeTab}
+                    onSelect={(k) => setActiveTab(k)}
+                    className="mb-3"
+                    fill
+                >
+                    <Tab eventKey="day" title="Top Day">
+                        <div className="userpage-tab-movies-list">
+                            {loading ? (
+                                <p>Loading top movies...</p>
+                            ) : error ? (
+                                <p>{error}</p>
+                            ) : (
+                                <table className="userpage-tab-movies-table">
+                                    <tbody>
+                                        {topMoviesDay.map((movie, index) => (
+                                            <tr key={index}>
+                                                <td className="userpage-tab-movie-title">
+                                                    <Link to={`/movie/${movie.id}`}>{movie.title}</Link>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            )}
+                        </div>
+                    </Tab>
+                    <Tab eventKey="month" title="Top Month">
+                        <div className="userpage-tab-movies-list">
+                            {loading ? (
+                                <p>Loading top movies...</p>
+                            ) : error ? (
+                                <p>{error}</p>
+                            ) : (
+                                <table className="userpage-tab-movies-table">
+                                    <tbody>
+                                        {topMoviesMonth.map((movie, index) => (
+                                            <tr key={index}>
+                                                <td className="userpage-tab-movie-title">
+                                                    <Link to={`/movie/${movie.id}`}>{movie.title}</Link>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            )}
+                        </div>
+                    </Tab>
+                    <Tab eventKey="year" title="Top Year">
+                        <div className="userpage-tab-movies-list">
+                            {loading ? (
+                                <p>Loading top movies...</p>
+                            ) : error ? (
+                                <p>{error}</p>
+                            ) : (
+                                <table className="userpage-tab-movies-table">
+                                    <tbody>
+                                        {topMoviesYear.map((movie, index) => (
+                                            <tr key={index}>
+                                                <td className="userpage-tab-movie-title">
+                                                    <Link to={`/movie/${movie.id}`}>{movie.title}</Link>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            )}
+                        </div>
+                    </Tab>
+                </Tabs>
             </div>
 
             {/* Footer */}
