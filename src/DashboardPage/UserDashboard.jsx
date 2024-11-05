@@ -1,90 +1,105 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './UserDashboard.css'; // Assuming you have a CSS file for styling
+import { useNavigate } from 'react-router-dom';
+import './UserDashboard.css';
 
 const UserDashboard = () => {
     const [user, setUser] = useState(null);
-    const [watchlist, setWatchlist] = useState([]);
+    const [activeTab, setActiveTab] = useState('ProfileOverview');
+    const [userName, setUserName] = useState(() => localStorage.getItem('username') || "User");
+    const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        // Fetch user details after login
         const fetchUserDetails = async () => {
+            setLoading(true);
             try {
-                const response = await axios.get('/api/user/details'); // Your API endpoint to get user details
-                setUser(response.data);
+                const response = await axios.get('/api/user'); // Fetching user data from the user page
+                if (response.status === 200) {
+                    setUser(response.data);
+                    setUserName(response.data.userName);
+                    localStorage.setItem('username', response.data.userName);
+                    console.log("Fetched user data:", response.data);
+                }
             } catch (error) {
-                console.error('Error fetching user details:', error);
+                console.error('Error fetching user details:', error.response?.data || error.message);
+                navigate('/login'); // Redirecting to login if there is an error
+            } finally {
+                setLoading(false); // Set loading to false after data is fetched
             }
         };
-
-        fetchUserDetails();
-    }, []);
+    
+        fetchUserDetails(); // Call the function to fetch user details
+    }, [navigate]); // Re-run this effect only if navigate changes
 
     useEffect(() => {
-        // Fetch watchlist for the user
-        const fetchWatchlist = async () => {
-            try {
-                const response = await axios.get('/api/user/watchlist'); // Your API endpoint to get user's watchlist
-                setWatchlist(response.data);
-            } catch (error) {
-                console.error('Error fetching watchlist:', error);
+        const handleStorageChange = () => {
+            const storedUserName = localStorage.getItem('username');
+            if (storedUserName && storedUserName !== userName) {
+                setUserName(storedUserName);
             }
         };
 
-        fetchWatchlist();
-    }, []);
+        // Listen for changes in local storage
+        window.addEventListener('storage', handleStorageChange);
 
-    const handleAddToWatchlist = async (movieId) => {
-        try {
-            const response = await axios.post('/api/user/watchlist/add', { movieId });
-            setWatchlist((prev) => [...prev, response.data]); // Update state with the new movie added
-        } catch (error) {
-            console.error('Error adding to watchlist:', error);
-        }
-    };
+        // Cleanup listener on component unmount
+        return () => {
+            window.removeEventListener('storage', handleStorageChange);
+        };
+    }, [userName]); // Dependency array only includes userName
 
-    const handleRemoveFromWatchlist = async (movieId) => {
-        try {
-            await axios.post('/api/user/watchlist/remove', { movieId });
-            setWatchlist((prev) => prev.filter(movie => movie.id !== movieId)); // Update state to remove the movie
-        } catch (error) {
-            console.error('Error removing from watchlist:', error);
-        }
+    const handleLogout = () => {
+        localStorage.removeItem('authToken');
+        localStorage.removeItem('username');
+        navigate('/login'); // Redirect to login on logout
     };
 
     return (
         <div className="user-dashboard-container">
-            <div className="user-profile-section">
-                <h2>User Profile</h2>
-                {user ? (
-                    <>
-                        <img src={user.profilePicture} alt="Profile" className="profile-picture" />
-                        <h3>{user.name}</h3>
-                        <p>Email: {user.email}</p>
-                        <p>Preferences: {user.preferences.join(', ')}</p>
-                        {/* Add more profile fields as needed */}
-                    </>
-                ) : (
-                    <p>Loading user details...</p>
-                )}
+            <div className="sidebar">
+                <button className="logout-button" onClick={handleLogout}>Logout</button>
+                <h3>Dashboard</h3>
+                <ul className="tabs">
+                    <li onClick={() => setActiveTab('ProfileOverview')}>Profile Overview</li>
+                    <li onClick={() => setActiveTab('AccountSettings')}>Account Settings</li>
+                    <li onClick={() => setActiveTab('Watchlist')}>Watchlist/Bookmarks</li>
+                    <li onClick={() => setActiveTab('Preferences')}>Preferences</li>
+                    <li onClick={() => setActiveTab('PaymentInfo')}>Payment Information</li>
+                    <li onClick={() => setActiveTab('Notifications')}>Notifications</li>
+                    <li onClick={() => setActiveTab('Support')}>Support</li>
+                    <li onClick={() => setActiveTab('Security')}>Security</li>
+                    <li onClick={() => setActiveTab('ActivityLog')}>Activity Log</li>
+                </ul>
             </div>
 
-            <div className="watchlist-section">
-                <h2>Your Watchlist</h2>
-                {watchlist.length > 0 ? (
-                    <ul>
-                        {watchlist.map(movie => (
-                            <li key={movie.id}>
-                                <span>{movie.title}</span>
-                                <button onClick={() => handleRemoveFromWatchlist(movie.id)}>Remove</button>
-                            </li>
-                        ))}
-                    </ul>
-                ) : (
-                    <p>Your watchlist is empty.</p>
+            <div className="content-area">
+                {activeTab === 'ProfileOverview' && (
+                    <div className="profile-overview">
+                        <h2>Profile Overview</h2>
+                        {loading ? (
+                            <p>Loading user details...</p>
+                        ) : user ? (
+                            <>
+                                <img src={user.profilePicture} alt="Profile" className="profile-picture" />
+                                <h3>{user.userName}</h3>
+                                <p>Name: {user.userName}</p>
+                                <p>Email: {user.email}</p>
+                                <p>Preferences: {user.preferences ? user.preferences.join(', ') : 'None'}</p>
+                            </>
+                        ) : (
+                            <p>Error loading user details.</p>
+                        )}
+                    </div>
                 )}
-                {/* Example of adding a movie (you can implement this as needed) */}
-                <button onClick={() => handleAddToWatchlist(1)}>Add Movie 1 to Watchlist</button> {/* Replace with actual movie ID */}
+                {activeTab === 'AccountSettings' && <div>Account Settings Content</div>}
+                {activeTab === 'Watchlist' && <div>Watchlist Content</div>}
+                {activeTab === 'Preferences' && <div>Preferences Content</div>}
+                {activeTab === 'PaymentInfo' && <div>Payment Information Content</div>}
+                {activeTab === 'Notifications' && <div>Notifications Content</div>}
+                {activeTab === 'Support' && <div>Support Content</div>}
+                {activeTab === 'Security' && <div>Security Content</div>}
+                {activeTab === 'ActivityLog' && <div>Activity Log Content</div>}
             </div>
         </div>
     );
