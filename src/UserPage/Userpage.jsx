@@ -23,8 +23,8 @@ const Userpage = () => {
 
     // Function to fetch movie data
     const fetchMoviesData = async () => {
-        setLoading(true); // Start loading
-        setError(""); // Reset error state
+        setLoading(true);
+        setError("");
         try {
             const [responseDay, responseMonth, responseYear, responseFeatured] = await Promise.all([
                 axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=1`),
@@ -40,7 +40,7 @@ const Userpage = () => {
         } catch (error) {
             setError("Error fetching movie data. Please try again later.");
         } finally {
-            setLoading(false); // End loading
+            setLoading(false);
         }
     };
 
@@ -48,6 +48,24 @@ const Userpage = () => {
     useEffect(() => {
         fetchMoviesData();
     }, []);
+
+    // Sync userName with localStorage whenever it changes
+    useEffect(() => {
+        const handleStorageChange = () => {
+            const storedUserName = localStorage.getItem('username');
+            if (storedUserName && storedUserName !== userName) {
+                setUserName(storedUserName);
+            }
+        };
+
+        // Listen for storage changes
+        window.addEventListener('storage', handleStorageChange);
+
+        // Cleanup listener on component unmount
+        return () => {
+            window.removeEventListener('storage', handleStorageChange);
+        };
+    }, [userName]);
 
     // Scroll carousel effect
     useEffect(() => {
@@ -82,12 +100,11 @@ const Userpage = () => {
                 </div>
                 <div className="userpage-navbar-user">
                     <div className="userpage-navbar-profile-icon">
-                        {userName.charAt(0).toUpperCase()} {/* Display the first letter of the username */}
+                        {userName.charAt(0).toUpperCase()}
                     </div>&nbsp;&nbsp;&nbsp;
                     <Link to="/userdashboard" className="userpage-navbar-user-name">
                         {userName.toUpperCase()}
                     </Link>
-
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </div>
             </nav>
@@ -195,18 +212,16 @@ const Userpage = () => {
                     </Tab>
                 </Tabs>
             </div>
-
-            {/* Footer */}
-            <footer className="userpage-footer-container">
-                <p className="userpage-footer-text">&copy; 2024 MovieFinder. All rights reserved.</p>
-                <div className="userpage-footer-links-container">
-                    <a href="#contact" className="userpage-footer-link">Contact</a>
-                    <a href="#terms" className="userpage-footer-link">Terms of Use</a>
-                    <a href="#privacy" className="userpage-footer-link">Privacy Policy</a>
+             {/* Footer */}
+             <footer className="user-footer-container">
+                <p className="user-footer-text">&copy; 2024 MovieFinder. All rights reserved.</p>
+                <div className="user-footer-links-container">
+                    <a href="#contact" className="user-footer-link">Contact</a>
+                    <a href="#terms" className="user-footer-link">Terms of Use</a>
+                    <a href="#privacy" className="user-footer-link">Privacy Policy</a>
                 </div>
             </footer>
         </div>
     );
 };
-
 export default Userpage;

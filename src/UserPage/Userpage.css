@@ -304,22 +304,22 @@ body {
     }
 }
 
-.userpage-footer-container {
+.user-footer-container {
     background-color: #1f1f1f; /* Ensure footer matches the overall background */
     padding: 20px;
     text-align: center;
     width: 100vw;
 }
 
-.userpage-footer-text {
+.user-footer-text {
     color: white;
 }
 
-.userpage-footer-links-container {
+.user-footer-links-container {
     margin-top: 10px;
 }
 
-.userpage-footer-link {
+.user-footer-link {
     color: white;
     margin: 0 15px;
     text-decoration: none;
