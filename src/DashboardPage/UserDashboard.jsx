@@ -13,10 +13,12 @@ const UserDashboard = () => {
         const handleStorageChange = () => {
             const storedUserName = localStorage.getItem('username');
             const storedUserEmail = localStorage.getItem('email');
-            if (storedUserName && storedUserName !== userName) {
+
+            // Only update if there's a change in localStorage
+            if (storedUserName !== userName) {
                 setUserName(storedUserName);
             }
-            if (storedUserEmail && storedUserEmail !== userEmail) {
+            if (storedUserEmail !== userEmail) {
                 setUserEmail(storedUserEmail);
             }
         };
@@ -28,7 +30,7 @@ const UserDashboard = () => {
         return () => {
             window.removeEventListener('storage', handleStorageChange);
         };
-    }, [userName, userEmail]);
+    }, [userName, userEmail]); // Keep these dependencies to track when they change
 
     const handleLogout = () => {
         localStorage.removeItem('authToken');

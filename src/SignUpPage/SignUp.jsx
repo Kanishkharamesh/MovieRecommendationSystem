@@ -55,6 +55,7 @@ const SignUp = () => {
         if (response.status === 201) {
           // Successful signup, save username to localStorage and redirect to user page
           localStorage.setItem('username', username); // Store username in localStorage
+          localStorage.setItem('email', email);
           navigate('/userpage', { state: { username } }); // Pass username to UserPage
         } else if (response.data === "User already exists") {
           setSignUpError("User already exists. Please log in.");
