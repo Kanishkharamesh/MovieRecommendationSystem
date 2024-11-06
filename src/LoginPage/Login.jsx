@@ -10,37 +10,48 @@ const Login = () => {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [loginError, setLoginError] = useState('');
-
+  
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
+  // Validate form fields
+  const validateForm = () => {
     let valid = true;
-
+    setEmailError('');
+    setPasswordError('');
+    
     if (!email) {
       setEmailError('Email is required');
       valid = false;
-    } else {
-      setEmailError('');
     }
-
+    
     if (!password) {
       setPasswordError('Password is required');
       valid = false;
-    } else {
-      setPasswordError('');
     }
+    
+    return valid;
+  };
 
-    if (valid) {
-      try {
-        const response = await axios.post('http://localhost:5000/login', { email, password });
-        const { token, username } = response.data; // Ensure your backend sends back the username
-        localStorage.setItem('authToken', token); // Store token in localStorage
-        localStorage.setItem('username', username); // Store username in localStorage
-        navigate('/userpage'); // Redirect to the user page
-      } catch (error) {
-        setLoginError(error.response?.data?.message || 'Error logging in');
-      }
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    // Validate the form before making the API request
+    if (!validateForm()) return;
+
+    try {
+      const response = await axios.post('http://localhost:5000/login', { email, password });
+      const { token, username } = response.data;
+
+      // Store user information in localStorage
+      localStorage.setItem('authToken', token);
+      localStorage.setItem('username', username);
+      localStorage.setItem('email', email);
+
+      // Redirect to user page
+      navigate('/userpage');
+    } catch (error) {
+      // Handle error from API
+      setLoginError(error.response?.data?.message || 'Error logging in');
     }
   };
 
@@ -57,7 +68,7 @@ const Login = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
           {emailError && <span className="errorLabel">{emailError}</span>}
-          {loginError && <span className="errorLabel">{loginError}</span>}
+          
           <input
             type="password"
             placeholder="Password"
@@ -66,6 +77,9 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           {passwordError && <span className="errorLabel">{passwordError}</span>}
+          
+          {loginError && <span className="errorLabel">{loginError}</span>}
+          
           <button type="submit" className="login-button">Login</button>
         </form>
       </div>

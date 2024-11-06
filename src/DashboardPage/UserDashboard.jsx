@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import navigate hook
+import { useNavigate } from 'react-router-dom';
 import './UserDashboard.css';
 
 const UserDashboard = () => {
     const [userName, setUserName] = useState(() => localStorage.getItem('username') || "User");
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
-    const [activeTab, setActiveTab] = useState('ProfileOverview'); // Track active tab
-    const [user, setUser] = useState(null); // Track user data
-    const navigate = useNavigate(); // For navigation
+    const [userEmail, setUserEmail] = useState(() => localStorage.getItem('email') || "user@example.com");
+    const [activeTab, setActiveTab] = useState('ProfileOverview');
+    const navigate = useNavigate();
 
-    // Sync userName with localStorage whenever it changes
+    // Sync userName and userEmail with localStorage whenever they change
     useEffect(() => {
         const handleStorageChange = () => {
             const storedUserName = localStorage.getItem('username');
+            const storedUserEmail = localStorage.getItem('email');
             if (storedUserName && storedUserName !== userName) {
                 setUserName(storedUserName);
+            }
+            if (storedUserEmail && storedUserEmail !== userEmail) {
+                setUserEmail(storedUserEmail);
             }
         };
 
@@ -26,50 +28,17 @@ const UserDashboard = () => {
         return () => {
             window.removeEventListener('storage', handleStorageChange);
         };
-    }, [userName]);
-
-    useEffect(() => {
-        const fetchUserDetails = async () => {
-            setLoading(true);
-            try {
-                const response = await fetch('/api/user', {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${localStorage.getItem('authToken')}`, // Example token
-                    },
-                });
-    
-                console.log('Response status:', response.status); // Log response status
-    
-                // Check if the response is JSON
-                if (response.ok) {
-                    const contentType = response.headers.get('Content-Type');
-                    if (contentType && contentType.includes('application/json')) {
-                        const fetchedUser = await response.json();
-                        console.log('Fetched user:', fetchedUser); // Log the fetched data
-                        setUser(fetchedUser);
-                    } else {
-                        throw new Error('Expected JSON, but got non-JSON response.');
-                    }
-                } else {
-                    throw new Error(`Failed to fetch user details. Status: ${response.status}`);
-                }
-            } catch (err) {
-                console.error('Error fetching user details:', err);
-                setError(`Error fetching user details: ${err.message}`);
-            } finally {
-                setLoading(false);
-            }
-        };
-    
-        fetchUserDetails();
-    }, []);       
+    }, [userName, userEmail]);
 
     const handleLogout = () => {
         localStorage.removeItem('authToken');
         localStorage.removeItem('username');
-        navigate('/login'); // Redirect to login on logout
+        localStorage.removeItem('email');
+        navigate('/login');
+    };
+
+    const handleTabChange = (tab) => {
+        setActiveTab(tab);
     };
 
     return (
@@ -77,7 +46,6 @@ const UserDashboard = () => {
             <div className="sidebar">
                 <button className="logout-button" onClick={handleLogout}>Logout</button>
                 <h3>Dashboard</h3>
-                <br></br>
                 <ul className="tabs">
                     <li onClick={() => setActiveTab('ProfileOverview')}>Profile Overview</li>
                     <li onClick={() => setActiveTab('AccountSettings')}>Account Settings</li>
@@ -95,21 +63,10 @@ const UserDashboard = () => {
                 {activeTab === 'ProfileOverview' && (
                     <div className="profile-overview">
                         <h2>Profile Overview</h2>
-                        {loading ? (
-                            <p>Loading user details...</p>
-                        ) : error ? (
-                            <p>{error}</p>
-                        ) : user ? (
-                            <>
-                                <img src={user.profilePicture} alt="Profile" className="profile-picture" />
-                                <h3>{user.userName}</h3>
-                                <p>Name: {user.userName}</p>
-                                <p>Email: {user.email}</p>
-                                <p>Preferences: {user.preferences ? user.preferences.join(', ') : 'None'}</p>
-                            </>
-                        ) : (
-                            <p>Error loading user details.</p>
-                        )}
+                        <h3>{userName}</h3>
+                        <p>Name: {userName}</p>
+                        <p>Email: {userEmail}</p>
+                        {/* Add more user details here if needed */}
                     </div>
                 )}
                 {activeTab === 'AccountSettings' && <div>Account Settings Content</div>}
