@@ -93,14 +93,19 @@ const UserDashboard = () => {
                         <p>Name: {userName}</p>
                         <p>Email: {userEmail}</p>
 
-                        <div className="user-dashboard-profile-picture">
-                            <img
-                                src={profilePictureUrl || 'default-profile.jpg'}
-                                alt="Profile"
-                                style={{ width: '120px', height: '120px', borderRadius: '50%' }}
-                            />
-                            <label htmlFor="file-upload" style={{ marginTop: '10px', cursor: 'pointer' }}>
-                                Choose a file
+                        <div className="user-dashboard-profile-picture-container">
+                            <div className="user-dashboard-profile-picture">
+                                <img
+                                    src={profilePictureUrl || 'default-profile.jpg'}
+                                    alt="Profile"
+                                    style={{ width: '120px', height: '120px', borderRadius: '50%' }}
+                                />
+                            </div>
+                            <label
+                                htmlFor="file-upload"
+                                style={{ marginTop: '10px', cursor: 'pointer', fontSize: '12px' }}  // Reduced font size
+                            >
+                            Choose a file
                             </label>
                             <input
                                 id="file-upload"

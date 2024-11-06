@@ -21,7 +21,7 @@
 /* Sidebar Styles */
 .user-dashboard-sidebar {
     width: 300px;
-    background-color: #1a1a1a; 
+    background-color: #1a1a1a;
     color: white;
     padding: 20px;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
@@ -61,6 +61,7 @@
     border: none;
     padding: 12px;
     margin-bottom: 20px;
+    margin-top: 25px;
     cursor: pointer;
     width: 100%;
     font-size: 16px; /* Larger font size for visibility */
@@ -96,7 +97,8 @@
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     margin-top: 20px;
-    position: relative; /* To ensure the profile picture is within the content area */
+    position: relative;
+    padding-right: 140px; /* Added space for the profile picture */
 }
 
 .user-dashboard-profile-overview h2 {
@@ -123,25 +125,42 @@
     width: 120px; /* Slightly smaller profile picture */
     height: 120px; /* Profile picture */
     object-fit: cover;
-    margin-bottom: 20px;
-    position: absolute; /* Position absolutely within the profile overview */
+    position: absolute; /* Positioned within the profile overview */
     top: 20px; /* Align to the top */
     right: 20px; /* Align to the right */
     transition: transform 0.3s;
 }
 
+.user-dashboard-profile-picture-container {
+    display: flex; /* Use flexbox to align children in a column */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
+    text-align: center; /* Ensure text is centered */
+    margin-left: 900px; ;
+}
+
 .user-dashboard-profile-picture img {
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
-    width: 35px; /* Reduced size */
-    height: 35px; /* Reduced size */
     object-fit: cover;
-    margin-bottom: 15px; /* Reduced margin */
-    border: none; /* Remove the border */
-    transition: transform 0.3s;
+}
+
+label {
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 12px; /* Reduced font size */
+    color: white; /* Optional: Ensure the text is visible */
 }
 
 .user-dashboard-profile-picture img:hover {
     transform: scale(1.1); /* Slight zoom effect on hover */
+}
+
+.user-dashboard-file-upload {
+    margin-top: 30px; /* Adjusted margin */
+    padding-left: 20px; /* Add left padding to provide spacing */
 }
 
 /* Input Fields */
@@ -166,20 +185,24 @@
 }
 
 .user-dashboard-file-upload input[type="file"] {
-    padding: 6px; /* Reduced padding */
-    font-size: 12px; /* Reduced font size */
+    padding: 10px 20px; /* Add horizontal padding */
+    font-size: 14px;
     border-radius: 8px;
     border: 1px solid #555;
     background-color: #2c2c2c;
     color: white;
     cursor: pointer;
-    width: auto; /* Shrink to fit */
-    margin-top: 8px; /* Reduced margin */
+    width: 100%;
+    margin-top: 20px;
     transition: background-color 0.3s;
 }
 
 .user-dashboard-file-upload input[type="file"]:hover {
-    background-color: #ff0000; /* Hover effect with red color */
+    background-color: #ff0000; 
+}
+
+.user-dashboard-file-upload {
+    margin-top: 30px;
 }
 
 /* Button Styling */
