@@ -86,7 +86,6 @@
     overflow-y: auto; /* Allow vertical scrolling */
     position: relative; /* To position profile photo inside content */
     height: 100%; /* Ensure content area takes full height */
-    margin-left: 0; /* Removed the margin to eliminate the gap */
 }
 
 /* Profile Overview Section */
@@ -129,6 +128,7 @@
     top: 20px; /* Align to the top */
     right: 20px; /* Align to the right */
     transition: transform 0.3s;
+    margin-right: 150px;
 }
 
 .user-dashboard-profile-picture-container {
@@ -137,14 +137,15 @@
     align-items: center; /* Center items horizontally */
     justify-content: center; /* Center items vertically */
     text-align: center; /* Ensure text is centered */
-    margin-left: 900px; ;
+    margin-left: 850px; ;
 }
 
 .user-dashboard-profile-picture img {
+    border-radius: 50%;
     width: 120px;
     height: 120px;
-    border-radius: 50%;
     object-fit: cover;
+    transition: transform 0.3s;
 }
 
 label {
@@ -159,8 +160,9 @@ label {
 }
 
 .user-dashboard-file-upload {
-    margin-top: 30px; /* Adjusted margin */
-    padding-left: 20px; /* Add left padding to provide spacing */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 /* Input Fields */
@@ -203,6 +205,7 @@ label {
 
 .user-dashboard-file-upload {
     margin-top: 30px;
+    
 }
 
 /* Button Styling */
