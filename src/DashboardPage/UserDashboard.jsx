@@ -5,6 +5,10 @@ import './UserDashboard.css';
 const UserDashboard = () => {
     const [userName, setUserName] = useState(() => localStorage.getItem('username') || "User");
     const [userEmail, setUserEmail] = useState(() => localStorage.getItem('email') || "user@example.com");
+    const [userBio, setUserBio] = useState(""); // Bio input field
+    const [userDob, setUserDob] = useState(""); // Date of Birth input field
+    const [userAddress, setUserAddress] = useState(""); // Address input field
+    const [profilePictureUrl, setProfilePictureUrl] = useState(""); // Profile picture URL input field
     const [activeTab, setActiveTab] = useState('ProfileOverview');
     const navigate = useNavigate();
 
@@ -39,8 +43,28 @@ const UserDashboard = () => {
         navigate('/login');
     };
 
-    const handleTabChange = (tab) => {
-        setActiveTab(tab);
+    const handleUpdate = () => {
+        // Logic to handle the update can go here
+        // For now, we will log the updated values
+        console.log("Profile Updated:", {
+            userName,
+            userEmail,
+            userBio,
+            userDob,
+            userAddress,
+            profilePictureUrl
+        });
+    };
+
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setProfilePictureUrl(reader.result); // Set the uploaded image URL
+            };
+            reader.readAsDataURL(file); // Convert the file to a data URL
+        }
     };
 
     return (
@@ -65,10 +89,90 @@ const UserDashboard = () => {
                 {activeTab === 'ProfileOverview' && (
                     <div className="profile-overview">
                         <h2>Profile Overview</h2>
-                        <h3>{userName}</h3>
+                        <h3>Welcome {userName}</h3>
                         <p>Name: {userName}</p>
                         <p>Email: {userEmail}</p>
-                        {/* Add more user details here if needed */}
+
+                        <div className="profile-picture">
+                            <img
+                                src={profilePictureUrl || 'default-profile.jpg'}
+                                alt="Profile"
+                                style={{ width: '120px', height: '120px', borderRadius: '50%' }}
+                            />
+                            <label htmlFor="file-upload" style={{ marginTop: '10px', cursor: 'pointer' }}>
+                                Choose a file
+                            </label>
+                            <input
+                                id="file-upload"
+                                type="file"
+                                accept="image/*"  // Only allow image files
+                                onChange={handleFileChange}
+                                style={{ display: 'none' }}  // Hide the default file input
+                            />
+                        </div><div className="profile-picture">
+                            <img
+                                src={profilePictureUrl || 'default-profile.jpg'}
+                                alt="Profile"
+                                style={{ width: '120px', height: '120px', borderRadius: '50%' }}
+                            />
+                            <label htmlFor="file-upload" style={{ marginTop: '10px', cursor: 'pointer' }}>
+                                Choose a file
+                            </label>
+                            <input
+                                id="file-upload"
+                                type="file"
+                                accept="image/*"  // Only allow image files
+                                onChange={handleFileChange}
+                                style={{ display: 'none' }}  // Hide the default file input
+                            />
+                        </div>
+
+                        {/* Bio */}
+                        <div className="user-bio">
+                            <h4>Bio</h4>
+                            <textarea
+                                value={userBio}
+                                placeholder="Add your bio"
+                                onChange={(e) => setUserBio(e.target.value)}
+                            />
+                        </div>
+
+                        {/* Date of Birth */}
+                        <div className="user-dob">
+                            <h4>Date of Birth</h4>
+                            <input
+                                type="date"
+                                value={userDob}
+                                onChange={(e) => setUserDob(e.target.value)}
+                            />
+                        </div>
+
+                        {/* User's Address */}
+                        <div className="user-address">
+                            <h4>Address</h4>
+                            <input
+                                type="text"
+                                value={userAddress}
+                                placeholder="Enter your address"
+                                onChange={(e) => setUserAddress(e.target.value)}
+                            />
+                        </div>
+
+                        {/* Account Creation Date */}
+                        <p>Account Created: {new Date().toLocaleDateString()}</p>  {/* Simulating account creation date */}
+
+                        {/* Activity Stats */}
+                        <div className="user-stats">
+                            <h4>Activity Stats</h4>
+                            <p>Posts: 25</p>
+                            <p>Comments: 45</p>
+                            <p>Purchases: 10</p>
+                        </div>
+
+                        {/* Update Button */}
+                        <div className="update-button">
+                            <button onClick={handleUpdate}>Update</button>
+                        </div>
                     </div>
                 )}
                 {activeTab === 'AccountSettings' && <div>Account Settings Content</div>}
