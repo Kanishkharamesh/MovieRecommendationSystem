@@ -1,37 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; // Import navigate hook
 import './UserDashboard.css';
 
 const UserDashboard = () => {
-    const [user, setUser] = useState(null);
-    const [activeTab, setActiveTab] = useState('ProfileOverview');
     const [userName, setUserName] = useState(() => localStorage.getItem('username') || "User");
-    const [loading, setLoading] = useState(true);
-    const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
+    const [activeTab, setActiveTab] = useState('ProfileOverview'); // Track active tab
+    const [user, setUser] = useState(null); // Track user data
+    const navigate = useNavigate(); // For navigation
 
-    useEffect(() => {
-        const fetchUserDetails = async () => {
-            setLoading(true);
-            try {
-                const response = await axios.get('/api/user'); // Fetching user data from the user page
-                if (response.status === 200) {
-                    setUser(response.data);
-                    setUserName(response.data.userName);
-                    localStorage.setItem('username', response.data.userName);
-                    console.log("Fetched user data:", response.data);
-                }
-            } catch (error) {
-                console.error('Error fetching user details:', error.response?.data || error.message);
-                navigate('/login'); // Redirecting to login if there is an error
-            } finally {
-                setLoading(false); // Set loading to false after data is fetched
-            }
-        };
-    
-        fetchUserDetails(); // Call the function to fetch user details
-    }, [navigate]); // Re-run this effect only if navigate changes
-
+    // Sync userName with localStorage whenever it changes
     useEffect(() => {
         const handleStorageChange = () => {
             const storedUserName = localStorage.getItem('username');
@@ -40,14 +19,52 @@ const UserDashboard = () => {
             }
         };
 
-        // Listen for changes in local storage
+        // Listen for storage changes
         window.addEventListener('storage', handleStorageChange);
 
         // Cleanup listener on component unmount
         return () => {
             window.removeEventListener('storage', handleStorageChange);
         };
-    }, [userName]); // Dependency array only includes userName
+    }, [userName]);
+
+    useEffect(() => {
+        const fetchUserDetails = async () => {
+            setLoading(true);
+            try {
+                const response = await fetch('/api/user', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('authToken')}`, // Example token
+                    },
+                });
+    
+                console.log('Response status:', response.status); // Log response status
+    
+                // Check if the response is JSON
+                if (response.ok) {
+                    const contentType = response.headers.get('Content-Type');
+                    if (contentType && contentType.includes('application/json')) {
+                        const fetchedUser = await response.json();
+                        console.log('Fetched user:', fetchedUser); // Log the fetched data
+                        setUser(fetchedUser);
+                    } else {
+                        throw new Error('Expected JSON, but got non-JSON response.');
+                    }
+                } else {
+                    throw new Error(`Failed to fetch user details. Status: ${response.status}`);
+                }
+            } catch (err) {
+                console.error('Error fetching user details:', err);
+                setError(`Error fetching user details: ${err.message}`);
+            } finally {
+                setLoading(false);
+            }
+        };
+    
+        fetchUserDetails();
+    }, []);       
 
     const handleLogout = () => {
         localStorage.removeItem('authToken');
@@ -60,6 +77,7 @@ const UserDashboard = () => {
             <div className="sidebar">
                 <button className="logout-button" onClick={handleLogout}>Logout</button>
                 <h3>Dashboard</h3>
+                <br></br>
                 <ul className="tabs">
                     <li onClick={() => setActiveTab('ProfileOverview')}>Profile Overview</li>
                     <li onClick={() => setActiveTab('AccountSettings')}>Account Settings</li>
@@ -79,6 +97,8 @@ const UserDashboard = () => {
                         <h2>Profile Overview</h2>
                         {loading ? (
                             <p>Loading user details...</p>
+                        ) : error ? (
+                            <p>{error}</p>
                         ) : user ? (
                             <>
                                 <img src={user.profilePicture} alt="Profile" className="profile-picture" />
