@@ -69,10 +69,10 @@ const UserDashboard = () => {
 
     return (
         <div className="user-dashboard-container">
-            <div className="sidebar">
-                <button className="logout-button" onClick={handleLogout}>Logout</button>
+            <div className="user-dashboard-sidebar">
+                <button className="user-dashboard-logout-button" onClick={handleLogout}>Logout</button>
                 <h3>Dashboard</h3>
-                <ul className="tabs">
+                <ul className="user-dashboard-tabs">
                     <li onClick={() => setActiveTab('ProfileOverview')}>Profile Overview</li>
                     <li onClick={() => setActiveTab('AccountSettings')}>Account Settings</li>
                     <li onClick={() => setActiveTab('Watchlist')}>Watchlist/Bookmarks</li>
@@ -85,31 +85,15 @@ const UserDashboard = () => {
                 </ul>
             </div>
 
-            <div className="content-area">
+            <div className="user-dashboard-content-area">
                 {activeTab === 'ProfileOverview' && (
-                    <div className="profile-overview">
+                    <div className="user-dashboard-profile-overview">
                         <h2>Profile Overview</h2>
                         <h3>Welcome {userName}</h3>
                         <p>Name: {userName}</p>
                         <p>Email: {userEmail}</p>
 
-                        <div className="profile-picture">
-                            <img
-                                src={profilePictureUrl || 'default-profile.jpg'}
-                                alt="Profile"
-                                style={{ width: '120px', height: '120px', borderRadius: '50%' }}
-                            />
-                            <label htmlFor="file-upload" style={{ marginTop: '10px', cursor: 'pointer' }}>
-                                Choose a file
-                            </label>
-                            <input
-                                id="file-upload"
-                                type="file"
-                                accept="image/*"  // Only allow image files
-                                onChange={handleFileChange}
-                                style={{ display: 'none' }}  // Hide the default file input
-                            />
-                        </div><div className="profile-picture">
+                        <div className="user-dashboard-profile-picture">
                             <img
                                 src={profilePictureUrl || 'default-profile.jpg'}
                                 alt="Profile"
@@ -128,7 +112,7 @@ const UserDashboard = () => {
                         </div>
 
                         {/* Bio */}
-                        <div className="user-bio">
+                        <div className="user-dashboard-user-bio">
                             <h4>Bio</h4>
                             <textarea
                                 value={userBio}
@@ -138,7 +122,7 @@ const UserDashboard = () => {
                         </div>
 
                         {/* Date of Birth */}
-                        <div className="user-dob">
+                        <div className="user-dashboard-user-dob">
                             <h4>Date of Birth</h4>
                             <input
                                 type="date"
@@ -148,7 +132,7 @@ const UserDashboard = () => {
                         </div>
 
                         {/* User's Address */}
-                        <div className="user-address">
+                        <div className="user-dashboard-user-address">
                             <h4>Address</h4>
                             <input
                                 type="text"
@@ -162,7 +146,7 @@ const UserDashboard = () => {
                         <p>Account Created: {new Date().toLocaleDateString()}</p>  {/* Simulating account creation date */}
 
                         {/* Activity Stats */}
-                        <div className="user-stats">
+                        <div className="user-dashboard-user-stats">
                             <h4>Activity Stats</h4>
                             <p>Posts: 25</p>
                             <p>Comments: 45</p>
@@ -170,7 +154,7 @@ const UserDashboard = () => {
                         </div>
 
                         {/* Update Button */}
-                        <div className="update-button">
+                        <div className="user-dashboard-update-button">
                             <button onClick={handleUpdate}>Update</button>
                         </div>
                     </div>

@@ -1,7 +1,7 @@
 /* Importing Poppins font from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-body {
+.user-body {
     margin: 0;
     background-color: black; /* Set background color to black */
     color: white; /* Default text color to white for contrast */
@@ -10,10 +10,16 @@ body {
 
 .user-dashboard-container {
     display: flex;
-    height: 100vh; /* Full viewport height */
+    flex-direction: row;
+    height: 100vh; /* Use full viewport height */
+    width: 100vw; /* Use full viewport width */
+    box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.1);
+    border-radius: 10px; /* Slight rounding of container */
+    margin: 0;
 }
 
-.sidebar {
+/* Sidebar Styles */
+.user-dashboard-sidebar {
     width: 300px;
     background-color: #1a1a1a; 
     color: white;
@@ -22,7 +28,7 @@ body {
     position: relative;
 }
 
-.sidebar h3 {
+.user-dashboard-sidebar h3 {
     margin-bottom: 20px;
     font-size: 24px; /* Larger font size for the title */
     text-align: center; /* Centered title */
@@ -30,24 +36,26 @@ body {
     padding-bottom: 10px; /* Padding for spacing */
 }
 
-.tabs {
-    list-style: none;
+.user-dashboard-tabs {
+    list-style-type: none;
     padding: 0;
+    margin: 0;
 }
 
-.tabs li {
+.user-dashboard-tabs li {
     padding: 12px 15px; /* More padding for better click area */
     cursor: pointer;
     transition: background 0.3s, color 0.3s; /* Smooth color transitions */
-    border-radius: 5px; /* Rounded corners for tabs */
+    border-radius: 5px;
 }
 
-.tabs li:hover {
-    background-color: red; /* Highlight color on hover */
-    color: white; /* Text color on hover */
+.user-dashboard-tabs li:hover {
+    background-color: red; /* Red accent on hover */
+    color: white;
 }
 
-.logout-button {
+/* Logout button styling */
+.user-dashboard-logout-button {
     background-color: red; /* Red logout button */
     color: white;
     border: none;
@@ -57,38 +65,196 @@ body {
     width: 100%;
     font-size: 16px; /* Larger font size for visibility */
     border-radius: 5px; /* Rounded corners */
-    transition: background 0.3s, transform 0.2s; /* Transform on hover */
+    transition: background 0.3s, transform 0.2s;
 }
 
-.logout-button:hover {
+.user-dashboard-logout-button:hover {
     transform: scale(1.010);
     color: black;
 }
 
-.content-area {
-    flex-grow: 1; /* Expand to fill remaining space */
-    padding: 20px;
-    margin-top: 83px;
-    margin-left: 50px;
-    font-size: 24px;
+/* Content Area Styles */
+.user-dashboard-content-area {
+    flex-grow: 1;
+    padding: 25px; /* Adjusted padding */
+    background-color: #181818; /* Dark background for content area */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    color: white;
+    font-size: 16px; /* Reduced font size */
+    overflow-y: auto; /* Allow vertical scrolling */
+    position: relative; /* To position profile photo inside content */
+    height: 100%; /* Ensure content area takes full height */
+    margin-left: 0; /* Removed the margin to eliminate the gap */
 }
 
-.profile-overview {
-    text-align: center;
-}
-
-.profile-picture {
-    border-radius: 50%;
-    width: 120px; /* Slightly larger profile picture */
-    height: 120px;/* Red border around the profile picture */
-    margin-bottom: 15px; /* Space below the profile picture */
-}
-
-h2 {
-    color: white; /* White color for headings */
-}
-
-h3 {
-    color: white; /* White color for subheadings */
+/* Profile Overview Section */
+.user-dashboard-profile-overview {
+    text-align: left;
+    padding: 15px; /* Reduced padding */
+    background-color: #2c2c2c; /* Slightly lighter background for contrast */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     margin-top: 20px;
+    position: relative; /* To ensure the profile picture is within the content area */
+}
+
+.user-dashboard-profile-overview h2 {
+    font-size: 24px; /* Reduced font size */
+    color: #ff0000; /* Red accent color */
+    margin-bottom: 15px; /* Reduced margin */
+}
+
+.user-dashboard-profile-overview h3 {
+    font-size: 18px; /* Reduced font size */
+    color: white;
+    margin-top: 8px; /* Reduced margin */
+}
+
+.user-dashboard-profile-overview p {
+    color: #b0b0b0; /* Light gray for text to reduce stark contrast */
+    font-size: 14px; /* Reduced font size */
+    margin: 4px 0; /* Reduced margin */
+}
+
+/* Profile Picture Styling - Positioned inside content area */
+.user-dashboard-profile-picture {
+    border-radius: 50%;
+    width: 120px; /* Slightly smaller profile picture */
+    height: 120px; /* Profile picture */
+    object-fit: cover;
+    margin-bottom: 20px;
+    position: absolute; /* Position absolutely within the profile overview */
+    top: 20px; /* Align to the top */
+    right: 20px; /* Align to the right */
+    transition: transform 0.3s;
+}
+
+.user-dashboard-profile-picture img {
+    border-radius: 50%;
+    width: 35px; /* Reduced size */
+    height: 35px; /* Reduced size */
+    object-fit: cover;
+    margin-bottom: 15px; /* Reduced margin */
+    border: none; /* Remove the border */
+    transition: transform 0.3s;
+}
+
+.user-dashboard-profile-picture img:hover {
+    transform: scale(1.1); /* Slight zoom effect on hover */
+}
+
+/* Input Fields */
+.user-dashboard-user-bio textarea,
+.user-dashboard-user-address input,
+.user-dashboard-user-dob input {
+    width: 100%;
+    padding: 10px; /* Reduced padding */
+    font-size: 14px; /* Reduced font size */
+    border-radius: 8px;
+    border: 1px solid #555;
+    background-color: #2c2c2c;
+    color: white;
+    transition: border-color 0.3s;
+}
+
+.user-dashboard-user-bio textarea:focus,
+.user-dashboard-user-address input:focus,
+.user-dashboard-user-dob input:focus {
+    border-color: #ff0000; /* Focus border color */
+    outline: none;
+}
+
+.user-dashboard-file-upload input[type="file"] {
+    padding: 6px; /* Reduced padding */
+    font-size: 12px; /* Reduced font size */
+    border-radius: 8px;
+    border: 1px solid #555;
+    background-color: #2c2c2c;
+    color: white;
+    cursor: pointer;
+    width: auto; /* Shrink to fit */
+    margin-top: 8px; /* Reduced margin */
+    transition: background-color 0.3s;
+}
+
+.user-dashboard-file-upload input[type="file"]:hover {
+    background-color: #ff0000; /* Hover effect with red color */
+}
+
+/* Button Styling */
+.user-dashboard-update-button button {
+    background-color: #ff0000;
+    color: white;
+    padding: 12px; /* Reduced padding */
+    font-size: 14px; /* Reduced font size */
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 15px; /* Reduced margin */
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.user-dashboard-update-button button:hover {
+    transform: scale(1.05);
+    background-color: #c54b36; /* Darker shade on hover */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1200px) {
+    .user-dashboard-container {
+        flex-direction: column;
+        height: auto;
+        width: 100%;
+    }
+
+    .user-dashboard-sidebar {
+        width: 100%;
+        border-radius: 0;
+        margin-bottom: 20px;
+    }
+
+    .user-dashboard-content-area {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .user-dashboard-sidebar {
+        padding: 12px; /* Reduced padding */
+        width: 100%;
+    }
+
+    .user-dashboard-profile-overview {
+        width: 100%;
+    }
+
+    .user-dashboard-tabs li {
+        font-size: 14px; /* Reduced font size */
+    }
+
+    .user-dashboard-profile-picture img {
+        width: 45px; /* Reduced size */
+        height: 45px; /* Reduced size */
+    }
+}
+
+@media (max-width: 480px) {
+    .user-dashboard-sidebar {
+        width: 100%;
+        padding: 8px; /* Further reduced padding */
+    }
+
+    .user-dashboard-content-area {
+        padding: 15px; /* Reduced padding */
+    }
+
+    .user-dashboard-profile-overview h2 {
+        font-size: 20px; /* Reduced font size */
+    }
+
+    .user-dashboard-tabs li {
+        font-size: 12px; /* Further reduced font size */
+    }
 }
