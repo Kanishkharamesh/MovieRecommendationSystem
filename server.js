@@ -8,7 +8,6 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-// Connect to MongoDB (adjust "UserInfo" to your MongoDB Compass database name)
 mongoose.connect('mongodb://localhost:27017/UserDetails', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
