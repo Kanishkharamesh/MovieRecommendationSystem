@@ -1,0 +1,94 @@
+/* Account Details Container */
+.account-details-container {
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap; /* Allow the sections to wrap */
+    gap: 20px; /* Add space between rows */
+    background-color: #2e2e2e;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+/* Account Details Title */
+.account-details-container h1 {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    width: 100%; /* Ensure the title spans full width */
+}
+
+/* Account Details Section */
+.account-details-section {
+    width: calc(50% - 10px); /* Each section takes half the width minus space for gap */
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-sizing: border-box; /* Ensure padding and border are included in width */
+}
+
+/* Account Details Subtitle */
+.account-details-subtitle {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Input Fields and Select */
+.account-details-input,
+.account-details-select {
+    width: 100%; /* Ensure inputs take full width of the section */
+    padding: 12px; /* Adjust padding for better spacing */
+    margin: 10px 0; /* Consistent spacing between fields */
+    border: 1px solid #000000;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+/* Button */
+.account-details-button {
+    background-color: red;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+.account-details-button:hover {
+    background-color: black;
+}
+
+/* Delete Button */
+.delete-button {
+    background-color: black;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+.delete-button:hover {
+    background-color: #ff1a1a;
+}
+
+/* Account Details Label */
+.account-details-label {
+    font-size: 16px;
+    color: #333;
+}
