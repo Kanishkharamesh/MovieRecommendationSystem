@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './UserDashboard.css';
+import Watchlist from "../WatchListPage/Watchlist"; // Assuming UserDashboard.jsx is in the DashboardPage folder
 
 const UserDashboard = () => {
     const [userName, setUserName] = useState(() => localStorage.getItem('username') || "User");
@@ -164,8 +165,8 @@ const UserDashboard = () => {
                         </div>
                     </div>
                 )}
+                {activeTab === 'Watchlist' && <Watchlist />} {/* Show Watchlist component */}
                 {activeTab === 'AccountSettings' && <div>Account Settings Content</div>}
-                {activeTab === 'Watchlist' && <div>Watchlist Content</div>}
                 {activeTab === 'Preferences' && <div>Preferences Content</div>}
                 {activeTab === 'PaymentInfo' && <div>Payment Information Content</div>}
                 {activeTab === 'Notifications' && <div>Notifications Content</div>}

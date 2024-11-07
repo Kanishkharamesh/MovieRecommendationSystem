@@ -9,6 +9,7 @@ import SearchResults from './SearchResultPage/SearchResults';
 import MovieResults from './MovieResultsPage/MovieResults';
 import UserPage from './UserPage/Userpage';
 import UserDashboard from './DashboardPage/Userdashboard';
+import Watchlist from './WatchListPage/Watchlist';
 const App = () => {
   return (
     <Router>
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/movie/:id" element={<MovieResults />} />
         <Route path="/userpage" element={<UserPage />} />
         <Route path="/userdashboard" element={<UserDashboard />} />
+        <Route path="/watchlist" element={<Watchlist />} />
       </Routes>
     </Router>
   );

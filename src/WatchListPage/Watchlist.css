@@ -1,0 +1,100 @@
+/* Watchlist Container */
+.watchlist-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+/* Watchlist Title */
+.watchlist-container h1 {
+    text-align: center;
+    font-size: 2em;
+    color: #e50914;
+    margin-bottom: 20px;
+}
+
+/* Watchlist Empty Message */
+.watchlist-container p {
+    text-align: center;
+    font-size: 1.2em;
+    color: #bbb;
+}
+
+/* Watchlist Movie List */
+.watchlist-movie-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Watchlist Movie Item */
+.watchlist-movie-item {
+    background-color: #222;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+}
+
+.watchlist-movie-item:hover {
+    transform: scale(1.05);
+}
+
+/* Movie Image */
+.watchlist-movie-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.watchlist-movie-image:hover {
+    opacity: 0.9;
+}
+
+/* Movie Info */
+.watchlist-movie-info {
+    padding: 15px;
+    text-align: center;
+}
+
+/* Movie Title */
+.watchlist-movie-info h3 {
+    font-size: 1.1em;
+    color: #fff;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.watchlist-movie-info h3:hover {
+    color: #e50914;
+}
+
+/* Movie Release Date */
+.watchlist-movie-info p {
+    font-size: 0.9em;
+    color: #bbb;
+    margin: 5px 0;
+}
+
+/* Remove Button */
+.watchlist-movie-info button {
+    background-color: #e50914;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    font-size: 0.9em;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+.watchlist-movie-info button:hover {
+    background-color: #b20710;
+}

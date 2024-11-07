@@ -11,6 +11,7 @@ const MovieResults = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [reviews, setReviews] = useState([]);
+    const [isInWatchlist, setIsInWatchlist] = useState(false);
 
     useEffect(() => {
         const fetchMovieDetails = async () => {
@@ -20,6 +21,7 @@ const MovieResults = () => {
                 const data = await response.json();
                 setMovie(data);
                 setReviews(data.reviews.results || []);
+                setIsInWatchlist(checkIfInWatchlist(data.id));
             } catch (error) {
                 setError(error.message);
             } finally {
@@ -29,6 +31,29 @@ const MovieResults = () => {
 
         fetchMovieDetails();
     }, [id]);
+
+    const checkIfInWatchlist = (movieId) => {
+        const watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
+        return watchlist.some((item) => item.id === movieId);
+    };
+
+    const handleAddToWatchlist = () => {
+        let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
+        if (!isInWatchlist) {
+            watchlist.push({
+                id: movie.id,
+                title: movie.title,
+                poster_path: movie.poster_path,
+                release_date: movie.release_date
+            });
+            localStorage.setItem("watchlist", JSON.stringify(watchlist));
+            setIsInWatchlist(true);
+        } else {
+            watchlist = watchlist.filter((item) => item.id !== movie.id);
+            localStorage.setItem("watchlist", JSON.stringify(watchlist));
+            setIsInWatchlist(false);
+        }
+    };
 
     const handleCastClick = (personId) => {
         navigate(`/person/${personId}`);
@@ -54,6 +79,12 @@ const MovieResults = () => {
                                 </td>
                                 <td style={{ paddingLeft: '20px' }}>
                                     <div className="movie-results-classname-title">{movie.title}</div>
+                                    <button 
+                                        onClick={handleAddToWatchlist} 
+                                        className="movie-results-classname-watchlist-button"
+                                    >
+                                        {isInWatchlist ? "Remove from Watchlist" : "Add to Watchlist"}
+                                    </button>
                                     <div className="movie-results-classname-description">{movie.overview || 'No description available.'}</div>
                                     <div className="movie-results-classname-release-year">Release Year: {new Date(movie.release_date).getFullYear()}</div>
                                     <div className="movie-results-classname-language">Language: {movie.original_language}</div>
@@ -107,7 +138,7 @@ const MovieResults = () => {
                                 }, []).map(service => (
                                     <div key={service.provider_id} className="movie-results-classname-provider">
                                         <a
-                                            href={`https://www.themoviedb.org/network/${service.provider_id}`} // Corrected URL
+                                            href={`https://www.themoviedb.org/network/${service.provider_id}`}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="movie-results-classname-provider-link"
@@ -166,9 +197,7 @@ const MovieResults = () => {
                         )}
                     </div>
                 </div>
-            ) : (
-                <p className="movie-results-classname-no-results">No movie found.</p>
-            )}
+            ) : null}
         </div>
     );
 };
