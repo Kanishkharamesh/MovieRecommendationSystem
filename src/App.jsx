@@ -12,6 +12,7 @@ import UserDashboard from './DashboardPage/Userdashboard';
 import Watchlist from './WatchListPage/Watchlist';
 import AccountSettings from './AccountSettingsPage/AccountSettings';
 import Password from './ForgotPasswordPage/Password';
+import ProfileOverview from './UserProfile/ProfileOverview';
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
         <Route path="/watchlist" element={<Watchlist />} />
         <Route path="/account-settings" element={<AccountSettings />} />
         <Route path="/reset-password" element={<Password />} />
+        <Route path="/profile-overview" element={<ProfileOverview />} />
       </Routes>
     </Router>
   );

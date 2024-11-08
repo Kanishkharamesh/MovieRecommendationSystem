@@ -3,18 +3,18 @@
 
 .user-body {
     margin: 0;
-    background-color: black; /* Set background color to black */
-    color: white; /* Default text color to white for contrast */
-    font-family: 'Poppins', sans-serif; /* Set font to Poppins */
+    background-color: black;
+    color: white;
+    font-family: 'Poppins', sans-serif;
 }
 
 .user-dashboard-container {
     display: flex;
     flex-direction: row;
-    height: 100vh; /* Use full viewport height */
-    width: 100vw; /* Use full viewport width */
+    height: 100vh;
+    width: 100vw;
     box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.1);
-    border-radius: 10px; /* Slight rounding of container */
+    border-radius: 10px;
     margin: 0;
 }
 
@@ -30,10 +30,10 @@
 
 .user-dashboard-sidebar h3 {
     margin-bottom: 20px;
-    font-size: 24px; /* Larger font size for the title */
-    text-align: center; /* Centered title */
-    border-bottom: 2px solid red; /* Underline for emphasis */
-    padding-bottom: 10px; /* Padding for spacing */
+    font-size: 24px;
+    text-align: center;
+    border-bottom: 2px solid red;
+    padding-bottom: 10px;
 }
 
 .user-dashboard-tabs {
@@ -43,20 +43,20 @@
 }
 
 .user-dashboard-tabs li {
-    padding: 12px 15px; /* More padding for better click area */
+    padding: 12px 15px;
     cursor: pointer;
-    transition: background 0.3s, color 0.3s; /* Smooth color transitions */
+    transition: background 0.3s, color 0.3s;
     border-radius: 5px;
 }
 
 .user-dashboard-tabs li:hover {
-    background-color: red; /* Red accent on hover */
+    background-color: red;
     color: white;
 }
 
 /* Logout button styling */
 .user-dashboard-logout-button {
-    background-color: red; /* Red logout button */
+    background-color: red;
     color: white;
     border: none;
     padding: 12px;
@@ -64,8 +64,8 @@
     margin-top: 25px;
     cursor: pointer;
     width: 100%;
-    font-size: 16px; /* Larger font size for visibility */
-    border-radius: 5px; /* Rounded corners */
+    font-size: 16px;
+    border-radius: 5px;
     transition: background 0.3s, transform 0.2s;
 }
 
@@ -77,154 +77,15 @@
 /* Content Area Styles */
 .user-dashboard-content-area {
     flex-grow: 1;
-    padding: 25px; /* Adjusted padding */
-    background-color: #181818; /* Dark background for content area */
+    padding: 25px;
+    background-color: #181818;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     color: white;
-    font-size: 16px; /* Reduced font size */
-    overflow-y: auto; /* Allow vertical scrolling */
-    position: relative; /* To position profile photo inside content */
-    height: 100%; /* Ensure content area takes full height */
-}
-
-/* Profile Overview Section */
-.user-dashboard-profile-overview {
-    text-align: left;
-    padding: 15px; /* Reduced padding */
-    background-color: #2c2c2c; /* Slightly lighter background for contrast */
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    margin-top: 20px;
+    font-size: 16px;
+    overflow-y: auto;
     position: relative;
-    padding-right: 140px; /* Added space for the profile picture */
-}
-
-.user-dashboard-profile-overview h2 {
-    font-size: 24px; /* Reduced font size */
-    color: #ff0000; /* Red accent color */
-    margin-bottom: 15px; /* Reduced margin */
-}
-
-.user-dashboard-profile-overview h3 {
-    font-size: 18px; /* Reduced font size */
-    color: white;
-    margin-top: 8px; /* Reduced margin */
-}
-
-.user-dashboard-profile-overview p {
-    color: #b0b0b0; /* Light gray for text to reduce stark contrast */
-    font-size: 14px; /* Reduced font size */
-    margin: 4px 0; /* Reduced margin */
-}
-
-/* Profile Picture Styling - Positioned inside content area */
-.user-dashboard-profile-picture {
-    border-radius: 50%;
-    width: 120px; /* Slightly smaller profile picture */
-    height: 120px; /* Profile picture */
-    object-fit: cover;
-    position: absolute; /* Positioned within the profile overview */
-    top: 20px; /* Align to the top */
-    right: 20px; /* Align to the right */
-    transition: transform 0.3s;
-    margin-right: 150px;
-}
-
-.user-dashboard-profile-picture-container {
-    display: flex; /* Use flexbox to align children in a column */
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center items horizontally */
-    justify-content: center; /* Center items vertically */
-    text-align: center; /* Ensure text is centered */
-    margin-left: 850px; ;
-}
-
-.user-dashboard-profile-picture img {
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-    transition: transform 0.3s;
-}
-
-label {
-    margin-top: 10px;
-    cursor: pointer;
-    font-size: 12px; /* Reduced font size */
-    color: white; /* Optional: Ensure the text is visible */
-}
-
-.user-dashboard-profile-picture img:hover {
-    transform: scale(1.1); /* Slight zoom effect on hover */
-}
-
-.user-dashboard-file-upload {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-/* Input Fields */
-.user-dashboard-user-bio textarea,
-.user-dashboard-user-address input,
-.user-dashboard-user-dob input {
-    width: 100%;
-    padding: 10px; /* Reduced padding */
-    font-size: 14px; /* Reduced font size */
-    border-radius: 8px;
-    border: 1px solid #555;
-    background-color: #2c2c2c;
-    color: white;
-    transition: border-color 0.3s;
-}
-
-.user-dashboard-user-bio textarea:focus,
-.user-dashboard-user-address input:focus,
-.user-dashboard-user-dob input:focus {
-    border-color: #ff0000; /* Focus border color */
-    outline: none;
-}
-
-.user-dashboard-file-upload input[type="file"] {
-    padding: 10px 20px; /* Add horizontal padding */
-    font-size: 14px;
-    border-radius: 8px;
-    border: 1px solid #555;
-    background-color: #2c2c2c;
-    color: white;
-    cursor: pointer;
-    width: 100%;
-    margin-top: 20px;
-    transition: background-color 0.3s;
-}
-
-.user-dashboard-file-upload input[type="file"]:hover {
-    background-color: #ff0000; 
-}
-
-.user-dashboard-file-upload {
-    margin-top: 30px;
-    
-}
-
-/* Button Styling */
-.user-dashboard-update-button button {
-    background-color: #ff0000;
-    color: white;
-    padding: 12px; /* Reduced padding */
-    font-size: 14px; /* Reduced font size */
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    margin-top: 15px; /* Reduced margin */
-    transition: transform 0.3s, background-color 0.3s;
-}
-
-.user-dashboard-update-button button:hover {
-    transform: scale(1.05);
-    background-color: #c54b36; /* Darker shade on hover */
+    height: 100%;
 }
 
 /* Media Queries for Responsiveness */
@@ -248,39 +109,26 @@ label {
 
 @media (max-width: 768px) {
     .user-dashboard-sidebar {
-        padding: 12px; /* Reduced padding */
-        width: 100%;
-    }
-
-    .user-dashboard-profile-overview {
+        padding: 12px;
         width: 100%;
     }
 
     .user-dashboard-tabs li {
-        font-size: 14px; /* Reduced font size */
-    }
-
-    .user-dashboard-profile-picture img {
-        width: 45px; /* Reduced size */
-        height: 45px; /* Reduced size */
+        font-size: 14px;
     }
 }
 
 @media (max-width: 480px) {
     .user-dashboard-sidebar {
         width: 100%;
-        padding: 8px; /* Further reduced padding */
+        padding: 8px;
     }
 
     .user-dashboard-content-area {
-        padding: 15px; /* Reduced padding */
-    }
-
-    .user-dashboard-profile-overview h2 {
-        font-size: 20px; /* Reduced font size */
+        padding: 15px;
     }
 
     .user-dashboard-tabs li {
-        font-size: 12px; /* Further reduced font size */
+        font-size: 12px;
     }
 }
