@@ -90,7 +90,7 @@
 /* Two-Factor Authentication Description */
 .twofa-description {
     font-size: 14px;
-    color: #ff0000;
+    color: rgb(169, 169, 169);
     margin-top: 8px;
     line-height: 0.5;
 }
@@ -125,7 +125,7 @@
 /* Deletion Description */
 .deletion-description {
     font-size: 14px;
-    color: #ff0000;
+    color: rgb(169, 169, 169);
     margin-top: 20px;
     line-height: 0.5;
 }
