@@ -2,8 +2,8 @@
 .account-details-container {
     padding: 20px;
     display: flex;
-    flex-wrap: wrap; /* Allow the sections to wrap */
-    gap: 20px; /* Add space between rows */
+    flex-wrap: wrap;
+    gap: 20px;
     background-color: #2e2e2e;
     border-radius: 8px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
@@ -13,51 +13,44 @@
 }
 
 /* Account Details Title */
-.account-details-container h1 {
+.account-details-container h2 {
     font-size: 1.5em;
     font-weight: bold;
-    color: #333;
+    color: #fff; /* Ensuring better contrast */
     margin-bottom: 20px;
-    width: 100%; /* Ensure the title spans full width */
+    width: 100%;
 }
 
-/* Account Details Section */
-.account-details-section {
-    width: calc(50% - 10px); /* Each section takes half the width minus space for gap */
+/* Email Section */
+.email-section {
+    width: 400px;
     margin-bottom: 20px;
     padding: 15px;
     border: 1px solid #ddd;
     border-radius: 8px;
     background-color: #fff;
-    box-sizing: border-box; /* Ensure padding and border are included in width */
+    box-sizing: border-box;
+    color: black;
 }
 
-/* Account Details Subtitle */
-.account-details-subtitle {
-    font-size: 1.1em;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-/* Input Fields and Select */
-.account-details-input,
-.account-details-select {
-    width: 100%; /* Ensure inputs take full width of the section */
-    padding: 12px; /* Adjust padding for better spacing */
-    margin: 10px 0; /* Consistent spacing between fields */
-    border: 1px solid #000000;
-    background-color: rgb(255, 255, 255);
+/* Email Input */
+.email-input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #000;
+    background-color: #fff;
     border-radius: 5px;
     font-size: 16px;
-    box-sizing: border-box; /* Ensure padding is included in width */
+    box-sizing: border-box;
+    color: black;
 }
 
-/* Button */
-.account-details-button {
+/* Update Email Button */
+.update-email-button {
     background-color: red;
     color: white;
-    padding: 12px 20px;
+    padding: 10px 18px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -66,15 +59,50 @@
     transition: background-color 0.3s;
 }
 
-.account-details-button:hover {
+.update-email-button:hover {
     background-color: black;
+}
+
+/* Two-Factor Authentication Section */
+.twofa-section {
+    width: 400px;
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-sizing: border-box;
+    color: black;
+}
+
+/* Two-Factor Authentication Label */
+.twofa-label {
+    font-size: 16px;
+    color: #333;
+}
+
+/* Two-Factor Authentication Checkbox */
+.twofa-checkbox {
+    margin-right: 10px;
+}
+
+/* Account Deletion Section */
+.deletion-section {
+    width: 400px;
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-sizing: border-box;
+    color: black;
 }
 
 /* Delete Button */
 .delete-button {
     background-color: black;
     color: white;
-    padding: 12px 20px;
+    padding: 10px 18px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -87,8 +115,55 @@
     background-color: #ff1a1a;
 }
 
-/* Account Details Label */
-.account-details-label {
+/* Language and Region Section */
+.language-region-section {
+    width: 400px;
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-sizing: border-box;
+    color: black;
+}
+
+/* Language and Region Select */
+.language-select,
+.region-select {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #000;
+    background-color: #fff;
+    border-radius: 5px;
     font-size: 16px;
-    color: #333;
+    box-sizing: border-box;
+    color: black;
+}
+
+/* Update Language and Region Button */
+.update-language-region-button {
+    background-color: red;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+.update-language-region-button:hover {
+    background-color: black;
+}
+
+/* Responsive Design for Smaller Screens */
+@media (max-width: 768px) {
+    .email-section,
+    .twofa-section,
+    .deletion-section,
+    .language-region-section {
+        width: 100%; /* Stack sections full-width on smaller screens */
+    }
 }

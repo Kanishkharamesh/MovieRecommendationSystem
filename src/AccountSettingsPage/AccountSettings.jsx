@@ -46,51 +46,66 @@ const AccountSettings = () => {
             <h2 className="account-details-title">Account Settings</h2>
 
             {/* Update Email */}
-            <div className="account-details-section">
+            <div className="account-details-section email-section">
                 <h3 className="account-details-subtitle">Update Email</h3>
                 <input
                     type="email"
                     placeholder="Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="account-details-input"
+                    className="account-details-input email-input"
                 />
-                <button onClick={handleEmailUpdate} className="account-details-button">Update Email</button>
+                <button onClick={handleEmailUpdate} className="account-details-button update-email-button">
+                    Update Email
+                </button>
             </div>
 
             {/* Two-Factor Authentication */}
-            <div className="account-details-section">
+            <div className="account-details-section twofa-section">
                 <h3 className="account-details-subtitle">Two-Factor Authentication</h3>
-                <label className="account-details-label">
+                <label className="account-details-label twofa-label">
                     <input
                         type="checkbox"
                         checked={is2FAEnabled}
                         onChange={handle2FAToggle}
+                        className="twofa-checkbox"
                     />
                     Enable Two-Factor Authentication
                 </label>
             </div>
 
             {/* Account Deletion */}
-            <div className="account-details-section">
+            <div className="account-details-section deletion-section">
                 <h3 className="account-details-subtitle">Account Deletion</h3>
-                <button onClick={handleAccountDeletion} className="account-details-button delete-button">Delete Account</button>
+                <button onClick={handleAccountDeletion} className="account-details-button delete-button">
+                    Delete Account
+                </button>
             </div>
 
             {/* Language and Region Settings */}
-            <div className="account-details-section">
+            <div className="account-details-section language-region-section">
                 <h3 className="account-details-subtitle">Language and Region Settings</h3>
-                <select value={language} onChange={(e) => setLanguage(e.target.value)} className="account-details-select">
+                <select
+                    value={language}
+                    onChange={(e) => setLanguage(e.target.value)}
+                    className="account-details-select language-select"
+                >
                     <option value="English">English</option>
                     <option value="Spanish">Spanish</option>
                     <option value="French">French</option>
                 </select>
-                <select value={region} onChange={(e) => setRegion(e.target.value)} className="account-details-select">
+                <select
+                    value={region}
+                    onChange={(e) => setRegion(e.target.value)}
+                    className="account-details-select region-select"
+                >
                     <option value="US">United States</option>
                     <option value="EU">Europe</option>
                     <option value="ASIA">Asia</option>
                 </select>
-                <button onClick={handleLanguageRegionChange} className="account-details-button">Update Settings</button>
+                <button onClick={handleLanguageRegionChange} className="account-details-button update-language-region-button">
+                    Update Settings
+                </button>
             </div>
         </div>
     );
