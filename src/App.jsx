@@ -16,6 +16,7 @@ import ProfileOverview from './UserProfile/ProfileOverview';
 import Preference from './UserPreferencePage/Preference';
 import Payment from './UserPaymentInfoPage/Payment';
 import Notification from './NotificationsContentPage/Notification';
+import Support from './SupportContentPage/Support';
 
 const App = () => {
   return (
@@ -35,6 +36,7 @@ const App = () => {
         <Route path="/prefesence" element={<Preference />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/notification" element={<Notification />} />
+        <Route path="/support" element={<Support />} />
       </Routes>
     </Router>
   );

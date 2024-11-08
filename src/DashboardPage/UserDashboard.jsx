@@ -7,6 +7,7 @@ import ProfileOverview from '../UserProfile/ProfileOverview';
 import Preference from '../UserPreferencePage/Preference';
 import Payment from '../UserPaymentInfoPage/Payment';
 import Notification from '../NotificationsContentPage/Notification';
+import Support from '../SupportContentPage/Support';
 
 const UserDashboard = () => {
   const [userName, setUserName] = useState(() => localStorage.getItem('username') || "User");
@@ -105,7 +106,7 @@ const UserDashboard = () => {
         {activeTab === 'Preferences' && <Preference/>}
         {activeTab === 'PaymentInfo' && <Payment/>}
         {activeTab === 'Notifications' && <Notification/>}
-        {activeTab === 'Support' && <div>Support Content</div>}
+        {activeTab === 'Support' && <Support/>}
         {activeTab === 'Security' && <div>Security Content</div>}
       </div>
     </div>
