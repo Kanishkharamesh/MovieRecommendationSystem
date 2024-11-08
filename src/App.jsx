@@ -8,12 +8,12 @@ import SignUp from './SignUpPage/SignUp';
 import SearchResults from './SearchResultPage/SearchResults';
 import MovieResults from './MovieResultsPage/MovieResults';
 import UserPage from './UserPage/Userpage';
-import UserDashboard from './DashboardPage/Userdashboard';
+import UserDashboard from './DashboardPage/UserDashboard';
 import Watchlist from './WatchListPage/Watchlist';
 import AccountSettings from './AccountSettingsPage/AccountSettings';
 import Password from './ForgotPasswordPage/Password';
 import ProfileOverview from './UserProfile/ProfileOverview';
-
+import Preference from './UserPreferencePage/Preference';
 const App = () => {
   return (
     <Router>
@@ -29,6 +29,7 @@ const App = () => {
         <Route path="/account-settings" element={<AccountSettings />} />
         <Route path="/reset-password" element={<Password />} />
         <Route path="/profile-overview" element={<ProfileOverview />} />
+        <Route path="/prefesence" element={<Preference />} />
       </Routes>
     </Router>
   );

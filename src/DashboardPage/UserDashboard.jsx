@@ -4,6 +4,7 @@ import './UserDashboard.css';
 import Watchlist from "../WatchListPage/Watchlist";
 import AccountSettings from '../AccountSettingsPage/AccountSettings';
 import ProfileOverview from '../UserProfile/ProfileOverview';
+import Preference from '../UserPreferencePage/Preference';
 
 const UserDashboard = () => {
   const [userName, setUserName] = useState(() => localStorage.getItem('username') || "User");
@@ -99,7 +100,7 @@ const UserDashboard = () => {
         )}
         {activeTab === 'Watchlist' && <Watchlist />} {/* Show Watchlist component */}
         {activeTab === 'AccountSettings' && <AccountSettings />}
-        {activeTab === 'Preferences' && <div>User Preferences Content</div>}
+        {activeTab === 'Preferences' && <Preference/>}
         {activeTab === 'PaymentInfo' && <div>Payment Information Content</div>}
         {activeTab === 'Notifications' && <div>Notifications Content</div>}
         {activeTab === 'Support' && <div>Support Content</div>}
