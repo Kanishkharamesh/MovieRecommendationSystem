@@ -15,6 +15,7 @@ import Password from './ForgotPasswordPage/Password';
 import ProfileOverview from './UserProfile/ProfileOverview';
 import Preference from './UserPreferencePage/Preference';
 import Payment from './UserPaymentInfoPage/Payment';
+import Notification from './NotificationsContentPage/Notification';
 
 const App = () => {
   return (
@@ -33,6 +34,7 @@ const App = () => {
         <Route path="/profile-overview" element={<ProfileOverview />} />
         <Route path="/prefesence" element={<Preference />} />
         <Route path="/payment" element={<Payment />} />
+        <Route path="/notification" element={<Notification />} />
       </Routes>
     </Router>
   );
