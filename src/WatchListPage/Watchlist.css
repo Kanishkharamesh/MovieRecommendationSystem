@@ -8,11 +8,12 @@
 
 /* Watchlist Title */
 .watchlist-container h1 {
-    color: #e50914;
+    color: white;
     margin-bottom: 20px;
     font-size: 1.5em;
+    font-weight: bold;
     margin: 20px 0;
-    padding-left: 40px;
+    padding-right: 50px;
 }
 
 /* Watchlist Empty Message */
@@ -25,8 +26,8 @@
 /* Watchlist Movie List */
 .watchlist-movie-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(4, 1fr); /* Fit 4 cards per row */
+    gap: 15px; /* Reduced gap for a tighter layout */
     margin-top: 20px;
 }
 
@@ -37,6 +38,7 @@
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s;
+    max-width: 250px;
 }
 
 .watchlist-movie-item:hover {
@@ -45,8 +47,8 @@
 
 /* Movie Image */
 .watchlist-movie-image {
-    width: 100%;
-    height: auto;
+    width: 250px;
+    height: 350px; /* Set a fixed height for smaller image size */
     display: block;
     cursor: pointer;
     transition: opacity 0.3s;
@@ -58,13 +60,13 @@
 
 /* Movie Info */
 .watchlist-movie-info {
-    padding: 15px;
+    padding: 10px; /* Reduced padding for smaller content space */
     text-align: center;
 }
 
 /* Movie Title */
 .watchlist-movie-info h3 {
-    font-size: 1.1em;
+    font-size: 1.0em;
     color: #fff;
     margin: 10px 0;
     cursor: pointer;
