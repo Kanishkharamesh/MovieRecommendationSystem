@@ -27,11 +27,10 @@
     height: relative;
     margin-bottom: 20px;
     padding: 15px;
-    border: 1px solid #ddd;
+    border: 1px solid #555;
     border-radius: 8px;
-    background-color: #ffffff;
     box-sizing: border-box;
-    color: black;
+    color: white;
 }
 
 /* Email Input */
@@ -61,24 +60,23 @@
 }
 
 .update-email-button:hover {
-    background-color: black;
+    background-color: blue;
 }
 
 /* Two-Factor Authentication Section */
 .twofa-section {
     margin-bottom: 20px;
     padding: 15px;
-    border: 1px solid #ddd;
+    border: 1px solid #555;
     border-radius: 8px;
-    background-color: #fff;
     box-sizing: border-box;
-    color: black;
+    color: white;
 }
 
 /* Two-Factor Authentication Label */
 .twofa-label {
     font-size: 16px;
-    color: #333;
+    color: #ffffff;
     display: flex;
     align-items: center;
 }
@@ -92,9 +90,9 @@
 /* Two-Factor Authentication Description */
 .twofa-description {
     font-size: 14px;
-    color: #666;
+    color: #ff0000;
     margin-top: 8px;
-    line-height: 1.4;
+    line-height: 0.5;
 }
 
 
@@ -102,11 +100,10 @@
 .deletion-section {
     margin-bottom: 20px;
     padding: 15px;
-    border: 1px solid #ddd;
+    border: 1px solid #555;
     border-radius: 8px;
-    background-color: #fff;
     box-sizing: border-box;
-    color: black;
+    color: white;
 }
 
 /* Account Deletion Button */
@@ -122,15 +119,15 @@
 }
 
 .delete-button:hover {
-    background-color: darkred;
+    background-color: blue;
 }
 
 /* Deletion Description */
 .deletion-description {
     font-size: 14px;
-    color: #666;
-    margin-top: 8px;
-    line-height: 1.4;
+    color: #ff0000;
+    margin-top: 20px;
+    line-height: 0.5;
 }
 
 /* Language and Region Section */
@@ -139,11 +136,10 @@
     height: relative;
     margin-bottom: 20px;
     padding: 15px;
-    border: 1px solid #ddd;
+    border: 1px solid #555;
     border-radius: 8px;
-    background-color: #fff;
     box-sizing: border-box;
-    color: black;
+    color: white;
 }
 
 /* Language and Region Select */
@@ -174,7 +170,7 @@
 }
 
 .update-language-region-button:hover {
-    background-color: black;
+    background-color: blue;
 }
 
 /* Responsive Design for Smaller Screens */
