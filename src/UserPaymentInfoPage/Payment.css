@@ -10,33 +10,33 @@
     width: 1150px;
     box-sizing: border-box;
     margin: 20px auto;
-  }
-  
-  /* Header Section */
-  .payment-header {
+}
+
+/* Header Section */
+.payment-header {
     text-align: center;
     margin-bottom: 40px;
-  }
-  
-  .payment-header h1 {
+}
+
+.payment-header h1 {
     font-size: 36px;
     color: #ffffff;
     font-weight: bold;
-  }
-  
-  .payment-header p {
+}
+
+.payment-header p {
     font-size: 18px;
     color: #ff0000;
-  }
-  
-  /* Plan Cards Section */
-  .payment-plans {
+}
+
+/* Plan Cards Section */
+.payment-plans {
     display: flex;
     justify-content: space-around;
     margin-bottom: 40px;
-  }
-  
-  .plan-card {
+}
+
+.plan-card {
     border: 1px solid #ddd;
     border-radius: 8px;
     width: 30%;
@@ -44,33 +44,33 @@
     text-align: center;
     transition: 0.3s;
     cursor: pointer;
-  }
-  
-  .plan-card.selected {
+}
+
+.plan-card.selected {
     border-color: red;
     box-shadow: 0 4px 8px rgba(255, 0, 0, 0.3);
-  }
-  
-  .plan-card h2 {
+}
+
+.plan-card h2 {
     font-size: 24px;
     margin-bottom: 10px;
-  }
-  
-  .plan-price {
+}
+
+.plan-price {
     font-size: 22px;
     color: red;
-  }
-  
-  .plan-card ul {
+}
+
+.plan-card ul {
     list-style-type: none;
     padding: 0;
-  }
-  
-  .plan-card ul li {
+}
+
+.plan-card ul li {
     margin: 10px 0;
-  }
-  
-  .select-plan-btn {
+}
+
+.select-plan-btn {
     margin-top: 20px;
     padding: 10px 20px;
     background-color: red;
@@ -79,58 +79,78 @@
     border-radius: 4px;
     cursor: pointer;
     transition: background 0.3s;
-  }
-  
-  .select-plan-btn:hover {
+}
+
+.select-plan-btn:hover {
     background-color: blue;
-  }
-  
-  /* Additional Features Section */
-  .additional-features {
+}
+
+/* Additional Features Section */
+.additional-features {
     margin-bottom: 40px;
-  }
-  
-  .additional-features h3 {
+}
+
+.additional-features h3 {
     font-size: 20px;
     font-weight: bold;
     color: red;
     margin-bottom: 20px;
-  }
-  
-  .additional-features ul {
+}
+
+.additional-features ul {
     list-style-type: none;
     padding: 0;
-  }
-  
-  .feature-icon {
+}
+
+.feature-icon {
     margin-right: 10px;
-  }
-  
-  /* Free Trial Toggle */
-  .free-trial {
+}
+
+/* Free Trial Toggle */
+.free-trial {
     margin-bottom: 40px;
-  }
-  
-  .toggle-switch {
+}
+
+/* Free Trial Toggle */
+.free-trial {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+/* Free Trial Section */
+.free-trial {
     display: flex;
+    justify-content: space-between;
+    /* Positions items at each end */
     align-items: center;
-  }
-  
-  .toggle-switch span {
-    margin-right: 10px;
-  }
-  
-  .toggle-slider {
+    /* Centers them vertically */
+    margin-bottom: 40px;
+}
+
+/* Text styling */
+.free-trial-text {
+    font-size: 16px;
+    color: white;
+    margin: 0;
+}
+
+/* Toggle Slider */
+.toggle-slider {
     position: relative;
     width: 60px;
     height: 30px;
-    background-color: #a0a0a0;
+    background-color: #ccc;
     border-radius: 30px;
+    cursor: pointer;
     transition: 0.3s;
-  }
-  
-  .toggle-slider:before {
-    content: "";
+    margin-right: 100px;
+}
+
+.toggle-slider.active {
+    background-color: #007bff;
+}
+
+.toggle-slider-circle {
     position: absolute;
     top: 3px;
     left: 3px;
@@ -139,77 +159,73 @@
     background-color: white;
     border-radius: 50%;
     transition: 0.3s;
-  }
-  
-  input[type="checkbox"]:checked + .toggle-slider:before {
+}
+
+.toggle-slider.active .toggle-slider-circle {
     transform: translateX(30px);
-  }
-  
-  input[type="checkbox"]:checked + .toggle-slider {
-    background-color: #007bff;
-  }
-  
-  /* Payment Options Section */
-  .payment-options {
+}
+
+
+/* Payment Options Section */
+.payment-options {
     margin-bottom: 40px;
-  }
-  
-  .payment-options h3 {
+}
+
+.payment-options h3 {
     font-size: 20px;
     font-weight: bold;
     color: red;
     margin-bottom: 20px;
-  }
-  
-  .payment-icons {
+}
+
+.payment-icons {
     display: flex;
     justify-content: space-around;
-  }
-  
-  .payment-icon {
+}
+
+.payment-icon {
     text-align: center;
-  }
-  
-  .payment-icon p {
+}
+
+.payment-icon p {
     margin-top: 10px;
     font-size: 16px;
-  }
-  
-  /* FAQ Section */
-  .faq {
+}
+
+/* FAQ Section */
+.faq {
     margin-bottom: 40px;
     color: red;
-  }
-  
-  .faq-item {
+}
+
+.faq-item {
     margin-bottom: 20px;
-  }
-  
-  .faq-item h4 {
+}
+
+.faq-item h4 {
     font-size: 15px;
     margin-top: 20px;
     color: white;
     font-weight: bold;
-  }
-  
-  .faq-item p {
+}
+
+.faq-item p {
     font-size: 16px;
     color: #cacaca;
-  }
-  
-  /* Footer Section */
-  .payment-footer {
+}
+
+/* Footer Section */
+.payment-footer {
     text-align: center;
     font-size: 10px;
     color: #666;
-  }
-  
-  .payment-footer a {
+}
+
+.payment-footer a {
     color: #007bff;
     text-decoration: none;
-  }
-  
-  .payment-footer a:hover {
+}
+
+.payment-footer a:hover {
     text-decoration: underline;
-  }
-  
+}
