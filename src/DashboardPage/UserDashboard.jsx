@@ -10,7 +10,6 @@ const UserDashboard = () => {
   const [userEmail, setUserEmail] = useState(() => localStorage.getItem('email') || "user@example.com");
   const [userBio, setUserBio] = useState(""); // Bio input field
   const [userDob, setUserDob] = useState(""); // Date of Birth input field
-  const [userAddress, setUserAddress] = useState(""); // Address input field
   const [profilePictureUrl, setProfilePictureUrl] = useState(""); // Profile picture URL input field
   const [activeTab, setActiveTab] = useState('ProfileOverview');
   const navigate = useNavigate();
@@ -47,14 +46,11 @@ const UserDashboard = () => {
   };
 
   const handleUpdate = () => {
-    // Logic to handle the update can go here
-    // For now, we will log the updated values
     console.log("Profile Updated:", {
       userName,
       userEmail,
       userBio,
       userDob,
-      userAddress,
       profilePictureUrl
     });
   };
@@ -84,7 +80,6 @@ const UserDashboard = () => {
           <li onClick={() => setActiveTab('Notifications')}>Notifications</li>
           <li onClick={() => setActiveTab('Support')}>Support</li>
           <li onClick={() => setActiveTab('Security')}>Security</li>
-          <li onClick={() => setActiveTab('ActivityLog')}>Activity Log</li>
         </ul>
       </div>
 
@@ -99,8 +94,6 @@ const UserDashboard = () => {
             setUserBio={setUserBio}
             userDob={userDob}
             setUserDob={setUserDob}
-            userAddress={userAddress}
-            setUserAddress={setUserAddress}
             handleUpdate={handleUpdate}
           />
         )}
@@ -111,7 +104,6 @@ const UserDashboard = () => {
         {activeTab === 'Notifications' && <div>Notifications Content</div>}
         {activeTab === 'Support' && <div>Support Content</div>}
         {activeTab === 'Security' && <div>Security Content</div>}
-        {activeTab === 'ActivityLog' && <div>Activity Log Content</div>}
       </div>
     </div>
   );
