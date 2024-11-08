@@ -14,6 +14,8 @@ import AccountSettings from './AccountSettingsPage/AccountSettings';
 import Password from './ForgotPasswordPage/Password';
 import ProfileOverview from './UserProfile/ProfileOverview';
 import Preference from './UserPreferencePage/Preference';
+import Payment from './UserPaymentInfoPage/Payment';
+
 const App = () => {
   return (
     <Router>
@@ -30,6 +32,7 @@ const App = () => {
         <Route path="/reset-password" element={<Password />} />
         <Route path="/profile-overview" element={<ProfileOverview />} />
         <Route path="/prefesence" element={<Preference />} />
+        <Route path="/payment" element={<Payment />} />
       </Routes>
     </Router>
   );
