@@ -45,6 +45,24 @@ h2 {
   margin-top: 5px;
 }
 
+/* Forgot Password button styled as a text link */
+.forgot-password-button {
+  background: none;
+  border: none;
+  color: white;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  margin-right: 250px;
+
+}
+
+.forgot-password-button:hover {
+  color: red; /* Optional: slightly darker color on hover */
+}
+
 
 .login-button {
   padding: 10px;

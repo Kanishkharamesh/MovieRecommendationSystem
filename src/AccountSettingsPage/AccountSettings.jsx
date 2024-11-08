@@ -2,9 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './AccountSettings.css';
 
 const AccountSettings = () => {
-    const [currentPassword, setCurrentPassword] = useState('');
-    const [newPassword, setNewPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
     const [email, setEmail] = useState(localStorage.getItem('email') || '');
     const [is2FAEnabled, setIs2FAEnabled] = useState(false);
     const [language, setLanguage] = useState('English');
@@ -15,23 +12,11 @@ const AccountSettings = () => {
         const savedEmail = localStorage.getItem('email');
         if (savedEmail) setEmail(savedEmail);
 
-        // Mock fetching 2FA and region settings
         const saved2FA = localStorage.getItem('is2FAEnabled') === 'true';
         setIs2FAEnabled(saved2FA);
         setLanguage(localStorage.getItem('language') || 'English');
         setRegion(localStorage.getItem('region') || 'US');
     }, []);
-
-    const handlePasswordChange = () => {
-        if (newPassword !== confirmPassword) {
-            alert('New passwords do not match.');
-            return;
-        }
-        alert('Password changed successfully!');
-        setCurrentPassword('');
-        setNewPassword('');
-        setConfirmPassword('');
-    };
 
     const handleEmailUpdate = () => {
         localStorage.setItem('email', email);
@@ -59,33 +44,6 @@ const AccountSettings = () => {
     return (
         <div className="account-details-container">
             <h2 className="account-details-title">Account Settings</h2>
-
-            {/* Change Password */}
-            <div className="account-details-section">
-                <h3 className="account-details-subtitle">Change Password</h3>
-                <input
-                    type="password"
-                    placeholder="Current Password"
-                    value={currentPassword}
-                    onChange={(e) => setCurrentPassword(e.target.value)}
-                    className="account-details-input"
-                />
-                <input
-                    type="password"
-                    placeholder="New Password"
-                    value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
-                    className="account-details-input"
-                />
-                <input
-                    type="password"
-                    placeholder="Confirm New Password"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="account-details-input"
-                />
-                <button onClick={handlePasswordChange} className="account-details-button">Change Password</button>
-            </div>
 
             {/* Update Email */}
             <div className="account-details-section">

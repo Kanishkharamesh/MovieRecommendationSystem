@@ -10,6 +10,9 @@ import MovieResults from './MovieResultsPage/MovieResults';
 import UserPage from './UserPage/Userpage';
 import UserDashboard from './DashboardPage/Userdashboard';
 import Watchlist from './WatchListPage/Watchlist';
+import AccountSettings from './AccountSettingsPage/AccountSettings';
+import Password from './ForgotPasswordPage/Password';
+
 const App = () => {
   return (
     <Router>
@@ -22,6 +25,8 @@ const App = () => {
         <Route path="/userpage" element={<UserPage />} />
         <Route path="/userdashboard" element={<UserDashboard />} />
         <Route path="/watchlist" element={<Watchlist />} />
+        <Route path="/account-settings" element={<AccountSettings />} />
+        <Route path="/reset-password" element={<Password />} />
       </Routes>
     </Router>
   );

@@ -79,12 +79,13 @@ const MovieResults = () => {
                                 </td>
                                 <td style={{ paddingLeft: '20px' }}>
                                     <div className="movie-results-classname-title">{movie.title}</div>
-                                    <button 
-                                        onClick={handleAddToWatchlist} 
-                                        className="movie-results-classname-watchlist-button"
+                                    <button
+                                        onClick={handleAddToWatchlist}
+                                        className={`movie-results-classname-watchlist-button ${isInWatchlist ? 'remove-from-watchlist' : 'add-to-watchlist'}`}
                                     >
                                         {isInWatchlist ? "Remove from Watchlist" : "Add to Watchlist"}
                                     </button>
+
                                     <div className="movie-results-classname-description">{movie.overview || 'No description available.'}</div>
                                     <div className="movie-results-classname-release-year">Release Year: {new Date(movie.release_date).getFullYear()}</div>
                                     <div className="movie-results-classname-language">Language: {movie.original_language}</div>
@@ -188,7 +189,7 @@ const MovieResults = () => {
                         {reviews.length > 0 ? (
                             reviews.slice(0, 3).map(review => (
                                 <div key={review.id} className="movie-results-classname-review">
-                                    <div className="movie-results-classname-review-author"><strong style={{ color: 'red', fontSize: '18px'}}>Author:</strong> {review.author}</div>
+                                    <div className="movie-results-classname-review-author"><strong style={{ color: 'red', fontSize: '18px' }}>Author:</strong> {review.author}</div>
                                     <p className="justified-text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{review.content}</p>
                                 </div>
                             ))

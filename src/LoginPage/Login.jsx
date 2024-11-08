@@ -10,7 +10,7 @@ const Login = () => {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [loginError, setLoginError] = useState('');
-  
+
   const navigate = useNavigate();
 
   // Validate form fields
@@ -18,17 +18,17 @@ const Login = () => {
     let valid = true;
     setEmailError('');
     setPasswordError('');
-    
+
     if (!email) {
       setEmailError('Email is required');
       valid = false;
     }
-    
+
     if (!password) {
       setPasswordError('Password is required');
       valid = false;
     }
-    
+
     return valid;
   };
 
@@ -68,7 +68,7 @@ const Login = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
           {emailError && <span className="errorLabel">{emailError}</span>}
-          
+
           <input
             type="password"
             placeholder="Password"
@@ -77,9 +77,11 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           {passwordError && <span className="errorLabel">{passwordError}</span>}
-          
+
           {loginError && <span className="errorLabel">{loginError}</span>}
-          
+          <button onClick={() => navigate('/reset-password')} className="forgot-password-button">
+            Forgot Password?
+          </button>
           <button type="submit" className="login-button">Login</button>
         </form>
       </div>

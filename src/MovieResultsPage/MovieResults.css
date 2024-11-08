@@ -44,6 +44,29 @@
     color: red;
 }
 
+/* Base styles for the watchlist button */
+.movie-results-classname-watchlist-button {
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Red background for "Add to Watchlist" */
+.add-to-watchlist {
+    background-color: red;
+    color: white;
+}
+
+/* Blue background for "Remove from Watchlist" */
+.remove-from-watchlist {
+    background-color: blue;
+    color: white;
+}
+
 .movie-results-classname-release-year,
 .movie-results-classname-language,
 .movie-results-classname-rating {
