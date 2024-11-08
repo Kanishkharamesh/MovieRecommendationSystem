@@ -106,7 +106,7 @@ const UserDashboard = () => {
         )}
         {activeTab === 'Watchlist' && <Watchlist />} {/* Show Watchlist component */}
         {activeTab === 'AccountSettings' && <AccountSettings />}
-        {activeTab === 'Preferences' && <ProfileOverview/>}
+        {activeTab === 'Preferences' && <div>User Preferences Content</div>}
         {activeTab === 'PaymentInfo' && <div>Payment Information Content</div>}
         {activeTab === 'Notifications' && <div>Notifications Content</div>}
         {activeTab === 'Support' && <div>Support Content</div>}

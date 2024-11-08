@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './ProfileOverview.css';
+import GenreSelector from '../GenreSelectPage/GenreSelector'; // Import the GenreSelector
 
 const ProfileOverview = ({
   userName,
@@ -10,17 +12,29 @@ const ProfileOverview = ({
   setUserBio,
   userDob,
   setUserDob,
-  userAddress,
-  setUserAddress,
-  handleUpdate
+  selectedGenres,
+  setSelectedGenres,
+  handleUpdate,
 }) => {
+  const [genres, setGenres] = useState([]);
+
+  // Fetch genres from API
+  useEffect(() => {
+    axios.get('https://api.example.com/genres', { headers: { 'Authorization': 'Bearer 5c49b6e2a36066a5b1491648804ef4c1' } })
+      .then(response => {
+        setGenres(response.data.genres); // assuming response has a `genres` array
+      })
+      .catch(error => console.error("Error fetching genres:", error));
+  }, []);
+
   return (
     <div className="profile-overview-container">
-      <h2>Profile Overview</h2>
+      <h2 style={{ fontWeight: 'bold', color: 'white' }}>Profile Overview</h2>
       <h3>Welcome {userName}</h3>
       <p>Name: {userName}</p>
       <p>Email: {userEmail}</p>
 
+      {/* Profile Picture */}
       <div className="profile-overview-picture-container">
         <div className="profile-overview-picture">
           <img
@@ -29,61 +43,32 @@ const ProfileOverview = ({
             style={{ width: '120px', height: '120px', borderRadius: '50%' }}
           />
         </div>
-        <label
-          htmlFor="file-upload"
-          style={{ marginTop: '10px', cursor: 'pointer', fontSize: '12px' }}
-        >
+        <label htmlFor="file-upload" style={{ marginTop: '10px', cursor: 'pointer', fontSize: '12px' }}>
           Choose a file
         </label>
-        <input
-          id="file-upload"
-          type="file"
-          accept="image/*"
-          onChange={handleFileChange}
-          style={{ display: 'none' }}
-        />
+        <input id="file-upload" type="file" accept="image/*" onChange={handleFileChange} style={{ display: 'none' }} />
       </div>
 
       {/* Bio */}
       <div className="profile-overview-bio">
         <h4>Bio</h4>
-        <textarea
-          value={userBio}
-          placeholder="Add your bio"
-          onChange={(e) => setUserBio(e.target.value)}
-        />
+        <textarea value={userBio} placeholder="Add your bio" onChange={(e) => setUserBio(e.target.value)} />
       </div>
 
       {/* Date of Birth */}
       <div className="profile-overview-dob">
         <h4>Date of Birth</h4>
-        <input
-          type="date"
-          value={userDob}
-          onChange={(e) => setUserDob(e.target.value)}
-        />
+        <input type="date" value={userDob} onChange={(e) => setUserDob(e.target.value)} />
       </div>
 
-      {/* User's Address */}
-      <div className="profile-overview-address">
-        <h4>Address</h4>
-        <input
-          type="text"
-          value={userAddress}
-          placeholder="Enter your address"
-          onChange={(e) => setUserAddress(e.target.value)}
+      {/* Genre Selection - Replaced with GenreSelector */}
+      <div className="profile-overview-genres">
+        <h4>Genres of Interest</h4>
+        <GenreSelector
+          genres={genres}
+          selectedGenres={selectedGenres}
+          setSelectedGenres={setSelectedGenres}
         />
-      </div>
-
-      {/* Account Creation Date */}
-      <p>Account Created: {new Date().toLocaleDateString()}</p>
-
-      {/* Activity Stats */}
-      <div className="profile-overview-stats">
-        <h4>Activity Stats</h4>
-        <p>Posts: 25</p>
-        <p>Comments: 45</p>
-        <p>Purchases: 10</p>
       </div>
 
       {/* Update Button */}
