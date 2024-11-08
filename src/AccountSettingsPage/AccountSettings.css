@@ -23,7 +23,8 @@
 
 /* Email Section */
 .email-section {
-    width: 400px;
+    width: relative;
+    height: relative;
     margin-bottom: 20px;
     padding: 15px;
     border: 1px solid #ddd;
@@ -65,7 +66,6 @@
 
 /* Two-Factor Authentication Section */
 .twofa-section {
-    width: 400px;
     margin-bottom: 20px;
     padding: 15px;
     border: 1px solid #ddd;
@@ -79,16 +79,27 @@
 .twofa-label {
     font-size: 16px;
     color: #333;
+    display: flex;
+    align-items: center;
 }
 
 /* Two-Factor Authentication Checkbox */
 .twofa-checkbox {
     margin-right: 10px;
+    margin-top: 25px;
 }
+
+/* Two-Factor Authentication Description */
+.twofa-description {
+    font-size: 14px;
+    color: #666;
+    margin-top: 8px;
+    line-height: 1.4;
+}
+
 
 /* Account Deletion Section */
 .deletion-section {
-    width: 400px;
     margin-bottom: 20px;
     padding: 15px;
     border: 1px solid #ddd;
@@ -98,26 +109,34 @@
     color: black;
 }
 
-/* Delete Button */
+/* Account Deletion Button */
 .delete-button {
-    background-color: black;
-    color: white;
-    padding: 10px 18px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
     font-size: 16px;
-    margin-top: 10px;
-    transition: background-color 0.3s;
+    color: white;
+    background-color: red;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
 }
 
 .delete-button:hover {
-    background-color: #ff1a1a;
+    background-color: darkred;
+}
+
+/* Deletion Description */
+.deletion-description {
+    font-size: 14px;
+    color: #666;
+    margin-top: 8px;
+    line-height: 1.4;
 }
 
 /* Language and Region Section */
 .language-region-section {
     width: 400px;
+    height: relative;
     margin-bottom: 20px;
     padding: 15px;
     border: 1px solid #ddd;
@@ -166,4 +185,7 @@
     .language-region-section {
         width: 100%; /* Stack sections full-width on smaller screens */
     }
+}
+.account-details-subtitle{
+    font-size: 20px;
 }

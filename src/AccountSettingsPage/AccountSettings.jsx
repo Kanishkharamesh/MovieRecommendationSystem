@@ -70,17 +70,35 @@ const AccountSettings = () => {
                         onChange={handle2FAToggle}
                         className="twofa-checkbox"
                     />
+                    <br></br>
                     Enable Two-Factor Authentication
                 </label>
+                <br></br>
+                <p className="twofa-description">
+                    Checking this box adds an extra layer of security to your account by requiring a code from your phone.
+                </p>
+                <p className="twofa-description">
+                    This helps protect your account even if your password is compromised.
+                </p>
             </div>
+
 
             {/* Account Deletion */}
             <div className="account-details-section deletion-section">
                 <h3 className="account-details-subtitle">Account Deletion</h3>
+                <br></br>
                 <button onClick={handleAccountDeletion} className="account-details-button delete-button">
                     Delete Account
                 </button>
+                <p className="deletion-description">
+                    <br></br>
+                    Deleting your account will permanently erase all your data. This action cannot be undone.
+                </p>
+                <p className="deletion-description">
+                    Please make sure you have saved any important information before proceeding.
+                </p>
             </div>
+
 
             {/* Language and Region Settings */}
             <div className="account-details-section language-region-section">
