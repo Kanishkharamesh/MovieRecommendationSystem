@@ -83,7 +83,6 @@ const UserDashboard = () => {
           <li onClick={() => setActiveTab('PaymentInfo')}>Payment Information</li>
           <li onClick={() => setActiveTab('Notifications')}>Notifications</li>
           <li onClick={() => setActiveTab('Support')}>Support</li>
-          <li onClick={() => setActiveTab('Security')}>Security</li>
         </ul>
       </div>
 
@@ -107,7 +106,6 @@ const UserDashboard = () => {
         {activeTab === 'PaymentInfo' && <Payment/>}
         {activeTab === 'Notifications' && <Notification/>}
         {activeTab === 'Support' && <Support/>}
-        {activeTab === 'Security' && <div>Security Content</div>}
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FiSend } from 'react-icons/fi';
-
+import './Support.css';
 const Support = () => {
     const [isChatOpen, setChatOpen] = useState(false);
     const [userInput, setUserInput] = useState('');
