@@ -1,10 +1,19 @@
 import React, { useState } from "react";
-import './Support.css';
+import { FiSend } from 'react-icons/fi';
 
 const Support = () => {
     const [isChatOpen, setChatOpen] = useState(false);
+    const [userInput, setUserInput] = useState('');
     const toggleChat = () => setChatOpen(!isChatOpen);
 
+    const handleUserInput = (e) => setUserInput(e.target.value);
+
+    const sendMessage = () => {
+        if (userInput.trim()) {
+            console.log("Message sent:", userInput);
+            setUserInput('');
+        }
+    };
     return (
         <div className="support-container">
             <header className="support-header">
@@ -33,7 +42,16 @@ const Support = () => {
                         <div className="chat-content">
                             <p>Welcome! How can we assist you today?</p>
                         </div>
-                        <input type="text" placeholder="Type your message..." />
+                        <div className="chat-input-container">
+                            <input
+                                type="text"
+                                placeholder="Type your message..."
+                                value={userInput}
+                                onChange={handleUserInput}
+                                onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
+                            />
+                            <FiSend className="send-icon" onClick={sendMessage} />
+                        </div>
                     </div>
                 )}
             </section>
@@ -48,7 +66,6 @@ const Support = () => {
                     <h3>Why aren't my recommendations updating?</h3>
                     <p>Make sure you have rated enough movies recently. You can also try clearing your cache or checking your internet connection.</p>
                 </div>
-                {/* Add more FAQ items */}
             </section>
 
             <section id="troubleshooting" className="support-section">
@@ -56,9 +73,9 @@ const Support = () => {
                 <div className="guide">
                     <h3>App Crashing</h3>
                     <ol>
-                        <li>Ensure your app is updated to the latest version.</li>
-                        <li>Try restarting your phone or tablet.</li>
-                        <li>If the issue persists, reinstall the app.</li>
+                        <li>Make sure you’re using the latest version of your web browser.</li>
+                        <li>Try refreshing the page or clearing your browser cache.</li>
+                        <li>If the issue continues, try accessing the website in a different browser or device.</li>
                     </ol>
                     <button className="help-btn">Get More Help</button>
                 </div>
