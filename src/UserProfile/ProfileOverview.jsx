@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import './ProfileOverview.css';
 import GenreSelector from '../GenreSelectPage/GenreSelector'; // Import the GenreSelector
 
@@ -8,46 +7,35 @@ const ProfileOverview = ({
   userEmail,
   profilePictureUrl,
   handleFileChange,
-  userBio,
-  setUserBio,
-  userDob,
-  setUserDob,
-  selectedGenres,
-  setSelectedGenres,
-  handleUpdate,
 }) => {
+  // Initialize state with values from localStorage (if available)
+  const [userBio, setUserBio] = useState(localStorage.getItem('userBio') || '');
+  const [userDob, setUserDob] = useState(localStorage.getItem('userDob') || '');
+  const [selectedGenres, setSelectedGenres] = useState(
+    JSON.parse(localStorage.getItem('selectedGenres')) || []
+  );
+
   const [genres, setGenres] = useState([]);
-  
+
   // Fetch genres from API
   useEffect(() => {
-    axios.get('https://api.example.com/genres', { 
-        headers: { 'Authorization': 'Bearer 5c49b6e2a36066a5b1491648804ef4c1' } 
-      })
-      .then(response => {
-        setGenres(response.data.genres); // assuming response has a `genres` array
+    // Assuming this is your genres API endpoint
+    fetch('https://api.example.com/genres')
+      .then(response => response.json())
+      .then(data => {
+        setGenres(data.genres); // Assuming response has a `genres` array
       })
       .catch(error => console.error("Error fetching genres:", error));
   }, []);
 
-  // Handle profile update
+  // Handle profile update (saves data locally)
   const updateProfile = () => {
-    axios.put('http://localhost:5000/update-profile', {
-      bio: userBio,
-      dob: userDob,
-      genre: selectedGenres, // sending the selected genres
-    }, {
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('jwtToken')}` // Add JWT token from localStorage
-      }
-    })
-    .then(response => {
-      console.log("Profile updated successfully", response);
-      alert('Profile updated successfully!');
-    })
-    .catch(error => {
-      console.error("Error updating profile:", error);
-      alert('Error updating profile!');
-    });
+    // Save bio, dob, and genres to localStorage
+    localStorage.setItem('userBio', userBio);
+    localStorage.setItem('userDob', userDob);
+    localStorage.setItem('selectedGenres', JSON.stringify(selectedGenres));
+
+    alert('Profile updated successfully!');
   };
 
   return (
@@ -75,13 +63,21 @@ const ProfileOverview = ({
       {/* Bio */}
       <div className="profile-overview-bio">
         <h4>Bio</h4>
-        <textarea value={userBio} placeholder="Add your bio" onChange={(e) => setUserBio(e.target.value)} />
+        <textarea
+          value={userBio}
+          placeholder="Add your bio"
+          onChange={(e) => setUserBio(e.target.value)}
+        />
       </div>
 
       {/* Date of Birth */}
       <div className="profile-overview-dob">
         <h4>Date of Birth</h4>
-        <input type="date" value={userDob} onChange={(e) => setUserDob(e.target.value)} />
+        <input
+          type="date"
+          value={userDob}
+          onChange={(e) => setUserDob(e.target.value)}
+        />
       </div>
 
       {/* Genre Selection */}
