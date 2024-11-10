@@ -76,12 +76,12 @@ const Cast = () => {
 
             <div className="cast-movies-list">
                 <h3>Movies featuring {castDetails?.name}</h3>
-                <div className="movies-grid">
+                <div className="cast-movies-grid">
                     {movies.length > 0 ? (
                         movies.map(movie => (
                             <div 
                                 key={movie.id} 
-                                className="movie-card" 
+                                className="cast-movie-card" 
                                 onClick={() => handleMovieClick(movie.id)} 
                                 role="button"
                                 tabIndex={0} 
@@ -90,11 +90,11 @@ const Cast = () => {
                                 <img 
                                     src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : placeholderImage}
                                     alt={movie.title}
-                                    className="movie-poster"
+                                    className="cast-movie-poster"
                                     onError={(e) => e.target.src = placeholderImage}  // Fallback image on error
                                 />
-                                <div className="movie-title">{movie.title}</div>
-                                <div className="movie-details">
+                                <div className="cast-movie-title">{movie.title}</div>
+                                <div className="cast-movie-details">
                                     <p><strong>Character:</strong> {movie.character || 'Not available'}</p>
                                     <p><strong>Release Date:</strong> {movie.release_date || 'Unknown'}</p>
                                     <p><strong>Rating:</strong> {movie.vote_average ? movie.vote_average : 'Not rated'}</p>

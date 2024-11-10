@@ -28,13 +28,13 @@
 }
 
 .cast-profile-image {
-    width: 200px;
-    height: 300px;
+    width: 180px;  /* Reduced size */
+    height: 270px;  /* Reduced size */
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
     object-fit: cover;
-    margin-right: 40px;
-    border: 3px solid #fff; /* Optional border to highlight the image */
+    margin-right: 30px;
+    border: 3px solid #fff;
 }
 
 .cast-profile-info {
@@ -48,19 +48,19 @@
 }
 
 .cast-profile-info h2 {
-    font-size: 36px;
+    font-size: 32px;  /* Reduced size */
     font-weight: bold;
-    color: #f44336; /* Red color */
+    color: #f44336;
     margin-bottom: 20px;
-    text-align: left;  /* Align to the left */
+    text-align: left;
     letter-spacing: 1px;
 }
 
 .cast-profile-info p {
-    font-size: 18px;
+    font-size: 16px;  /* Reduced size */
     margin-bottom: 15px;
     line-height: 1.6;
-    text-align: left;  /* Align to the left */
+    text-align: left;
     color: #ccc;
 }
 
@@ -82,85 +82,84 @@
 }
 
 .cast-movies-list h3 {
-    font-size: 28px;
+    font-size: 24px;  /* Reduced size */
     font-weight: bold;
     color: #f44336;
     margin-bottom: 30px;
-    text-align: left;  /* Align to the left */
+    text-align: left;
 }
 
-.movies-grid {
+.cast-movies-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;
-    justify-content: flex-start;  /* Align to the left */
+    gap: 20px;  /* Reduced gap */
+    justify-content: flex-start;
 }
 
-.movie-card {
-    width: calc(33.33% - 20px);
+.cast-movie-card {
+    width: calc(25% - 20px);  /* 4 cards in a row */
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(255, 255, 255, 0.1);
     display: flex;
     flex-direction: column;
 }
 
-.movie-card:hover {
+.cast-movie-card:hover {
     transform: scale(1.05);
     box-shadow: 0 6px 30px rgba(0, 0, 0, 0.6);
 }
 
-.movie-poster {
-    width: 100%;
-    height: 300px;
+.cast-movie-poster {
+    width: 90%;
+    height: 90%;
     border-radius: 10px;
     object-fit: cover;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    margin-left: 15px;
+    margin-top: 15px;
 }
 
-.movie-title {
-    font-size: 20px;
+.cast-movie-title {
+    font-size: 18px;  /* Reduced size */
     font-weight: bold;
     color: white;
     padding: 12px;
-    background-color: rgba(0, 0, 0, 0.8);
-    text-align: left;  /* Align to the left */
+    text-align: left;
     margin-top: 10px;
     border-radius: 5px;
 }
 
-.movie-details {
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.85);
+.cast-movie-details {
+    padding: 15px;  /* Reduced padding */
     color: white;
     border-radius: 10px;
-    margin-top: 10px;
+    margin-top: -20px;
     flex-grow: 1;
 }
 
-.movie-details p {
-    margin: 8px 0;
-    font-size: 16px;
+.cast-movie-details p {
+    margin: 6px 0;
+    font-size: 14px;  /* Reduced size */
     line-height: 1.6;
     color: #d3d3d3;
-    text-align: left;  /* Align to the left */
+    text-align: left;
 }
 
-.movie-details .watch-button {
+.cast-movie-details .watch-button {
     background-color: #f44336;
     color: white;
-    padding: 12px 20px;
+    padding: 10px 18px;  /* Reduced padding */
     text-align: center;
     cursor: pointer;
-    margin-top: 20px;
+    margin-top: 15px;  /* Reduced margin */
     border-radius: 5px;
     transition: background-color 0.3s ease;
 }
 
-.movie-details .watch-button:hover {
+.cast-movie-details .watch-button:hover {
     background-color: #d32f2f;
 }
 
@@ -172,8 +171,8 @@
 
     .cast-profile-header {
         flex-direction: column;
-        align-items: flex-start;  /* Align to the left */
-        text-align: left;  /* Align to the left */
+        align-items: flex-start;
+        text-align: left;
     }
 
     .cast-profile-image {
@@ -181,12 +180,12 @@
         margin-bottom: 20px;
     }
 
-    .movies-grid {
+    .cast-movies-grid {
         flex-direction: column;
-        align-items: flex-start;  /* Align to the left */
+        align-items: flex-start;
     }
 
-    .movie-card {
+    .cast-movie-card {
         width: 100%;
         margin-bottom: 30px;
     }
@@ -194,14 +193,14 @@
 
 @media (max-width: 480px) {
     .cast-profile-info h2 {
-        font-size: 28px;
+        font-size: 24px;  /* Further reduced size */
     }
 
-    .movie-title {
-        font-size: 18px;
+    .cast-movie-title {
+        font-size: 16px;  /* Further reduced size */
     }
 
-    .movie-details {
-        font-size: 14px;
+    .cast-movie-details {
+        font-size: 12px;  /* Further reduced size */
     }
 }
