@@ -18,6 +18,7 @@ import Payment from './UserPaymentInfoPage/Payment';
 import Notification from './NotificationsContentPage/Notification';
 import Support from './SupportContentPage/Support';
 import Cast from './CastProfilePage/Cast';
+import Recommendation from './RecommendationPage/GetRecommendation';
 
 const App = () => {
   return (
@@ -39,6 +40,7 @@ const App = () => {
         <Route path="/notification" element={<Notification />} />
         <Route path="/support" element={<Support />} />
         <Route path="/cast/:castId" element={<Cast />} />
+        <Route path="/get-recommendation" element={<Recommendation />} />
       </Routes>
     </Router>
   );

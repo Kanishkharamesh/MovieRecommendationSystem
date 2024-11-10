@@ -86,7 +86,7 @@ const Homepage = () => {
                 <br></br>
                 <p className="hero-subtitle">Explore a world of movies tailored just for you!</p>
                 <br></br>
-                <Link to="/login" className="homepage-button">Get Recommendation</Link>
+                <Link to="/get-recommendation" className="homepage-button">Get Recommendation</Link>
             </div>
 
             {/* Featured Movies Section */}
