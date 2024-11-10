@@ -1,0 +1,207 @@
+/* General Styles */
+.cast-body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #000;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+/* Cast Profile Section */
+.cast-profile-container {
+    padding: 80px 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;  /* Align to the left */
+    background-color: #121212;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+}
+
+.cast-profile-header {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    width: 100%;
+    justify-content: flex-start;  /* Align to the left */
+}
+
+.cast-profile-image {
+    width: 200px;
+    height: 300px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    object-fit: cover;
+    margin-right: 40px;
+    border: 3px solid #fff; /* Optional border to highlight the image */
+}
+
+.cast-profile-info {
+    max-width: 800px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    align-items: flex-start;  /* Align to the left */
+    justify-content: flex-start;  /* Align to the left */
+}
+
+.cast-profile-info h2 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #f44336; /* Red color */
+    margin-bottom: 20px;
+    text-align: left;  /* Align to the left */
+    letter-spacing: 1px;
+}
+
+.cast-profile-info p {
+    font-size: 18px;
+    margin-bottom: 15px;
+    line-height: 1.6;
+    text-align: left;  /* Align to the left */
+    color: #ccc;
+}
+
+.cast-profile-info a {
+    color: #1E90FF;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.cast-profile-info a:hover {
+    color: #f44336;
+}
+
+/* Movies List Section */
+.cast-movies-list {
+    width: 100%;
+    margin-top: 40px;
+    padding: 0 20px;
+}
+
+.cast-movies-list h3 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #f44336;
+    margin-bottom: 30px;
+    text-align: left;  /* Align to the left */
+}
+
+.movies-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: flex-start;  /* Align to the left */
+}
+
+.movie-card {
+    width: calc(33.33% - 20px);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+}
+
+.movie-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.6);
+}
+
+.movie-poster {
+    width: 100%;
+    height: 300px;
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.movie-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    padding: 12px;
+    background-color: rgba(0, 0, 0, 0.8);
+    text-align: left;  /* Align to the left */
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.movie-details {
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
+    border-radius: 10px;
+    margin-top: 10px;
+    flex-grow: 1;
+}
+
+.movie-details p {
+    margin: 8px 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #d3d3d3;
+    text-align: left;  /* Align to the left */
+}
+
+.movie-details .watch-button {
+    background-color: #f44336;
+    color: white;
+    padding: 12px 20px;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.movie-details .watch-button:hover {
+    background-color: #d32f2f;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .cast-profile-container {
+        padding: 80px 40px;
+    }
+
+    .cast-profile-header {
+        flex-direction: column;
+        align-items: flex-start;  /* Align to the left */
+        text-align: left;  /* Align to the left */
+    }
+
+    .cast-profile-image {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .movies-grid {
+        flex-direction: column;
+        align-items: flex-start;  /* Align to the left */
+    }
+
+    .movie-card {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cast-profile-info h2 {
+        font-size: 28px;
+    }
+
+    .movie-title {
+        font-size: 18px;
+    }
+
+    .movie-details {
+        font-size: 14px;
+    }
+}

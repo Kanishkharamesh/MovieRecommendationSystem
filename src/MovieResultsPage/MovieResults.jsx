@@ -56,7 +56,7 @@ const MovieResults = () => {
     };
 
     const handleCastClick = (personId) => {
-        navigate(`/person/${personId}`);
+        navigate(`/cast/${personId}`);
     };
 
     return (
