@@ -17,15 +17,38 @@ const ProfileOverview = ({
   handleUpdate,
 }) => {
   const [genres, setGenres] = useState([]);
-
+  
   // Fetch genres from API
   useEffect(() => {
-    axios.get('https://api.example.com/genres', { headers: { 'Authorization': 'Bearer 5c49b6e2a36066a5b1491648804ef4c1' } })
+    axios.get('https://api.example.com/genres', { 
+        headers: { 'Authorization': 'Bearer 5c49b6e2a36066a5b1491648804ef4c1' } 
+      })
       .then(response => {
         setGenres(response.data.genres); // assuming response has a `genres` array
       })
       .catch(error => console.error("Error fetching genres:", error));
   }, []);
+
+  // Handle profile update
+  const updateProfile = () => {
+    axios.put('http://localhost:5000/update-profile', {
+      bio: userBio,
+      dob: userDob,
+      genre: selectedGenres, // sending the selected genres
+    }, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwtToken')}` // Add JWT token from localStorage
+      }
+    })
+    .then(response => {
+      console.log("Profile updated successfully", response);
+      alert('Profile updated successfully!');
+    })
+    .catch(error => {
+      console.error("Error updating profile:", error);
+      alert('Error updating profile!');
+    });
+  };
 
   return (
     <div className="profile-overview-container">
@@ -61,7 +84,7 @@ const ProfileOverview = ({
         <input type="date" value={userDob} onChange={(e) => setUserDob(e.target.value)} />
       </div>
 
-      {/* Genre Selection - Replaced with GenreSelector */}
+      {/* Genre Selection */}
       <div className="profile-overview-genres">
         <h4>Genres of Interest</h4>
         <GenreSelector
@@ -73,7 +96,7 @@ const ProfileOverview = ({
 
       {/* Update Button */}
       <div className="profile-overview-update-button">
-        <button onClick={handleUpdate}>Update</button>
+        <button onClick={updateProfile}>Update</button>
       </div>
     </div>
   );

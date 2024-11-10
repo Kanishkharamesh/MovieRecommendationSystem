@@ -46,6 +46,7 @@ const Login = () => {
       localStorage.setItem('authToken', token);
       localStorage.setItem('username', username);
       localStorage.setItem('email', email);
+      localStorage.setItem('jwtToken', response.data.token);
 
       // Redirect to user page
       navigate('/userpage');

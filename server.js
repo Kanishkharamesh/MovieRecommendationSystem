@@ -20,10 +20,10 @@ mongoose.connect('mongodb://localhost:27017/UserDetails', {
 const userSchema = new mongoose.Schema({
     username: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },  // Store plain-text password (not secure)
-    is2FAEnabled: { type: Boolean, default: false },
-    language: { type: String, default: 'English' },
-    region: { type: String, default: 'US' },
+    password: { type: String, required: true },
+    bio: { type: String, default: '' }, // New field
+    dob: { type: Date },  // New field
+    genre: { type: String, default: '' } // New field
 });
 
 const User = mongoose.model('User', userSchema);
@@ -70,58 +70,43 @@ app.post('/login', async (req, res) => {
         res.status(401).send({ message: 'Invalid email or password' });
     }
 });
-
 // Middleware to authenticate JWT
 const authenticateJWT = (req, res, next) => {
     const token = req.header('Authorization')?.split(' ')[1]; // Extract token from Authorization header
     if (!token) return res.status(401).send('Access Denied');
 
-    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    jwt.verify(token, 'secretkey', (err, user) => {
         if (err) return res.status(403).send('Invalid or expired token');
         req.user = user; // Store the decoded user data in the request object
         next();
     });
 };
 
-// Validate email format
-const validateEmail = (email) => /\S+@\S+\.\S+/.test(email);
-
-// Validate password strength
-const validatePassword = (password) => password.length >= 8;
-
-// PUT route for updating account settings
-app.put('/account-settings', authenticateJWT, async (req, res) => {
-    const { email, newPassword, is2FAEnabled, language, region } = req.body;
+// Profile Update Endpoint
+app.put('/update-profile', authenticateJWT, async (req, res) => {
+    const { bio, dob, genre } = req.body;
     const userId = req.user.id; // Get the user ID from the JWT token
 
-    // Input validation
-    if (email && !validateEmail(email)) {
-        return res.status(400).send('Invalid email format');
-    }
-
-    if (newPassword && !validatePassword(newPassword)) {
-        return res.status(400).send('Password must be at least 8 characters long');
+    // Validate that the required fields are sent
+    if (!bio || !dob || !genre) {
+        return res.status(400).send('All fields are required.');
     }
 
     try {
-        // Prepare data for update
-        const updateData = { email, is2FAEnabled, language, region };
+        // Prepare data to update
+        const updateData = { bio, dob, genre };
 
-        // If password is being updated, hash it
-        if (newPassword) {
-            updateData.password = await bcrypt.hash(newPassword, 10);
-        }
-
-        // Update user data in the database
+        // Update user profile in the database
         const updatedUser = await User.findByIdAndUpdate(userId, updateData, { new: true });
+
         if (!updatedUser) {
             return res.status(404).send('User not found');
         }
 
-        res.send('Account settings updated successfully');
+        res.send('Profile updated successfully');
     } catch (err) {
-        console.error('Error updating account settings:', err);
-        res.status(500).send('Error updating account settings: ' + err.message);
+        console.error('Error updating profile:', err);
+        res.status(500).send('Error updating profile: ' + err.message);
     }
 });
 
