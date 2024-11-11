@@ -1,203 +1,191 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Box, Container, Typography, RadioGroup, FormControlLabel, Radio, LinearProgress } from '@mui/material';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { FaFilm, FaSmile, FaSadTear, FaClock, FaCheck, FaRedoAlt } from 'react-icons/fa';
+import React, { useState } from 'react';
+import axios from 'axios';
 import './GetRecommendation.css';
-const theme = createTheme();
 
-const GetRecommendation = () => {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
+function GetRecommendation() {
+  const API_KEY = '5c49b6e2a36066a5b1491648804ef4c1'; // Securely store API key
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState({});
-  const [loading, setLoading] = useState(false);
-  const [movieResults, setMovieResults] = useState([]);
-  const [error, setError] = useState('');
+  const [recommendations, setRecommendations] = useState([]);
 
   const questions = [
     {
-      question: "I'm watching with...",
+      question: "I'm watching with (choose all)",
       options: [
-        { label: "Netflix", icon: <FaFilm /> },
-        { label: "Amazon Prime", icon: <FaFilm /> },
-        { label: "Hulu", icon: <FaFilm /> },
-        { label: "Disney+", icon: <FaFilm /> },
-        { label: "Apple TV", icon: <FaFilm /> },
-        { label: "HBO Max", icon: <FaFilm /> },
-        { label: "Let me pick specifically", icon: <FaCheck /> },
-        { label: "I don't care", icon: <FaSmile /> },
+        "Netflix",
+        "Amazon Prime",
+        "Hulu",
+        "Disney+",
+        "HBO Max",
+        "Apple TV+",
+        "Other"
       ],
     },
     {
       question: "I feel like...",
       options: [
-        { label: "Dramatic (Action, Adventure, Drama)", icon: <FaFilm /> },
-        { label: "Intense (Horror, Thriller)", icon: <FaSadTear /> },
-        { label: "Gentle (Comedy, Family, Romance)", icon: <FaSmile /> },
-        { label: "Curious (History, Mystery)", icon: <FaFilm /> },
-        { label: "Out of this world (Fantasy, Science-Fiction)", icon: <FaFilm /> },
-        { label: "Realistic (Documentary)", icon: <FaCheck /> },
-        { label: "Let me pick specifically", icon: <FaFilm /> },
-        { label: "I don't care", icon: <FaSmile /> },
+        { text: "Dramatic", genres: [28, 12, 18] },
+        { text: "Intense", genres: [27, 53] },
+        { text: "Gentle", genres: [35, 10751, 10749] },
+        { text: "Curious", genres: [36, 9648] },
+        { text: "Out of this world", genres: [14, 878] },
+        { text: "Realistic", genres: [99] },
+        { text: "Let me pick specifically", genres: [] },
+        { text: "I don't care", genres: [] },
       ],
     },
     {
-      question: "When from...?",
+      question: "When from?",
       options: [
-        { label: "This year", icon: <FaClock /> },
-        { label: "Last few years", icon: <FaClock /> },
-        { label: "Last 10 years", icon: <FaClock /> },
-        { label: "Last 25 years", icon: <FaClock /> },
-        { label: "Last 100 years", icon: <FaClock /> },
-        { label: "Let me pick specifically", icon: <FaCheck /> },
-        { label: "I still don't care", icon: <FaSmile /> },
+        "This year",
+        "Last few years",
+        "Last 10 years",
+        "Last 25 years",
+        "Last 100 years",
+        "Let me pick specifically",
+        "I still don't care",
       ],
     },
     {
       question: "And is...",
       options: [
-        { label: "Highly rated (Over 7/10)", icon: <FaCheck /> },
-        { label: "At least average (Over 5/10)", icon: <FaSmile /> },
-        { label: "I don't mind", icon: <FaFilm /> },
+        "Highly rated (Over 7/10 rated)",
+        "At least average (Over 5/10 rated)",
+        "I don't mind",
       ],
     },
     {
       question: "For how long...",
       options: [
-        { label: "A shorter film (-90 minutes)", icon: <FaClock /> },
-        { label: "Average length (1.5 to 2.5 hours)", icon: <FaClock /> },
-        { label: "A long film (2.5 hours+)", icon: <FaClock /> },
-        { label: "Time is relative", icon: <FaClock /> },
+        "A shorter film (-90 minutes)",
+        "Average length (1.5 to 2.5 hours)",
+        "A long film (2.5 hours+)",
+        "Time is relative",
+      ],
+    },
+    {
+      question: "Show me...",
+      options: [
+        "5 movies",
+        "10 movies",
+        "20 movies",
       ],
     },
   ];
 
-  useEffect(() => {
-    if (movieResults.length === 0) {
-      fetchRecommendations();
-    }
-  }, [movieResults]);
+  const handleAnswer = async (option) => {
+    const newAnswers = { ...answers, [currentQuestionIndex]: option };
+    setAnswers(newAnswers);
 
-  const fetchRecommendations = async () => {
-    setLoading(true);
-    setError('');
-    try {
-      // Simulate an API call (replace with real API for movie recommendations)
-      const response = await fetch('https://api.themoviedb.org/3/movie/popular?api_key=5c49b6e2a36066a5b1491648804ef4c1');
-      const data = await response.json();
-      setMovieResults(data.results);
-    } catch (err) {
-      setError('Failed to fetch recommendations');
-    }
-    setLoading(false);
-  };
-
-  const handleAnswerChange = (event) => {
-    setAnswers({ ...answers, [currentQuestion]: event.target.value });
-  };
-
-  const handleNext = () => {
-    if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
+    if (currentQuestionIndex === questions.length - 1) {
+      await fetchRecommendation(newAnswers);
     } else {
-      // Show recommendations after answering all questions
-      fetchRecommendations();
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
     }
   };
 
-  const handlePrevious = () => {
-    if (currentQuestion > 0) {
-      setCurrentQuestion(currentQuestion - 1);
+  const fetchRecommendation = async (userAnswers) => {
+    try {
+      const genreIds = userAnswers[1]?.genres || [];
+      const releaseDateRange = getReleaseDateRange(userAnswers[2]);
+      const ratingFilter = getRatingFilter(userAnswers[3]);
+      const runtimeFilter = getRuntimeFilter(userAnswers[4]);
+
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/discover/movie`,
+        {
+          params: {
+            api_key: API_KEY,
+            with_genres: genreIds.join(','),
+            primary_release_date: releaseDateRange,
+            vote_average: ratingFilter,
+            with_runtime: runtimeFilter,
+          },
+        }
+      );
+      setRecommendations(response.data.results.slice(0, userAnswers[5] === "5 movies" ? 5 : 10)); // Adjust the number of movies based on the answer
+    } catch (error) {
+      console.error("Error fetching recommendation:", error);
     }
   };
 
-  const handleReRoll = () => {
-    setMovieResults([]);
-    fetchRecommendations(); // Re-fetch the recommendations
+  const getReleaseDateRange = (timePeriod) => {
+    switch (timePeriod) {
+      case "This year":
+        return "2024-01-01,2024-12-31";
+      case "Last few years":
+        return "2020-01-01,2023-12-31";
+      case "Last 10 years":
+        return "2014-01-01,2023-12-31";
+      case "Last 25 years":
+        return "1999-01-01,2023-12-31";
+      case "Last 100 years":
+        return "1924-01-01,2023-12-31";
+      default:
+        return "";
+    }
   };
 
-  const handleRestart = () => {
-    setCurrentQuestion(0);
-    setAnswers({});
-    setMovieResults([]);
-    setError('');
+  const getRatingFilter = (ratingOption) => {
+    switch (ratingOption) {
+      case "Highly rated (Over 7/10 rated)":
+        return "7";
+      case "At least average (Over 5/10 rated)":
+        return "5";
+      default:
+        return "0";
+    }
+  };
+
+  const getRuntimeFilter = (runtimeOption) => {
+    switch (runtimeOption) {
+      case "A shorter film (-90 minutes)":
+        return "0,90";
+      case "Average length (1.5 to 2.5 hours)":
+        return "90,150";
+      case "A long film (2.5 hours+)":
+        return "150,999";
+      default:
+        return "";
+    }
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container className="get-recom-container">
-        <Box sx={{ marginTop: 5 }}>
-          <Typography variant="h4" className="get-recom-title">Movie Recommendation</Typography>
-          {currentQuestion < questions.length ? (
-            <>
-              <Box sx={{ marginTop: 3 }}>
-                <Typography variant="h6" className="get-recom-question">{questions[currentQuestion].question}</Typography>
-                <RadioGroup
-                  value={answers[currentQuestion] || ''}
-                  onChange={handleAnswerChange}
-                  className="get-recom-radio-group"
-                >
-                  {questions[currentQuestion].options.map((option, idx) => (
-                    <FormControlLabel
-                      key={idx}
-                      value={option.label}
-                      control={<Radio color="primary" />}
-                      label={
-                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                          {option.icon}
-                          <Typography sx={{ marginLeft: 1 }} className="get-recom-option-text">{option.label}</Typography>
-                        </Box>
-                      }
-                    />
-                  ))}
-                </RadioGroup>
-              </Box>
-
-              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Button variant="outlined" color="secondary" onClick={handlePrevious} disabled={currentQuestion === 0}>
-                  Previous
-                </Button>
-                <Button variant="contained" color="primary" onClick={handleNext}>
-                  {currentQuestion === questions.length - 1 ? 'Get Recommendations' : 'Next'}
-                </Button>
-              </Box>
-            </>
-          ) : (
-            <Box sx={{ marginTop: 3 }}>
-              {loading && <LinearProgress />}
-              {error && <Typography sx={{ color: 'red', marginTop: 3 }} className="get-recom-error">{error}</Typography>}
-              {movieResults.length > 0 && (
-                <>
-                  <Typography variant="h5" sx={{ marginBottom: 2 }} className="get-recom-recommendations-title">
-                    Movie Recommendations
-                  </Typography>
-                  <Box sx={{ display: 'flex', flexWrap: 'wrap' }} className="get-recom-movie-container">
-                    {movieResults.slice(0, 1).map((movie) => (
-                      <Box key={movie.id} sx={{ width: 200, marginRight: 2, marginBottom: 2 }} className="get-recom-movie-card">
-                        <img
-                          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                          alt={movie.title}
-                          className="get-recom-movie-poster"
-                        />
-                        <Typography sx={{ textAlign: 'center', fontWeight: 'bold', marginTop: 1 }} className="get-recom-movie-title">
-                          {movie.title}
-                        </Typography>
-                      </Box>
-                    ))}
-                  </Box>
-
-                  <Button variant="contained" color="primary" onClick={handleReRoll} sx={{ marginTop: 2 }} className="get-recom-button">
-                    Re-roll
-                  </Button>
-                  <Button variant="outlined" color="secondary" onClick={handleRestart} sx={{ marginTop: 2, margnLeft: 2 }} className="get-recom-button">
-                    Restart
-                  </Button>
-                </>
-              )}
-            </Box>
-          )}
-        </Box>
-      </Container>
-    </ThemeProvider>
+    <div className="get-recom-container">
+      {!recommendations.length ? (
+        <div className="get-recom-question">
+          <h2>{questions[currentQuestionIndex].question}</h2>
+          <div className="get-recom-options">
+            {questions[currentQuestionIndex].options.map((option, index) => (
+              <button
+                key={index}
+                className="get-recom-button"
+                onClick={() => handleAnswer(option)}
+              >
+                {typeof option === "string" ? option : option.text}
+              </button>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div className="get-recom-result">
+          <h2>Your Recommended Movies</h2>
+          <div className="get-recom-movie-container">
+            {recommendations.map((movie) => (
+              <div key={movie.id} className="get-recom-movie-item">
+                <img
+                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                  alt={movie.title}
+                  className="get-recom-movie-image"
+                />
+                <h3>{movie.title}</h3>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
   );
-};
+}
 
 export default GetRecommendation;

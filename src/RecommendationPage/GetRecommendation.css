@@ -1,213 +1,99 @@
-/* Global Styles */
-.get-rec-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f5f5f5;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+/* MovieRecommendation.css */
+.get-recom-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100vw; /* Ensure full screen width */
+  font-family: Arial, sans-serif;
+  background-color: black;
+  color: black; /* Ensuring text is black */
+}
+
+.get-recom-question,
+.get-recom-result {
+  text-align: left;
+  background-color: #2e2e2e;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  width: 70%; /* Adjust width to fit better */
+  margin: 15px;
+  box-sizing: border-box;
+  color: rgb(255, 255, 255); /* Ensure text is black */
+}
+
+.get-recom-options {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 350px;
+  margin-left: 340px;
+}
+
+.get-recom-button {
+  padding: 15px;
+  font-size: 1rem;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.get-recom-button:hover {
+  background-color: blue;
+}
+
+.get-recom-movie-image {
+  width: 100%;
+  max-width: 200px;
+  margin-top: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.get-recom-result h2 {
+  color: rgb(255, 255, 255); /* Set header text to black */
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.get-recom-result h3 {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 30px;
+  color: white; /* Set header text to black */
+}
+
+.get-recom-movie-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.get-recom-movie-item {
+  width: calc(20% - 20px); /* 4 items per row */
+  text-align: center;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .get-recom-question, .get-recom-result {
+    width: 90%;
   }
-  
-  .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 20px;
-    max-width: 1200px;
-    width: 100%;
-    box-sizing: border-box;
+
+  .get-recom-movie-item {
+    width: calc(50% - 20px); /* 2 items per row on smaller screens */
   }
-  
-  /* Header */
-  h1 {
-    font-size: 2.5rem;
-    color: #333;
-    margin-bottom: 20px;
-    text-align: center;
-    letter-spacing: 1px;
+}
+
+@media (max-width: 480px) {
+  .get-recom-movie-item {
+    width: 100%; /* 1 item per row on very small screens */
   }
-  
-  /* Question Section */
-  .question-container {
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 600px;
-  }
-  
-  .question-container h2 {
-    font-size: 1.8rem;
-    color: #333;
-    margin-bottom: 15px;
-    text-align: center;
-  }
-  
-  /* Radio Buttons */
-  .radio-group {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .radio-option {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .radio-option label {
-    font-size: 1rem;
-    color: #555;
-  }
-  
-  /* Buttons */
-  button {
-    font-size: 1.2rem;
-    border-radius: 8px;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  button:focus {
-    outline: none;
-  }
-  
-  /* Next and Previous buttons */
-  button.next {
-    background-color: #4CAF50;
-    color: white;
-  }
-  
-  button.next:hover {
-    background-color: #45a049;
-  }
-  
-  button.prev {
-    background-color: #FF5722;
-    color: white;
-  }
-  
-  button.prev:hover {
-    background-color: #e64a19;
-  }
-  
-  /* Movie Recommendation Section */
-  .movie-recommendation {
-    margin-top: 40px;
-    text-align: center;
-  }
-  
-  .movie-recommendation img {
-    width: 100%;
-    max-width: 300px;
-    border-radius: 10px;
-    margin-bottom: 15px;
-  }
-  
-  .movie-recommendation h3 {
-    font-size: 1.5rem;
-    color: #333;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .movie-recommendation p {
-    color: #777;
-    font-size: 1rem;
-    margin-top: 10px;
-  }
-  
-  /* Re-Roll and Restart Buttons */
-  button.re-roll {
-    background-color: #FF9800;
-    color: white;
-    margin-top: 20px;
-  }
-  
-  button.re-roll:hover {
-    background-color: #fb8c00;
-  }
-  
-  button.restart {
-    background-color: #2196F3;
-    color: white;
-    margin-top: 20px;
-  }
-  
-  button.restart:hover {
-    background-color: #1976D2;
-  }
-  
-  /* Loading Indicator */
-  .loader {
-    margin-top: 20px;
-    width: 100%;
-  }
-  
-  /* Error Message */
-  .error {
-    color: red;
-    margin-top: 20px;
-    font-size: 1.2rem;
-    text-align: center;
-  }
-  
-  /* Material UI LinearProgress Override */
-  .MuiLinearProgress-root {
-    height: 5px;
-    background-color: #e0e0e0;
-  }
-  
-  .MuiLinearProgress-bar {
-    background-color: #2196F3;
-  }
-  
-  /* Media Queries for Responsiveness */
-  @media (max-width: 768px) {
-    .container {
-      padding: 10px;
-    }
-  
-    h1 {
-      font-size: 2rem;
-    }
-  
-    .question-container {
-      padding: 20px;
-    }
-  
-    .movie-recommendation img {
-      max-width: 250px;
-    }
-  
-    button {
-      font-size: 1rem;
-      padding: 8px 16px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    h1 {
-      font-size: 1.8rem;
-    }
-  
-    .question-container {
-      padding: 15px;
-    }
-  
-    .movie-recommendation img {
-      max-width: 200px;
-    }
-  
-    button {
-      font-size: 0.9rem;
-      padding: 6px 14px;
-    }
-  }  
+}
