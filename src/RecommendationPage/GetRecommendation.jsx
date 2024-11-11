@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 import './GetRecommendation.css';
 
 function GetRecommendation() {
@@ -7,6 +8,7 @@ function GetRecommendation() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState({});
   const [recommendations, setRecommendations] = useState([]);
+  const navigate = useNavigate(); // Initialize useNavigate hook
 
   const questions = [
     {
@@ -150,6 +152,11 @@ function GetRecommendation() {
     }
   };
 
+  // Handle click on a movie
+  const handleMovieClick = (movie) => {
+    navigate(`/movie/${movie.id}`); // Navigate to the correct route
+  };
+
   return (
     <div className="get-recom-container">
       {!recommendations.length ? (
@@ -172,7 +179,11 @@ function GetRecommendation() {
           <h2>Your Recommended Movies</h2>
           <div className="get-recom-movie-container">
             {recommendations.map((movie) => (
-              <div key={movie.id} className="get-recom-movie-item">
+              <div
+                key={movie.id}
+                className="get-recom-movie-item"
+                onClick={() => handleMovieClick(movie)} // Add the click handler here
+              >
                 <img
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                   alt={movie.title}
