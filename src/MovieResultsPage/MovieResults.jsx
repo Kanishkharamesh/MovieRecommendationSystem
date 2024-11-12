@@ -12,6 +12,7 @@ const MovieResults = () => {
     const [error, setError] = useState(null);
     const [reviews, setReviews] = useState([]);
     const [isInWatchlist, setIsInWatchlist] = useState(false);
+    const [similarMovies, setSimilarMovies] = useState([]); 
 
     useEffect(() => {
         const fetchMovieDetails = async () => {
@@ -29,7 +30,19 @@ const MovieResults = () => {
             }
         };
 
+        const fetchSimilarMovies = async () => {
+            try {
+                const response = await fetch(`https://api.themoviedb.org/3/movie/${id}/similar?api_key=${API_KEY}`);
+                if (!response.ok) throw new Error('Failed to fetch similar movies.');
+                const data = await response.json();
+                setSimilarMovies(data.results || []);
+            } catch (error) {
+                console.error("Error fetching similar movies:", error);
+            }
+        };
+
         fetchMovieDetails();
+        fetchSimilarMovies();
     }, [id]);
 
     const checkIfInWatchlist = (movieId) => {
@@ -196,6 +209,28 @@ const MovieResults = () => {
                         ) : (
                             <p>No reviews available for this movie.</p>
                         )}
+                    </div>
+                    {/* Similar Movies Section */}
+                    <div className="movie-results-classname-similar-movies">
+                        <div className="movie-results-classname-similar-movies-title"><strong>Similar Movies</strong></div>
+                        <div className="movie-results-classname-similar-movies-list">
+                            {similarMovies.length > 0 ? (
+                                similarMovies.slice(0, 5).map(similarMovie => (
+                                    <div key={similarMovie.id} className="movie-results-classname-similar-movie-item">
+                                        <img
+                                            src={similarMovie.poster_path ? `https://image.tmdb.org/t/p/w500${similarMovie.poster_path}` : 'placeholder-image-url.png'}
+                                            alt={similarMovie.title}
+                                            className="movie-results-classname-similar-movie-image"
+                                            onClick={() => navigate(`/movie/${similarMovie.id}`)}
+                                            style={{ cursor: 'pointer' }}
+                                        />
+                                        <div className="movie-results-classname-similar-movie-title">{similarMovie.title}</div>
+                                    </div>
+                                ))
+                            ) : (
+                                <p>No similar movies available.</p>
+                            )}
+                        </div>
                     </div>
                 </div>
             ) : null}
