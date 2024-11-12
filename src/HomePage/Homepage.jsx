@@ -83,7 +83,6 @@ const Homepage = () => {
             {/* Hero Section */}
             <div className="hero-container">
                 <h1 className="hero-title">Discover Your Next Favorite Movie</h1>
-                <br></br>
                 <p className="hero-subtitle">Explore a world of movies tailored just for you!</p>
                 <br></br>
                 <Link to="/get-recommendation" className="homepage-button">Get Recommendation</Link>

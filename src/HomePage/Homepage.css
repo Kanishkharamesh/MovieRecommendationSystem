@@ -27,6 +27,7 @@ body {
     background-color: #1f1f1f; /* Consistent navbar background */
     padding: 10px 20px;
     width: 100vw;
+    margin-top: -20px;
 }
 
 .navbar-logo {
@@ -89,7 +90,7 @@ body {
     border-radius: 5px;
     cursor: pointer;
     text-decoration: none;
-    margin-right: 20px;
+    margin-right: 10px;
 }
 
 .navbar-button:hover {
@@ -116,12 +117,12 @@ body {
     padding: 50px;
     text-align: center;
     width: 100vw;
-    margin-top: 20px;
 }
 
 .hero-title {
-    font-size: 36px;
+    font-size: 30px;
     color: red;
+    margin-top: -20px;
 }
 
 .hero-subtitle {
@@ -131,7 +132,8 @@ body {
 
 .featured-movies-container {
     padding: 20px;
-    background-color: #1f1f1f; /* Ensure this section matches the overall background */
+    background-color: #1f1f1f;
+    margin-top: -20px; /* Ensure this section matches the overall background */
 }
 
 .featured-title {
@@ -147,6 +149,7 @@ body {
     scroll-behavior: smooth;
     padding: 20px 0;
     scrollbar-width: none;
+    margin-top: -10px;
 }
 
 .movie-card {

@@ -112,7 +112,6 @@ const Userpage = () => {
             {/* Hero Section */}
             <div className="userpage-hero-container">
                 <h1 className="userpage-hero-title">Discover Your Next Favorite Movie</h1>
-                <br></br>
                 <p className="userpage-hero-subtitle">Explore a world of movies tailored just for you!</p>
                 <br></br>
                 <Link to="/get-recommendation" className="homepage-button">Get Recommendation</Link>

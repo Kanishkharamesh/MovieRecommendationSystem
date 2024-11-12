@@ -27,6 +27,8 @@
     background-color: #1f1f1f; /* Consistent navbar background */
     padding: 10px 20px;
     width: 100vw;
+    margin-top: -5px;
+    margin-bottom: -10px;
 }
 
 .userpage-navbar-logo {
@@ -147,12 +149,13 @@
     padding: 50px;
     text-align: center;
     width: 100vw;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .userpage-hero-title {
     font-size: 36px;
     color: red;
+    margin-top: -20px;
 }
 
 .userpage-hero-subtitle {
@@ -163,6 +166,7 @@
 .userpage-featured-movies-container {
     padding: 20px;
     background-color: #1f1f1f; /* Ensure this section matches the overall background */
+    margin-top: -20px;
 }
 
 .userpage-featured-title {
@@ -178,6 +182,7 @@
     scroll-behavior: smooth;
     padding: 20px 0;
     scrollbar-width: none;
+    margin-top: -20px;
 }
 
 .userpage-movie-card {
