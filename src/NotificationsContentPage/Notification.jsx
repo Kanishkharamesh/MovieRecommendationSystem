@@ -8,7 +8,7 @@ const NotificationPage = () => {
     const [isEmailEnabled, setIsEmailEnabled] = useState(false);
 
     // API Key to fetch trending movies
-    const API_KEY = "5c49b6e2a36066a5b1491648804ef4c1";
+    const API_KEY = "YOUR_API_KEY";
 
     // Function to fetch trending movies from the API
     const fetchTrendingMovies = async () => {
