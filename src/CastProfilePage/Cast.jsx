@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './Cast.css';
 
-const API_KEY = "5c49b6e2a36066a5b1491648804ef4c1";
+const API_KEY = "YOUR_API_KEY";
 const placeholderImage = 'https://via.placeholder.com/500';  // Placeholder image URL
 
 const Cast = () => {
