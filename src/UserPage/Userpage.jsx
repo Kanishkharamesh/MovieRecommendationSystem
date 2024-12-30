@@ -19,7 +19,7 @@ const Userpage = () => {
     const [error, setError] = useState("");
     const [userName, setUserName] = useState(() => localStorage.getItem('username') || "User");
 
-    const apiKey = '5c49b6e2a36066a5b1491648804ef4c1';
+    const apiKey = 'YOUR_API_KEY';
 
     // Function to fetch movie data
     const fetchMoviesData = async () => {
