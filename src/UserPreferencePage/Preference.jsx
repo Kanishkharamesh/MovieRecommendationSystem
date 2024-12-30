@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Preference.css';
 import { FaBell, FaFilm, FaLanguage, FaStar, FaPlay, FaShareAlt } from 'react-icons/fa';
 
-const API_KEY = '5c49b6e2a36066a5b1491648804ef4c1';
+const API_KEY = 'YOUR_API_KEY';
 
 const Preference = () => {
     const [genres, setGenres] = useState([]);
