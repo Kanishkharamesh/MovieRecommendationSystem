@@ -16,7 +16,7 @@ const Homepage = () => {
     const [loading, setLoading] = useState(true); // Loading state
     const [error, setError] = useState(""); // Error state
 
-    const apiKey = '5c49b6e2a36066a5b1491648804ef4c1';
+    const apiKey = 'YOUR_API_KEY';
 
     const fetchMoviesData = async () => {
         setLoading(true); // Start loading
