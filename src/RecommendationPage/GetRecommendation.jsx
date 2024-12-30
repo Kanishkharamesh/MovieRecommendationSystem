@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate for naviga
 import './GetRecommendation.css';
 
 function GetRecommendation() {
-  const API_KEY = '5c49b6e2a36066a5b1491648804ef4c1'; // Securely store API key
+  const API_KEY = 'YOUR_API_KEY'; // Securely store API key
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState({});
   const [recommendations, setRecommendations] = useState([]);
